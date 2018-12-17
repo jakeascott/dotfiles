@@ -1,16 +1,16 @@
-laptop
+computer
     description: Laptop
     product: Latitude E7470 (06DC)
     vendor: Dell Inc.
-    serial: B23VR72
+    serial: [REMOVED]
     width: 64 bits
     capabilities: smbios-3.0 dmi-3.0 smp vsyscall32
-    configuration: boot=normal chassis=laptop family=Latitude sku=06DC uuid=44454C4C-3200-1033-8056-C2C04F523732
+    configuration: boot=normal chassis=laptop family=Latitude sku=06DC uuid=[REMOVED]
   *-core
        description: Motherboard
        vendor: Dell Inc.
        physical id: 0
-       serial: /B23VR72/              /
+       serial: [REMOVED]
      *-firmware
           description: BIOS
           vendor: Dell Inc.
@@ -59,9 +59,9 @@ laptop
           physical id: 45
           bus info: cpu@0
           version: Intel(R) Core(TM) i7-6600U CPU @ 2.60GHz
-          serial: To Be Filled By O.E.M.
+          serial: [REMOVED]
           slot: U3E1
-          size: 3289MHz
+          size: 3390MHz
           capacity: 3400MHz
           width: 64 bits
           clock: 100MHz
@@ -77,7 +77,7 @@ laptop
              product: HMA41GS6AFR8N-TF
              vendor: SK Hynix
              physical id: 0
-             serial: 12161215
+             serial: [REMOVED]
              slot: DIMM A
              size: 8GiB
              width: 64 bits
@@ -87,7 +87,7 @@ laptop
              product: HMA41GS6AFR8N-TF
              vendor: SK Hynix
              physical id: 1
-             serial: 12121212
+             serial: [REMOVED]
              slot: DIMM B
              size: 8GiB
              width: 64 bits
@@ -210,7 +210,7 @@ laptop
              clock: 66MHz
              capabilities: storage msi pm bus_master cap_list
              configuration: driver=ahci latency=0
-             resources: irq:125 memory:e1250000-e1251fff memory:e1254000-e12540ff ioport:f090(size=8) ioport:f080(size=4) ioport:f060(size=32) memory:e1253000-e12537ff
+             resources: irq:126 memory:e1250000-e1251fff memory:e1254000-e12540ff ioport:f090(size=8) ioport:f080(size=4) ioport:f060(size=32) memory:e1253000-e12537ff
         *-pci:0
              description: PCI bridge
              product: Sunrise Point-LP PCI Express Root Port #5
@@ -231,11 +231,11 @@ laptop
                 bus info: pci@0000:01:00.0
                 logical name: wlp1s0
                 version: 3a
-                serial: e4:b3:18:1d:20:36
+                serial: [REMOVED]
                 width: 64 bits
                 clock: 33MHz
                 capabilities: pm msi pciexpress bus_master cap_list ethernet physical wireless
-                configuration: broadcast=yes driver=iwlwifi driverversion=4.15.0-20-generic firmware=34.0.1 ip=192.168.1.142 latency=0 link=yes multicast=yes wireless=IEEE 802.11
+                configuration: broadcast=yes driver=iwlwifi driverversion=4.15.0-20-generic firmware=34.0.1 ip=[REMOVED] latency=0 link=yes multicast=yes wireless=IEEE 802.11
                 resources: irq:130 memory:e1100000-e1101fff
         *-pci:1
              description: PCI bridge
@@ -260,7 +260,7 @@ laptop
                 clock: 33MHz
                 capabilities: pm msi pciexpress bus_master cap_list
                 configuration: driver=rtsx_pci latency=0
-                resources: irq:126 memory:e1000000-e1000fff
+                resources: irq:125 memory:e1000000-e1000fff
         *-isa
              description: ISA bridge
              product: Sunrise Point-LP LPC Controller
@@ -315,7 +315,7 @@ laptop
              bus info: pci@0000:00:1f.6
              logical name: enp0s31f6
              version: 21
-             serial: 84:7b:eb:39:f9:e8
+             serial: [REMOVED]
              capacity: 1Gbit/s
              width: 32 bits
              clock: 33MHz
@@ -333,7 +333,7 @@ laptop
              bus info: scsi@2:0.0.0
              logical name: /dev/sda
              version: 0P00
-             serial: FJ63N512311803P1P
+             serial: [REMOVED]
              size: 476GiB (512GB)
              capabilities: partitioned partitioned:dos
              configuration: ansiversion=5 logicalsectorsize=512 sectorsize=512 signature=caff3f97
@@ -345,17 +345,17 @@ laptop
                 logical name: /dev/sda1
                 logical name: /
                 version: 1.0
-                serial: 7707aaeb-00f4-4634-96d7-0e5270420e13
+                serial: [REMOVED]
                 size: 476GiB
                 capacity: 476GiB
                 capabilities: primary bootable journaled extended_attributes large_files huge_files dir_nlink 64bit extents ext4 ext2 initialized
-                configuration: created=2018-11-24 15:54:47 filesystem=ext4 lastmountpoint=/ modified=2018-12-16 18:56:08 mount.fstype=ext4 mount.options=rw,relatime,errors=remount-ro,data=ordered mounted=2018-12-15 11:46:33 state=mounted
+                configuration: created=2018-11-24 15:54:47 filesystem=ext4 lastmountpoint=/ modified=2018-12-16 21:42:24 mount.fstype=ext4 mount.options=rw,relatime,errors=remount-ro,data=ordered mounted=2018-12-16 18:56:08 state=mounted
   *-battery
        product: DELL 1W2Y263
        vendor: Samsung SDI
        physical id: 1
        version: 03/17/2016
-       serial: B8B0
+       serial: [REMOVED]
        slot: Sys. Battery Bay
        capacity: 54990mWh
        configuration: voltage=7.6V
