@@ -1,0 +1,86 @@
+1. Download .iso and make bootable USB.
+	a. lsblk : list all block devices to find USB (probably sdb)
+	b. become root: sudo su
+	c. dd if=~/Arch.iso of=/dev/sdb status="progress"
+
+2. Partition Drives
+	a. fdisk /dev/sda
+	b. make partitions for... (can make just root)
+		i. boot 200M
+		ii. SWAP generally equal to RAM + 1G
+		iii. / (root) 30G min
+		iv. /home rest of drive
+	c. format partitions: mkfs.ext4 /dev/sda1 (all except SWAP)
+	d. designate swap partition: mkswap /dev/sda2 && swapon /dev/sda2;
+	e. mount drives
+		i. mount /dev/<root> /mnt
+		ii. mkdir /mnt/home; mount /dev/<home> /mnt/home;
+		iii. mkdir /mnt/boot; mount /dev/<boot> /mnt/boot;
+
+3. Install Arch with: pacstrap /mnt base <base-devel> ...
+
+4. Make fstab file: genfstab -U /mnt >> /mnt/etc/fstab
+
+5. Jump into arch install: arch-chroot /mnt
+
+6. Install essential pacs: e.g. pacman -S networkmanager vim ...
+	a. Start NetMan on boot: systemctl enable NetworkManager
+	b. Install 'intel-ucode' or 'amd-ucode' for microcode updates
+	c. For VBox: virtualbox-guest-utils
+
+7. Install/configure bootloader (generally GRUB): pacman -S grub 
+	a. grub-install --target=i386-pc /dev/sda
+	b. grub-mkconfig -o /boot/grub/grub.cfg
+
+8. Final set up
+	a. Set a root password: passwd
+	b. set locale: open '/etc/locale.gen' and uncomment 'en_US' lines.
+	c. locale-gen
+	d. vim '/etc/locale.conf' and put 'LANG=en-US.UTF-8' in file. 
+	e. Link time-zone: ln -sf /usr/share/zoneinfo/America/<City>
+/etc/localtime
+	f. Set computer name: '/etc/hostname' name in first line file
+	g. If ssd, enable TRIM: systemctl enable fstrim.timer 
+	g. Add users: useradd -m -g wheel jake; passwd jake;
+
+9. 'exit' back to iso, 'umount -R /mnt' to unmount drives for safetly; reboot;
+
+10. Add users...
+	a. useradd -m -g wheel jake
+	b. passwd jake
+
+11a. Need X.org for graphical environments like i3 (or XFCE easier DE)
+	a. pacman -S xorg-server xorg-xinit
+	b. start by running 'xinit' or 'startx', reads ~/.xinitrc to start
+	c. for i3: pacman -S i3-gaps i3status rxvt-unicode dmenu
+	d. other things you need nm-applet (for wifi applet), noto-fonts
+	e. may need to set fonts manually in ~/.config/fontconfig/fonts.conf
+	f. put 'exec i3' in ~/.xinitrc
+	g. for xfce: pacman -S xfce4; add 'exec xfce4-session' to ~/.xinitrc
+	h. CTRL+ALT+F(2,3...) if you mess up and need a new tty
+	i. log in options, 'startx' at shell or install a display manager...
+		i. sudo pacman -S lightdm lightdm-gtk-greeter
+		ii. sudo systemctl enable lightdm.service
+
+	Notes: 
+		- To start a service every startup
+			sudo systemctl enable <SERVICENAME>
+		- To start a service right now
+			suod systemctl start <SERVICENAME>
+		
+11b. (optional LARBS instead of step 11a) As root ...
+	a. curl -LO larbs.xyz/larbs.sh
+	b. bash larbs.sh
+	c. Go to https://larbs.xyz for details.
+
+12. Customize ~/.profile or ~/.bash_profile
+	a. e.g.	
+		[[ -f ~/.bashrc ]] && . ~/.bashrc
+		export PATH=$PATH:$HOME/.scripts
+		export EDITOR="vim"
+		export TERMINAL="st"
+		export BROWSER="firefox"
+		
+		if [[ "$(tty)" = "/dev/tty1" ]]; then
+				pgrep i3 || startx
+		fi 
