@@ -1,15 +1,28 @@
-" Turn of compat mode
+" Use Vim settings, rather than vi compatability
 set nocompatible
 
 " ----- General Settings ----- "
-set number
-set noexpandtab
-set tabstop=4
-set shiftwidth=4
+set backspace=indent,eol,start " allow backspacing in insert mode
+set number " line numbers
+set ruler " show cursor position at all times
+set showcmd " display incomplete commands
+set incsearch " do incremental searching
+set linebreak " wrap lines on 'word' boundaries
+set scrolloff=3 " don't let cursor touch edge of viewport
+set splitright " Vertical splits use right half of screen
+set timeoutlen=100 " lower ^[ timeout
+if exists('&breakindent')
+    set breakindent " Indent wrapped lines up to the same level
+endif
+
+" Tab settings
+set expandtab " Expand tabs into spaces
+set tabstop=4 " default to 4 spaces for hard tab
+set softtabstop=4 " default to 4 spaces for soft tab
+set shiftwidth=4 " for when <tab> is pressed at beginning of line
+
+set hlsearch
 
 syntax on
 
-set mouse=a
-
-colorscheme desert
-set guifont=Consolas:h14
+set mouse=a " activate mouse click, scroll, highlight, etc.
