@@ -6,30 +6,34 @@
 2. Partition Drives
 	a. fdisk /dev/sda
 	b. make partitions for... (can make just root)
-		i. boot 200M
+		i. efi/boot 550M/200M
 		ii. SWAP generally equal to RAM + 1G
-		iii. / (root) 30G min
-		iv. /home rest of drive
-	c. format partitions: mkfs.ext4 /dev/sda1 (all except SWAP)
-	d. designate swap partition: mkswap /dev/sda2 && swapon /dev/sda2;
+		iii. / (root) rest of drive
+	c. format partitions: 
+        i. root: mkfs.ext4 /dev/sdaX
+        ii.efi: mkfs.fat -F32 /dev/sdaY (may need 'dosfstools' package) 
+	d. designate swap partition: mkswap /dev/sdaX && swapon /dev/sdaX;
 	e. mount drives
 		i. mount /dev/<root> /mnt
-		ii. mkdir /mnt/home; mount /dev/<home> /mnt/home;
-		iii. mkdir /mnt/boot; mount /dev/<boot> /mnt/boot;
+		iii. mkdir /mnt/efi; mount /dev/<efi> /mnt/efi;
 
 3. Install Arch with: pacstrap /mnt base <base-devel> ...
+    - may want to mess with /etc/pacman.d/mirrorlist for faster mirrors 
 
 4. Make fstab file: genfstab -U /mnt >> /mnt/etc/fstab
 
 5. Jump into arch install: arch-chroot /mnt
 
-6. Install essential pacs: e.g. pacman -S networkmanager vim ...
+6. Install essential pacs: e.g. pacman -S ... 
+	- networkmanager, vim, intel/amd-ucode, tlp(laptop)
 	a. Start NetMan on boot: systemctl enable NetworkManager
 	b. Install 'intel-ucode' or 'amd-ucode' for microcode updates
 	c. For VBox: virtualbox-guest-utils
 
 7. Install/configure bootloader (generally GRUB): pacman -S grub 
-	a. grub-install --target=i386-pc /dev/sda
+	a. grub-install --target=i386-pc /dev/sda (FOR BIOS)
+    a. grub-install --target=x86_64-efi ==efi-directoyr=/efi
+--bootloader-id=GRUB
 	b. grub-mkconfig -o /boot/grub/grub.cfg
 
 8. Final set up
@@ -38,10 +42,15 @@
 	c. locale-gen
 	d. vim '/etc/locale.conf' and put 'LANG=en-US.UTF-8' in file. 
 	e. Link time-zone: ln -sf /usr/share/zoneinfo/America/<City>
-/etc/localtime
+/etc/localtime; hwclock --systohc
 	f. Set computer name: '/etc/hostname' name in first line file
 	g. If ssd, enable TRIM: systemctl enable fstrim.timer 
-	g. Add users: useradd -m -g wheel jake; passwd jake;
+	h. Add users: useradd -m -g wheel jake; passwd jake;
+    i. Set network: put hostname in new file /etc/hostname, add matching
+entries to /etc/hosts:
+        127.0.0.1   localhost
+        ::1         localhost
+        127.0.1.1 myhostname.localdomain myhostname
 
 9. 'exit' back to iso, 'umount -R /mnt' to unmount drives for safetly; reboot;
 
