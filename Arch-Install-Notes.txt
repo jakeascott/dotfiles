@@ -18,7 +18,7 @@
 	d. designate swap partition: mkswap /dev/<swp> && swapon /dev/<swp>;
 	e. mount drives
 		i. mount /dev/<root> /mnt
-		iii. mkdir /mnt/efi; mount /dev/<efi> /mnt/efi;
+		iii. mkdir /mnt/boot; mount /dev/<efi> /mnt/boot;
 
 3. Install Arch
     a. Sort /etc/pacman.d/mirrorlist so that closer mirrors are at the top.
