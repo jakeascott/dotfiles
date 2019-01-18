@@ -1,95 +1,93 @@
-1. Download .iso and make bootable USB.
-	a. lsblk : list all block devices to find USB (probably sdb)
-	b. become root: sudo su
-	c. dd if=~/Arch.iso of=/dev/sdb status="progress"
+1. Pre-installation 
+	a. Make bootable .iso and verify signature 
+	b. Once in live, verify boot mode is efi: ls /sys/firmware/efi/efivars
+    c. Ping archlinux.org to verify internet connection. Use wired, but see
+       wiki for for wifi instructions
+    d. update system clock: timedatectl set-ntp true
 
 2. Partition Drives
-	a. fdisk /dev/sda
-	b. make partitions for... (can make just root)
-		i. efi/boot 550M/200M
+    a. List partitions: fdisk -l
+	a. fdisk /dev/sdX
+	b. make partitions for...
+		i. efi 550M, should have part type 'EFI System'
 		ii. SWAP generally equal to RAM + 1G
 		iii. / (root) rest of drive
-	c. format partitions: 
-        i. root: mkfs.ext4 /dev/sdaX
-        ii.efi: mkfs.fat -F32 /dev/sdaY (may need 'dosfstools' package) 
-	d. designate swap partition: mkswap /dev/sdaX && swapon /dev/sdaX;
+	c. format efi/root partitions: 
+        i.  efi: mkfs.fat -F32 /dev/sdXx
+        ii. root: mkfs.ext4 /dev/sdXx
+	d. designate swap partition: mkswap /dev/<swp> && swapon /dev/<swp>;
 	e. mount drives
 		i. mount /dev/<root> /mnt
 		iii. mkdir /mnt/efi; mount /dev/<efi> /mnt/efi;
 
-3. Install Arch with: pacstrap /mnt base <base-devel> ...
-    - may want to mess with /etc/pacman.d/mirrorlist for faster mirrors 
+3. Install Arch
+    a. Sort /etc/pacman.d/mirrorlist so that closer mirrors are at the top.
+    b. Intall base packages: pacstrap /mnt base <base-devel> ... 
+    c. <man want more base packages for wireless> 
 
-4. Make fstab file: genfstab -U /mnt >> /mnt/etc/fstab
-
-5. Jump into arch install: arch-chroot /mnt
-
-6. Install essential pacs: e.g. pacman -S ... 
-	- networkmanager, vim, intel/amd-ucode, tlp(laptop)
-	a. Start NetMan on boot: systemctl enable NetworkManager
-	b. Install 'intel-ucode' or 'amd-ucode' for microcode updates
-	c. For VBox: virtualbox-guest-utils
-
-7. Install/configure bootloader (generally GRUB): pacman -S grub 
-	a. grub-install --target=i386-pc /dev/sda (FOR BIOS)
-    a. grub-install --target=x86_64-efi ==efi-directoyr=/efi
---bootloader-id=GRUB
-	b. grub-mkconfig -o /boot/grub/grub.cfg
-
-8. Final set up
-	a. Set a root password: passwd
-	b. set locale: open '/etc/locale.gen' and uncomment 'en_US' lines.
-	c. locale-gen
-	d. vim '/etc/locale.conf' and put 'LANG=en-US.UTF-8' in file. 
-	e. Link time-zone: ln -sf /usr/share/zoneinfo/America/<City>
-/etc/localtime; hwclock --systohc
-	f. Set computer name: '/etc/hostname' name in first line file
-	g. If ssd, enable TRIM: systemctl enable fstrim.timer 
-	h. Add users: useradd -m -g wheel jake; passwd jake;
-    i. Set network: put hostname in new file /etc/hostname, add matching
-entries to /etc/hosts:
+4. Configure system
+    a. make fstab: genfstab -U /mnt >> /mnt/etc/fstab
+    b. Jump into arch install: arch-chroot /mnt 
+    c. Set time zone: ln -sf /usr/share/zoneinfo/America/<City> /etc/localtime
+    d. Run hwclock: hwclock --systohc
+    e. Uncomment 'en_US.UTF-8' in /etc/locale.gen then run: locale-gen
+    f. Set LANG: echo "LANG=en_US.UTF-8" > /etc/locale.conf
+    g. Set root password: passwd
+    h. Enable TRIM for ssd: systemctl enable fstrim.timer
+    i. Add users: useradd -g users -G wheel,storage,power -m jake; passwd jake
+    j. Grant user sudo privlages: visudo, uncomment wheel entry of choice. 
+    
+5. Configure network
+    a. Set hostname: echo "hostname" > /etc/hostname
+    b. Add matching entries to /etc/hosts 
         127.0.0.1   localhost
         ::1         localhost
-        127.0.1.1 myhostname.localdomain myhostname
+        127.0.1.1   myhostname.localdomain myhostname
+    c. Network configuration on wiki.
 
-9. 'exit' back to iso, 'umount -R /mnt' to unmount drives for safetly; reboot;
+6. Install & configure bootloader
+    a. Run: pacman -S intel-ucode
+    b. For systemd-boot, install using: bootctl --path=/boot install
+    c. Ensure updated with: bootctl update
+        - For pacman hooks to autoupdate systemd-boot, add the following to /etc/pacman.d/hooks/systemd-boot.hook
+            [Trigger]
+            Type = Package
+            Operation = Upgrade
+            Target = systemd
 
-10. Add users...
-	a. useradd -m -g wheel jake
-	b. passwd jake
-
-11a. Need X.org for graphical environments like i3 (or XFCE easier DE)
-	a. pacman -S xorg-server xorg-xinit
-	b. start by running 'xinit' or 'startx', reads ~/.xinitrc to start
-	c. for i3: pacman -S i3-gaps i3status rxvt-unicode dmenu
-	d. other things you need nm-applet (for wifi applet), noto-fonts
-	e. may need to set fonts manually in ~/.config/fontconfig/fonts.conf
-	f. put 'exec i3' in ~/.xinitrc
-	g. for xfce: pacman -S xfce4; add 'exec xfce4-session' to ~/.xinitrc
-	h. CTRL+ALT+F(2,3...) if you mess up and need a new tty
-	i. log in options, 'startx' at shell or install a display manager...
-		i. sudo pacman -S lightdm lightdm-gtk-greeter
-		ii. sudo systemctl enable lightdm.service
-
-	Notes: 
-		- To start a service every startup
-			sudo systemctl enable <SERVICENAME>
-		- To start a service right now
-			suod systemctl start <SERVICENAME>
+            [Action]
+            Description = Updating systemd-boot
+            When = PostTransaction
+            Exec = /usr/bin/bootctl update
+        - Could install systemd-boot-pacman-hook instead 
+    d. Config file at /boot/loader/loader.conf [see wiki for options]
+        - e.x.  default arch
+                timeout 4
+                console-mode max
+                editor no
+    e. Add loader: /boot/loader/entries/arch.conf
+        - e.x.  title Arch Linux
+                linux /vmlinuz-linux
+                initrd /intel-ucode.img
+                initrd /initramfs-linux.img
+                options root=LABEL=arch_os rw (must label root to arch_os in fdisk)
+        - options alternative: echo "options root=PARTUUID=$(blkid -s PARTUUID -o value /dev/<root>) rw" >> /boot/loader/entries/arch.conf 
 		
-11b. (optional LARBS instead of step 11a) As root ...
-	a. curl -LO larbs.xyz/larbs.sh
-	b. bash larbs.sh
-	c. Go to https://larbs.xyz for details.
 
-12. Customize ~/.profile or ~/.bash_profile
-	a. e.g.	
-		[[ -f ~/.bashrc ]] && . ~/.bashrc
-		export PATH=$PATH:$HOME/.scripts
-		export EDITOR="vim"
-		export TERMINAL="st"
-		export BROWSER="firefox"
-		
-		if [[ "$(tty)" = "/dev/tty1" ]]; then
-				pgrep i3 || startx
-		fi 
+9. 'exit' back to iso, unmount drives 'umount -R /mnt'; reboot; and remove iso. 
+
+10. Install essential pacs: e.g. pacman -S ... 
+	- networkmanager, vim, tlp(laptop)
+	- Start NetMan on boot: systemctl enable NetworkManager
+    - For VBox: virtualbox-guest-utils
+
+11. TODO: steps for gui
+
+Notes: 
+	- To start a service every startup
+		sudo systemctl enable <SERVICENAME>
+	- To start a service right now
+		suod systemctl start <SERVICENAME>
+    - LARBS for easy post-install config
+        - curl -LO larbs.xyz/larbs.sh
+        - bash larbs.sh
