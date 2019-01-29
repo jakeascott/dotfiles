@@ -1,3 +1,3 @@
 # dotfiles
 
-My dotfile & script repository.
+My dotfiles & scripts.
