@@ -1,16 +1,15 @@
 1. Pre-installation 
 	a. Make bootable .iso and verify signature 
 	b. Once in live, verify boot mode is efi: ls /sys/firmware/efi/efivars
-    c. Ping archlinux.org to verify internet connection. Use wired, but see
-       wiki for for wifi instructions
+    c. Ping archlinux.org to verify internet connection. If need wifi, can use wifi-menu
     d. update system clock: timedatectl set-ntp true
 
 2. Partition Drives
     a. List partitions: fdisk -l
 	a. fdisk /dev/sdX
-	b. make partitions for...
+	b. make GPT partitions for... 
 		i. efi 550M, should have part type 'EFI System'
-		ii. SWAP generally equal to RAM + 1G
+		ii. SWAP generally equal to RAM + SQRT(RAM) (ex. 16GB RAM = 20GB Swap) 
 		iii. / (root) rest of drive
 	c. format efi/root partitions: 
         i.  efi: mkfs.fat -F32 /dev/sdXx
@@ -23,7 +22,6 @@
 3. Install Arch
     a. Sort /etc/pacman.d/mirrorlist so that closer mirrors are at the top.
     b. Intall base packages: pacstrap /mnt base <base-devel> ... 
-    c. <man want more base packages for wireless> 
 
 4. Configure system
     a. make fstab: genfstab -U /mnt >> /mnt/etc/fstab
@@ -34,8 +32,9 @@
     f. Set LANG: echo "LANG=en_US.UTF-8" > /etc/locale.conf
     g. Set root password: passwd
     h. Enable TRIM for ssd: systemctl enable fstrim.timer
-    i. Add users: useradd -g users -G wheel,storage,power -m jake; passwd jake
+    i. Add users: useradd -m -g users -G wheel jake; passwd jake
     j. Grant user sudo privlages: visudo, uncomment wheel entry of choice. 
+    k. disable root user: passwd -l root
     
 5. Configure network
     a. Set hostname: echo "hostname" > /etc/hostname
@@ -44,12 +43,13 @@
         ::1         localhost
         127.0.1.1   myhostname.localdomain myhostname
     c. Network configuration on wiki.
+    d. [Optional] instead of above, install networkmanager and start/enable NetworkManager.service
 
 6. Install & configure bootloader
     a. Run: pacman -S intel-ucode
     b. For systemd-boot, install using: bootctl --path=/boot install
     c. Ensure updated with: bootctl update
-        - For pacman hooks to autoupdate systemd-boot, add the following to /etc/pacman.d/hooks/systemd-boot.hook
+        - For pacman hooks to autoupdate systemd-boot, add the following to /etc/pacman.d/hooks/100-systemd-boot.hook
             [Trigger]
             Type = Package
             Operation = Upgrade
@@ -76,18 +76,8 @@
 
 9. 'exit' back to iso, unmount drives 'umount -R /mnt'; reboot; and remove iso. 
 
-10. Install essential pacs: e.g. pacman -S ... 
-	- networkmanager, vim, tlp(laptop)
-	- Start NetMan on boot: systemctl enable NetworkManager
-    - For VBox: virtualbox-guest-utils
+====== Post Install ======
 
-11. TODO: steps for gui
+1. Set up network and firewall, install browser and follow archwiki general recommendations. 
 
-Notes: 
-	- To start a service every startup
-		sudo systemctl enable <SERVICENAME>
-	- To start a service right now
-		suod systemctl start <SERVICENAME>
-    - LARBS for easy post-install config
-        - curl -LO larbs.xyz/larbs.sh
-        - bash larbs.sh
+2. Notes on GUI
