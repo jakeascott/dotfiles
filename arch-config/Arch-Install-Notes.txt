@@ -3,7 +3,7 @@
 	b. Once in live, verify boot mode is efi: ls /sys/firmware/efi/efivars
     c. Ping archlinux.org to verify internet connection. If need wifi, can use wifi-menu
     d. update system clock: timedatectl set-ntp true
-    e. curl -O "https://github.com/GideonWasHere/dotfiles/blob/master/arch-config/<file>"
+    e. curl -O "https://raw.githubusercontent.com/GideonWasHere/dotfiles/master/arch-config/<file>"
         - grab 'Arch-Install-Notes.txt' and 'update-mirrors.sh' 
 
 2. Partition Drives
@@ -22,16 +22,17 @@
 		iii. mkdir /mnt/boot; mount /dev/<efi> /mnt/boot;
 
 3. Install Arch
-    a. Sort /etc/pacman.d/mirrorlist so that closer mirrors are at the top.
-        - install 'pacman-contrib' and backup mirrorlist to mirrorlist.default
-        - run: curl -s "https://www.archlinux.org/mirrorlist/?country=US&protocol=https&ip_version=4&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 - > /etc/pacman.d/mirrorlist 
-    b. run pacman -Syu to update database
+    a. Sort /etc/pacman.d/mirrorlist so that closer mirrors are at the top or
+        - 'pacman -Sy pacman-contrib' and backup mirrorlist to mirrorlist.default
+        - run: update-mirrors.sh 
+    b. run pacman -Syy to force update database
     c. Intall base packages: pacstrap /mnt base base-devel
 
 4. Configure system
     a. make fstab: genfstab -U /mnt >> /mnt/etc/fstab
     b. Jump into arch install: arch-chroot /mnt 
     c. Install some utils: nvim, intel-ucode, mesa, ufw, iwd, networkmanager, git, tlp, gnome-keyring
+        -Remember to alias vi=nvim to make life easier
     d. Set time zone: ln -sf /usr/share/zoneinfo/America/<City> /etc/localtime
     e. Run hwclock: hwclock --systohc
     f. Uncomment 'en_US.UTF-8' in /etc/locale.gen then run: locale-gen
@@ -87,7 +88,8 @@
                 initrd /initramfs-linux.img
         - add options: echo "options root=PARTUUID=$(blkid -s PARTUUID -o value /dev/<root>) rw" >> /boot/loader/entries/arch.conf 
 
-7. 'exit' back to iso, unmount drives 'umount -R /mnt'; reboot; and remove iso. 
+7. 'exit' back to iso, unmount drives 'umount -R /mnt'; reboot; and remove iso.
+    - ensure upaded 'pacman -Syu' 
 
 ====== Post Install - basics ======
 
