@@ -3,6 +3,8 @@
 	b. Once in live, verify boot mode is efi: ls /sys/firmware/efi/efivars
     c. Ping archlinux.org to verify internet connection. If need wifi, can use wifi-menu
     d. update system clock: timedatectl set-ntp true
+    e. curl -O "https://github.com/GideonWasHere/dotfiles/blob/master/arch-config/<file>"
+        - grab 'Arch-Install-Notes.txt' and 'update-mirrors.sh' 
 
 2. Partition Drives
     a. List partitions: fdisk -l
