@@ -26,5 +26,5 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
 # Aliases
-[ -f ~/.shell/.bash_aliases ] && source ~/.shell/.bash_aliases 
-[ -f ~/.shell/.bash_shortcuts ] && source ~/.shell/.bash_shortcuts 
+[ -f ~/.config/bash/aliases ] && source ~/.config/bash/aliases
+[ -f ~/.config/bash/shortcuts ] && source ~/.config/bash/shortcuts
