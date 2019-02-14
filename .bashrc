@@ -13,18 +13,18 @@ HISTCONTROL=ignoreboth
 HISTSIZE=1000
 HISTFILESIZE=500
 
-# Set prompt
-PS1='[\[\033[01;32m\]\w\[\033[00m\]]$ '
+# Set prompt (color: \[\e[XXm\]text)
+PS1='[\[\e[01;94m\]\u\[\e[01;93m\]@\[\e[01;95m\]\h\[\e[01;92m\] \w\[\e[00m\]]$ '
 
-# Apply LS colors 
-LS_COLORS=$LS_COLORS:'di=1;33:' ; export LS_COLORS
+# Apply LS & GREP colors 
+LS_COLORS=$LS_COLORS:'di=1;32:' ; export LS_COLORS
+# GREP_COLOR="1;32"; export GREP_COLOR
 
-# Enable color in ls and grep
+# Enable color for various commands
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
+alias diff='diff --color=auto'
 
-# Aliases
+# Source aliases & shortcuts
 [ -f ~/.shell/.bash_aliases ] && source ~/.shell/.bash_aliases 
 [ -f ~/.shell/.bash_shortcuts ] && source ~/.shell/.bash_shortcuts 
