@@ -29,36 +29,51 @@
 4. Configure system
     a. make and check fstab: genfstab -U /mnt >> /mnt/etc/fstab
     b. Jump into arch install: arch-chroot /mnt 
-    c. install vim and git
-    d. Uncomment 'en_US.UTF-8' in /etc/locale.gen
-    e. sh configure-arch.sh
-        - curl -O 'https://gideonwashere.github.io/configure-arch.sh'
-    f. (SSD Only) Enable TRIM: systemctl enable fstrim.timer
-    g. Set root password: passwd
+    c. Uncomment 'en_US.UTF-8' in /etc/locale.gen
+    i. (SSD Only) Enable TRIM: systemctl enable fstrim.timer
         
-5. NetworkManager (lots of options for this) 
+5. NetworkManager 
     a. Install networkmanager 
     b. start/enable NetworkManager.service
         - nmcli device wifi connect <SSID> password <pass> hidden yes
 
 6. Install & configure bootloader
-    a. For systemd-boot: curl -O 'https://gideonwashere.github.io/configure-systemd-boot.sh'
-    b. Install intel-ucode
-    c. Run configure-systemd-boot.sh
-    d. echo "options root=PARTUUID=$(blkid -s PARTUUID -o value /dev/<root>) rw" >> /boot/loader/entries/arch.conf 
+    a. For systemd-boot, install using: bootctl --path=/boot install
+    b. Ensure updated with: bootctl update
+        - For pacman hooks to autoupdate systemd-boot, add the following to /etc/pacman.d/hooks/100-systemd-boot.hook
+            [Trigger]
+            Type = Package
+            Operation = Upgrade
+            Target = systemd
+
+            [Action]
+            Description = Updating systemd-boot
+            When = PostTransaction
+            Exec = /usr/bin/bootctl update
+        - Could install systemd-boot-pacman-hook from AUR instead 
+    c. Config file at /boot/loader/loader.conf [see wiki for options]
+        - e.x.  default arch
+                timeout 4
+                console-mode max
+                editor no
+    d. Add loader: /boot/loader/entries/arch.conf
+        - e.x.  title Arch Linux
+                linux /vmlinuz-linux
+                initrd /intel-ucode.img
+                initrd /initramfs-linux.img
+        - add options: echo "options root=PARTUUID=$(blkid -s PARTUUID -o value /dev/<root>) rw" >> /boot/loader/entries/arch.conf 
 
 7. 'exit' back to iso, unmount drives 'umount -R /mnt'; reboot; and remove iso.
     - ensure upaded 'pacman -Syu' 
 
 ====== Post Install - basics ======
-8. Users and Security 
-    a. Add users: useradd -m -g users -G wheel jake; passwd jake
-    b. Grant user sudo privlages: visudo, uncomment wheel entry of choice. 
-    c. disable root user: passwd -l root (undo with sudo passwd -u root)
-        - be SURE sudo works right before you do this!
-    d. Grab my dotfiles: git clone 'https://github.com/gideonwashere/dotfiles.git'
+h. Set root password: passwd
+    j. Add users: useradd -m -g users -G wheel jake; passwd jake
+    k. Grant user sudo privlages: visudo, uncomment wheel entry of choice. 
+    l. disable root user: passwd -l root (undo with sudo passwd -u root)
+        - be SURE sudo works right!
 
-9. Install GUI:
+8. Install GUI:
     a. Install Xorg: 
             xorg-server | Graphical server
             xf86-video-<graphics> | Grapics driver (to check: lspci | grep -e VGA -e 3D)
@@ -103,6 +118,8 @@
 
 10. Other Packages for consideration:
     lightDM, slick greeter | mint desktop manager
+    reflector | sorts pacman mirrors.
+        - reflector --country "United States" --age 24 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
     ranger | terminal file manager
     bc | terminal based calculator
     calcurse | terminal based calander 
