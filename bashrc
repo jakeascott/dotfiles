@@ -8,13 +8,16 @@ shopt -s autocd # cd by only typing path
 shopt -s histappend # append to history file
 shopt -s checkwinsize # resize window after each command if necessary
 
+# bind C-l to clear screen
+bind -x '"\C-l":clear'
+
 # History options
 HISTCONTROL=ignoreboth
 HISTSIZE=1000
 HISTFILESIZE=500
 
 # Set prompt (color: \[\e[XXm\]text)
-PS1='[\[\e[01;94m\]\u\[\e[01;93m\]@\[\e[01;95m\]\h\[\e[01;92m\] \w\[\e[00m\]]$ '
+PS1='[\[\e[01;94m\]\u\[\e[01;93m\]@\[\e[01;95m\]\h\[\e[01;92m\] \W\[\e[00m\]]$ '
 
 # Apply LS & GREP colors 
 LS_COLORS=$LS_COLORS:'di=1;32:' ; export LS_COLORS
