@@ -1,62 +1,59 @@
 1. Pre-installation 
 	a. Make bootable .iso and verify signature 
-	b. Once in live, verify boot mode is efi: ls /sys/firmware/efi/efivars
+	b. Check if EFI or BIOS: ls /sys/firmware/efi/efivars
     c. Ping archlinux.org to verify internet connection. If need wifi, can use wifi-menu
     d. Check system clock: timedatectl set-ntp true && timedatectl status
+    NOTE: Try 'setfont tarcyrheb-sun32' if archiso font too small
+          Alternatively, at archiso boot menu press 'tab' then nomodeset; video=1280x720
 
 2. Partition Drives (EFI)
     a. List partitions: fdisk -l
-	b. fdisk /dev/sd<x>
+	b. Start fdisk: fdisk /dev/sd<x>
 	c. make GPT partitions for... 
-		- efi 550M, should have partition type 'EFI System'
-		- SWAP generally equal to RAM + SQRT(RAM) (ex. 16GB RAM = 20GB Swap) 
-		- / (root) rest of drive
-	d. format efi/root partitions: 
-        - efi: mkfs.fat -F32 /dev/sdXx
-        - root: mkfs.ext4 /dev/sdXx
-	e. designate swap partition: mkswap /dev/<swp> && swapon /dev/<swp>;
+		EFI: 550M, should have partition type 'EFI System'
+		SWAP: generally equal to RAM
+		ROOT: rest of drive
+	d. format partitions: 
+        EFI: mkfs.fat -F32 /dev/sdXx
+        ROOT: mkfs.ext4 /dev/sdXx
+	e. designate swap partition: mkswap /dev/<swp> && swapon /dev/<swp>
 	f. mount drives
-        - mkdir /mnt/boot
-		- mount /dev/<root> /mnt
-		- mount /dev/<efi> /mnt/boot
+		mount /dev/<root> /mnt
+        mkdir /mnt/boot
+		mount /dev/<efi> /mnt/boot
+    NOTE: (BIOS) Ignore EFI and set ROOT to 'Legacy BIOS Bootable'
 
 3. Install Arch
-    a. Sort /etc/pacman.d/mirrorlist so that closer mirrors are at the top or...
-        - pacman -Sy pacman-contrib
-        - curl -O 'https://gideonwashere.github.io/update-mirrors.sh'
+    a. Sort /etc/pacman.d/mirrorlist so that closer mirrors are at the top
     b. Intall Arch: pacstrap /mnt base base-devel
 
 4. Configure system
     a. make and check fstab: genfstab -U /mnt >> /mnt/etc/fstab
     b. Jump into arch install: arch-chroot /mnt 
     c. install vim and git
+    d. Grab dotfiles: git clone 'https://github.com/gideonwashere/dotfiles.git'
     d. Uncomment 'en_US.UTF-8' in /etc/locale.gen
-    e. sh configure-arch.sh
-        - curl -O 'https://gideonwashere.github.io/configure-arch.sh'
+    e. run 'configure-arch.sh' from dotfiles
     f. (SSD Only) Enable TRIM: systemctl enable fstrim.timer
     g. Set root password: passwd
         
-5. NetworkManager (lots of options for this) 
+5. NetworkManager (lots of options for this NetworkManager is easiest) 
     a. Install networkmanager 
     b. start/enable NetworkManager.service
-        - nmcli device wifi connect <SSID> password <pass> hidden yes
+    NOTE: nmcli device wifi connect <SSID> password <pass> hidden yes
 
 6. Install & configure bootloader
-    a. For systemd-boot: curl -O 'https://gideonwashere.github.io/configure-systemd-boot.sh'
-    b. Install intel-ucode
-    c. Run configure-systemd-boot.sh
-    d. echo "options root=PARTUUID=$(blkid -s PARTUUID -o value /dev/<root>) rw" >> /boot/loader/entries/arch.conf 
+    a. Install intel-ucode
+    b. (EFI) Run configure-systemd-boot.sh | (BIOS) See syslinux-notes.txt
 
-7. 'exit' back to iso, unmount drives 'umount -R /mnt'; reboot; and remove iso.
-    - ensure upaded 'pacman -Syu' 
+7. 'exit' back to archiso, unmount drives 'umount -R /mnt', reboot, and remove iso.
 
-====== Post Install - basics ======
+====== Post Install ======
 8. Users and Security 
     a. Add users: useradd -m -g users -G wheel jake; passwd jake
     b. Grant user sudo privlages: visudo, uncomment wheel entry of choice. 
     c. disable root user: passwd -l root (undo with sudo passwd -u root)
-        - be SURE sudo works right before you do this!
-    d. Grab my dotfiles: git clone 'https://github.com/gideonwashere/dotfiles.git'
+    NOTE: Be SURE sudo works right before you diable root password!
 
 9. Install GUI:
     a. Install Xorg: 
@@ -103,6 +100,7 @@
 
 10. Other Packages for consideration:
     lightDM, slick greeter | mint desktop manager
+    ntp | System Clock
     ranger | terminal file manager
     bc | terminal based calculator
     calcurse | terminal based calander 
