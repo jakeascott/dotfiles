@@ -24,8 +24,8 @@
 
 3. Install Arch
     a. Sort /etc/pacman.d/mirrorlist so that closer mirrors are at the top
-    b. curl -O 'https://gideonwashere.github.io/update-mirrors.sh'
-    b. Install pacman-contrib and run update-mirrors.sh
+    b. curl -O 'https://gideonwashere.github.io/update-mirrors'
+    b. Install pacman-contrib and run update-mirrors
     b. Intall Arch: pacstrap /mnt base base-devel
 
 4. Configure system
@@ -34,7 +34,7 @@
     c. install vim and git
     d. Grab dotfiles: git clone 'https://github.com/gideonwashere/dotfiles.git'
     d. Uncomment 'en_US.UTF-8' in /etc/locale.gen
-    e. run 'configure-arch.sh' from dotfiles
+    e. run 'configure-arch' from dotfiles
     f. (SSD Only) Enable TRIM: systemctl enable fstrim.timer
     g. Set root password: passwd
         
@@ -45,7 +45,7 @@
 
 6. Install & configure bootloader
     a. Install intel-ucode
-    b. (EFI) Run configure-systemd-boot.sh | (BIOS) See syslinux-notes.txt
+    b. (EFI) Run configure-systemd-boot | (BIOS) See configure-syslinux
 
 7. 'exit' back to archiso, unmount drives 'umount -R /mnt', reboot, and remove iso.
 
