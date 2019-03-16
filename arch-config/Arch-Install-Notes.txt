@@ -1,14 +1,13 @@
 1. Pre-installation 
 	a. Make bootable .iso and verify signature 
 	b. Check if EFI or BIOS: ls /sys/firmware/efi/efivars
-    c. Ping archlinux.org to verify internet connection. If need wifi, can use wifi-menu
+    c. Ping archlinux.org to verify internet connection. If need wifi, set config file in /etc/netctl
     d. Check system clock: timedatectl set-ntp true && timedatectl status
-    NOTE: Try 'setfont tarcyrheb-sun32' if archiso font too small
-          Alternatively, at archiso boot menu press 'tab' then nomodeset; video=1280x720
+    NOTE: If text too small, at archiso boot menu press 'tab' then: nomodeset video=1280x720
 
 2. Partition Drives (EFI)
     a. List partitions: fdisk -l
-	b. Start fdisk: fdisk /dev/sd<x>
+	b. Start fdisk: fdisk /dev/sdX
 	c. make GPT partitions for... 
 		EFI: 550M, should have partition type 'EFI System'
 		SWAP: generally equal to RAM
@@ -25,6 +24,8 @@
 
 3. Install Arch
     a. Sort /etc/pacman.d/mirrorlist so that closer mirrors are at the top
+    b. curl -O 'https://gideonwashere.github.io/update-mirrors.sh'
+    b. Install pacman-contrib and run update-mirrors.sh
     b. Intall Arch: pacstrap /mnt base base-devel
 
 4. Configure system
@@ -37,7 +38,7 @@
     f. (SSD Only) Enable TRIM: systemctl enable fstrim.timer
     g. Set root password: passwd
         
-5. NetworkManager (lots of options for this NetworkManager is easiest) 
+5. NetworkManager (lots of options for this) 
     a. Install networkmanager 
     b. start/enable NetworkManager.service
     NOTE: nmcli device wifi connect <SSID> password <pass> hidden yes
