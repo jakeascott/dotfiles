@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Installs .profile .bashrc .vimrc and .config folder in /home/user/
+
+cp profile $HOME/.profile
+cp bashrc $HOME/.bashrc
+[ ! -d $HOME/.config ] && mkdir $HOME/.config
+cp -r config/bash $HOME/.config/
+
+#sudo cp profile /root/.profile
+#sudo cp root-bashrc /root/.bashrc
