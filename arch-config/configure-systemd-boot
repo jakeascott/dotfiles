@@ -36,7 +36,7 @@ console-mode max
 editor no
 EOL
 
-echo '/boot/loader/loader.conf'
+echo '/boot/loader/loader.conf installed'
 
 cat > /boot/loader/entries/arch.conf << EOL
 title Arch Linux
@@ -46,6 +46,6 @@ initrd /initramfs-linux.img
 options root=PARTUUID=`blkid -s PARTUUID -o value $1` rw
 EOL
 
-echo '/boot/loader/entries/arch.conf'
+echo '/boot/loader/entries/arch.conf installed'
 
 echo 'Done'

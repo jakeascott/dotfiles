@@ -5,14 +5,22 @@
 
 [ -z "$1" ] && echo 'No hostname supplied' && exit 1
 
+echo 'generating fstab...'
+genfstab -U /mnt >> /mnt/etc/fstab
+cat /mnt/etc/fstab
+
+# Jump into arch install
+arch-chroot /mnt
+
 # Timezone and clock set
 echo 'Setting timezone to Los_Angeles...'
 ln -sf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
 hwclock --systohc
+date
 
 # Set language
-# NEED TO UNCOMMENT 'en_US.UTF-8' IN /etc/locale.gen FIRST
 echo 'Setting language to en_US.UTF-8...'
+sed -i 's/#en_US.UTF-8/en_US.UTF-8/' /etc/locale.gen
 locale-gen
 echo "LANG=en_US.UTF-8" > /etc/locale.conf
 
@@ -25,5 +33,8 @@ cat > /etc/hosts << EOL
 ::1           localhost
 127.0.1.1     $1.localdomain $1
 EOL
+
+cat /etc/hostname
+cat /etc/hosts
 
 echo 'Done'
