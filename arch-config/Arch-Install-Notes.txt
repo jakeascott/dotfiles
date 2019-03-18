@@ -26,6 +26,8 @@
     b. curl -O 'https://gideonwashere.github.io/update-mirrors'
     c. pacman -Sy pacman-contrib; run update-mirrors
     d. Intall Arch: pacstrap /mnt base base-devel
+    e. Generate fstab: genfstab -U /mnt >> /mnt/etc/fstab
+    f. Jump into arch install: arch-chroot /mnt
 
 4. Configure system
     a. curl -O 'https://gideonwashere.github.io/configure-arch' and run it
