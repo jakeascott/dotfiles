@@ -20,7 +20,7 @@ HISTFILESIZE=500
 PS1='[\[\e[01;94m\]\u\[\e[01;93m\]@\[\e[01;95m\]\h\[\e[01;92m\] \W\[\e[00m\]]$ '
 
 # Apply LS & GREP colors 
-LS_COLORS=$LS_COLORS:'di=1;32:ex=1;34:' ; export LS_COLORS
+LS_COLORS=$LS_COLORS:'di=7;32:ex=1;35:ln=4;36:' ; export LS_COLORS
 # GREP_COLOR="1;32"; export GREP_COLOR
 
 # Enable color for various commands

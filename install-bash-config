@@ -7,5 +7,6 @@ cp bashrc $HOME/.bashrc
 [ ! -d $HOME/.config ] && mkdir $HOME/.config
 cp -r config/bash $HOME/.config/
 
-#sudo cp profile /root/.profile
-#sudo cp root-bashrc /root/.bashrc
+# Only works when run as root
+cp root-profile /root/.profile
+cp root-bashrc /root/.bashrc

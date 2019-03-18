@@ -1,7 +1,16 @@
-# figlet
-alias clr='clear'
+# useful aliases
 alias mkd='mkdir -pv'
-alias vi='vim'
+alias v='vim'
+alias la='ls -Agoh'
+alias ll='ls -goh'
+
+# git aliases
+alias gita='git add .'
+alias gitc='git commit -m'
+alias gitp='git push'
+alias gits='git status'
+
+# apt aliases
 alias apti='sudo apt install'
 alias aptu='sudo apt update'
 alias aptg='sudo apt upgrade'
@@ -9,11 +18,3 @@ alias aptr='sudo apt remove'
 alias aptp='sudo apt purge'
 alias apts='apt search'
 alias upgrade='sudo apt update && sudo apt upgrade'
-alias la='ls -Agoh'
-alias ll='ls -goh'
-alias aliases='vim ~/.bash_aliases'
-alias shortcuts='vim ~/.bash_shortcuts'
-alias gita='git add .'
-alias gitc='git commit -m'
-alias gitp='git push'
-alias gits='git status'
