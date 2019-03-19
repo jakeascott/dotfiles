@@ -1,61 +1,9 @@
-1. Pre-installation 
-	a. Make bootable .iso and verify signature 
-	b. Check if EFI or BIOS: ls /sys/firmware/efi/efivars
-    c. Ping archlinux.org to verify internet connection. If need wifi, set config file in /etc/netctl
-    d. Check system clock: timedatectl set-ntp true && timedatectl status
-    NOTE: If text too small, at archiso boot menu press 'tab' then: nomodeset video=1280x720
+On a fresh intall for an easy and nice setup can use LARBS
+curl -LO larbs.xyz/larbs.sh; then run as root: bash larbs.sh
 
-2. Partition Drives
-    a. List partitions: fdisk -l
-	b. Start fdisk: fdisk /dev/sdX
-	c. make GPT partitions for... 
-		EFI: 550M, should have partition type 'EFI System'
-		SWAP: generally equal to RAM
-		ROOT: rest of drive
-	d. format partitions: 
-        EFI: mkfs.fat -F32 /dev/sdXx
-        ROOT: mkfs.ext4 /dev/sdXx
-	e. designate swap partition: mkswap /dev/<swp> && swapon /dev/<swp>
-	f. mount drives
-		mount /dev/<root> /mnt
-        mkdir /mnt/boot && mount /dev/<efi> /mnt/boot
-    NOTE: (BIOS) Ignore EFI and set <root> partition to 'Legacy BIOS Bootable'
+===== Custom from fresh install ===== 
 
-3. Install Arch
-    a. Sort /etc/pacman.d/mirrorlist so that closer mirrors are at the top
-    b. curl -O 'https://gideonwashere.github.io/update-mirrors'
-    c. pacman -Sy pacman-contrib; run update-mirrors
-    d. Intall Arch: pacstrap /mnt base base-devel
-    e. Generate fstab: genfstab -U /mnt >> /mnt/etc/fstab
-    f. Jump into arch install: arch-chroot /mnt
-
-4. Configure system
-    a. curl -O 'https://gideonwashere.github.io/configure-arch' and run it
-    b. (SSD Only) Enable TRIM: systemctl enable fstrim.timer
-    c. Install vim and git 
-    d. Grab dotfiles: git clone 'https://github.com/gideonwashere/dotfiles.git'
-    e. Set root password: passwd
-        
-5. Install & configure bootloader
-    a. Install intel-ucode
-    b. (EFI) Run configure-systemd-boot | (BIOS) Run configure-syslinux
-
-6. 'exit' back to archiso, unmount drives 'umount -R /mnt', reboot, and remove iso.
-
-====== Post Install ======
-
-8. Users and Security 
-    a. Add users: useradd -m -g users -G wheel jake; passwd jake
-    b. Grant user sudo privlages: visudo, uncomment wheel entry of choice. 
-    c. disable root user: passwd -l root (undo with sudo passwd -u root)
-    NOTE: Be SURE sudo works right before you diable root password!
-
-5. NetworkManager (OPTIONAL) 
-    a. Install networkmanager 
-    b. start/enable NetworkManager.service
-    NOTE: nmcli device wifi connect <SSID> password <pass> hidden yes
-
-9. Install GUI:
+Installing i3
     a. Install Xorg: 
             xorg-server | Graphical server
             xf86-video-<graphics> | Grapics driver (to check: lspci | grep -e VGA -e 3D)
@@ -98,7 +46,7 @@
         eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
         export SSH_AUTH_SOCK
 
-10. Other Packages for consideration:
+10. Packages to look at: 
     lightDM, slick greeter | mint desktop manager
     ntp | System Clock
     ranger | terminal file manager
