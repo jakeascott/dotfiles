@@ -1,6 +1,11 @@
 " Use Vim settings, rather than vi compatability
 set nocompatible
 
+" Vim Plug
+call plug#begin('~/.vim/plugged')
+Plug 'morhetz/gruvbox'
+call plug#end()
+
 " ----- General Settings ----- "
 set backspace=indent,eol,start " allow backspacing in insert mode
 set number " line numbers
@@ -26,3 +31,6 @@ set hlsearch
 syntax on
 
 set mouse=a " activate mouse click, scroll, highlight, etc.
+
+set background=dark
+colorscheme gruvbox
