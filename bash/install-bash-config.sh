@@ -1,12 +1,7 @@
 #!/bin/bash
 
-# Installs .profile .bashrc .vimrc and .config folder in /home/user/
+# Installs .profile .bashrc .bash_aliases
 
-cp profile $HOME/.profile
-cp bashrc $HOME/.bashrc
-[ ! -d $HOME/.config ] && mkdir $HOME/.config
-cp -r config/bash $HOME/.config/
-
-# Only works when run as root
-cp root-profile /root/.profile
-cp root-bashrc /root/.bashrc
+cp profile $HOME/.profile && echo '~/.profile copied'
+cp bashrc $HOME/.bashrc && echo '~/.bashrc copied'
+cp bash_aliases $HOME/.bash_aliases && echo '~/.bash_aliases copied'

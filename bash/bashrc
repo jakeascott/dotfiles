@@ -1,4 +1,11 @@
-# ~/.bashrc executed when new interactive shell is launched. 
+#===========================================
+#     _               _              
+#    | |__   __ _ ___| |__  _ __ ___ 
+#    | '_ \ / _` / __| '_ \| '__/ __|
+# _  | |_) | (_| \__ \ | | | | | (__ 
+#(_) |_.__/ \__,_|___/_| |_|_|  \___|
+# 
+# ==========================================
 
 # activate vi mode
 set -o vi
@@ -28,6 +35,5 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias diff='diff --color=auto'
 
-# Source aliases & shortcuts
-[ -f ~/.config/bash/aliases ] && source ~/.config/bash/aliases
-[ -f ~/.config/bash/shortcuts ] && source ~/.config/bash/shortcuts
+# Source aliases
+[ -f ~/.bash_aliases ] && source ~/.bash_aliases

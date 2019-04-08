@@ -1,7 +1,16 @@
+" ==========================================
+"           _                    
+"    __   _(_)_ __ ___  _ __ ___ 
+"    \ \ / / | '_ ` _ \| '__/ __|
+" _   \ V /| | | | | | | | | (__ 
+"(_)   \_/ |_|_| |_| |_|_|  \___|
+"
+" ========================================== 
+
 " Use Vim settings, rather than vi compatability
 set nocompatible
 
-" Vim Plug
+" ----- Vim Plugged ----- " 
 call plug#begin('~/.vim/plugged')
 Plug 'morhetz/gruvbox'
 call plug#end()
@@ -32,5 +41,6 @@ syntax on
 
 set mouse=a " activate mouse click, scroll, highlight, etc.
 
+" Set colorscheme
 set background=dark
 colorscheme gruvbox

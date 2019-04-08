@@ -1,0 +1,31 @@
+# useful aliases
+alias mkd='mkdir -pv'
+alias v='vim'
+alias la='ls -Agoh'
+alias ll='ls -goh'
+
+# file shortcuts
+alias brc='vim ~/.bashrc'
+alias vrc='vim ~/.vimrc'
+alias bal='vim ~/.bash_aliases'
+alias sbrc='source ~/.bashrc'
+
+# directory shortcuts
+
+# git aliases
+alias gita='git add .'
+alias gitc='git commit -m'
+alias gitp='git push'
+alias gits='git status'
+
+# apt aliases
+alias apti='sudo apt install'
+alias aptu='sudo apt update'
+alias aptg='sudo apt upgrade'
+alias aptr='sudo apt remove'
+alias aptp='sudo apt purge'
+alias apts='apt search'
+alias upgrade='sudo apt update && sudo apt upgrade'
+
+# fun aliases
+alias starwars='telnet towel.blinkenlights.nl'
