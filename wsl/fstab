@@ -1,0 +1,4 @@
+# <file system> <mount point> <type> <options> <dump> <pass>
+LABEL=cloudimg-rootfs	/	    ext4	defaults	0 0
+P:                      /mnt/p	drvfs	defaults	0 0
+S:                      /mnt/s	drvfs	defaults	0 0
