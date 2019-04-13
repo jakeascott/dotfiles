@@ -43,4 +43,4 @@ set mouse=a " activate mouse click, scroll, highlight, etc.
 
 " Set colorscheme
 set background=dark
-colorscheme gruvbox
+"colorscheme gruvbox
