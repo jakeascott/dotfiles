@@ -23,14 +23,14 @@
 
 3. Install Arch
     a. Sort /etc/pacman.d/mirrorlist so that closer mirrors are at the top
-    b. curl -O 'https://gideonwashere.github.io/update-mirrors'
-    c. pacman -Sy pacman-contrib; run update-mirrors
+    b. curl -O 'https://gideonwashere.github.io/update-mirrors.sh'
+    c. pacman -Sy pacman-contrib; run update-mirrors.sh
     d. Intall Arch: pacstrap /mnt base base-devel
     e. Generate fstab: genfstab -U /mnt >> /mnt/etc/fstab
     f. Jump into arch install: arch-chroot /mnt
 
 4. Configure system
-    a. curl -O 'https://gideonwashere.github.io/configure-arch' and run it
+    a. curl -O 'https://gideonwashere.github.io/configure-arch.sh' and run it
     b. (SSD Only) Enable TRIM: systemctl enable fstrim.timer
     c. Install vim and git 
     d. Grab dotfiles: git clone 'https://github.com/gideonwashere/dotfiles.git'
@@ -53,3 +53,4 @@
     a. Install networkmanager 
     b. start/enable NetworkManager.service
     NOTE: nmcli device wifi connect <SSID> password <pass> hidden yes
+    c. (FOR NETCTL) copy a profile to /etc/netctl, then netctl start/enable 'profile'
