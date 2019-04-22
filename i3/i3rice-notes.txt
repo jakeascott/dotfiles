@@ -1,0 +1,6 @@
+lxapperance for gtk appearance
+
+i3 blocks
+cp /etc/i3blocks.conf to i3 config folder
+set i3blocks to source custom blocks config
+i3blocks -c path/to/blocks.conf
