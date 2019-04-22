@@ -10,7 +10,7 @@ bootctl --path=/boot install
 bootctl update
 
 # Insert pacman hooks
-echo 'Inserting pacman hooks...'
+echo "Inserting pacman hooks..."
 
 mkdir -p /etc/pacman.d/hooks
 
