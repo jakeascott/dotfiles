@@ -4,3 +4,6 @@ i3 blocks
 cp /etc/i3blocks.conf to i3 config folder
 set i3blocks to source custom blocks config
 i3blocks -c path/to/blocks.conf
+
+For glyphs in ubuntu just install 'fonts-font-awesome' then copy/paste from font awesome cheatsheet
+https://fontawesome.com/cheatsheet?from=io

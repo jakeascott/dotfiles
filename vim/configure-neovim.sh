@@ -7,7 +7,7 @@ fi
 # Install vim config
 echo 'Installing init.vim'
 [ ! -d ~/.config/nvim ] && mkdir ~/.config/nvim 
-cp vimrc ~/.config/nvim/init.vim
+cp init.vim ~/.config/nvim/init.vim
 
 # Get vim-plug
 echo 'Installing vim-plug'
