@@ -1,0 +1,16 @@
+#282828 bg
+#cc241d red
+#98971a green
+#d79921 yellow
+#458588 blue
+#b16286 purple
+#689d6a aqua
+#a89984 gray
+#928374 b_gray
+#fb4934 b_red
+#b8bb26 b_green
+#fabd2f b_yellow
+#83a598 b_blue
+#d3869b b_purple
+#8ec07c b_aqua
+#ebdbb2 fg
