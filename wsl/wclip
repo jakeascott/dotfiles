@@ -1,5 +1,2 @@
 #!/bin/bash
-
-[ -z $1 ] &&  echo 'No file to clip' && exit 1
-
-cat $1 | clip.exe
+cat | clip.exe
