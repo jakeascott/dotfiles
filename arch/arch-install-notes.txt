@@ -24,7 +24,7 @@
 3. Install Arch
     a. Sort /etc/pacman.d/mirrorlist so that closer mirrors are at the top
     b. curl -O 'https://gideonwashere.github.io/update-mirrors.sh'
-    c. pacman -Sy pacman-contrib; run update-mirrors.sh
+    c. pacman -Sy pacman-contrib && sh update-mirrors.sh
     d. Intall Arch: pacstrap /mnt base base-devel
     e. Generate fstab: genfstab -U /mnt >> /mnt/etc/fstab
     f. Jump into arch install: arch-chroot /mnt
@@ -32,25 +32,25 @@
 4. Configure system
     a. curl -O 'https://gideonwashere.github.io/configure-arch.sh' and run it
     b. (SSD Only) Enable TRIM: systemctl enable fstrim.timer
-    c. Install vim and git 
-    d. Grab dotfiles: git clone 'https://github.com/gideonwashere/dotfiles.git'
     e. Set root password: passwd
         
 5. Install & configure bootloader
-    a. Install intel-ucode
-    b. (EFI) Run configure-systemd-boot | (BIOS) Run configure-syslinux
+    a. Install intel-ucode or amd-ucode
+    b. curl -O 'https://gidoenwashere.github.io/configure-<Boot Loader>.sh'
+    c. (EFI) Run configure-systemd-boot.sh | (BIOS) Run configure-syslinux.sh
 
-6. 'exit' back to archiso, unmount drives 'umount -R /mnt', reboot, and remove iso.
-
-7. Users and Security 
-    a. Add users: useradd -m -g users -G wheel jake; passwd jake
-    b. Grant user sudo privlages: visudo, uncomment wheel entry of choice. 
-    c. disable root user: passwd -l root (undo with sudo passwd -u root)
-    NOTE: Be SURE sudo works right before you diable root password!
-    NOTE: May want to re-clone dotfiles with prefered user
-
-8. NetworkManager (OPTIONAL generally good for laptops) 
-    a. Install networkmanager 
+6. Network 
+    a. (FOR NETMAN) Install networkmanager 
     b. start/enable NetworkManager.service
     NOTE: nmcli device wifi connect <SSID> password <pass> hidden yes
     c. (FOR NETCTL) copy a profile to /etc/netctl, then netctl start/enable 'profile'
+
+7. 'exit' back to archiso, unmount drives 'umount -R /mnt', reboot, and remove iso.
+
+8. Users and finishing up
+    a. Add users: useradd -m -g users -G wheel jake; passwd jake
+    b. Grant user sudo privlages: visudo, uncomment wheel entry of choice. 
+    c. disable root user: passwd -l root (undo with sudo passwd -u root)
+    c. Install neovim and git 
+    d. Grab dotfiles: git clone 'https://github.com/gideonwashere/dotfiles.git'
+    NOTE: Be SURE sudo works right before you diable root password!

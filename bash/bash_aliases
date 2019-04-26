@@ -1,13 +1,13 @@
 # useful aliases
 alias mkd='mkdir -pv'
-alias v='vim'
+alias v='nvim'
 alias la='ls -Agoh'
 alias ll='ls -goh'
 
 # file shortcuts
-alias brc='vim ~/.bashrc'
-alias vrc='vim ~/.vimrc'
-alias bal='vim ~/.bash_aliases'
+alias brc='nvim ~/.bashrc'
+alias vrc='nvim ~/.vimrc'
+alias bal='nvim ~/.bash_aliases'
 alias sbrc='source ~/.bashrc'
 
 # directory shortcuts
