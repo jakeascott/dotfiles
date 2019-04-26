@@ -32,7 +32,8 @@
 4. Configure system
     a. curl -O 'https://gideonwashere.github.io/configure-arch.sh' and run it
     b. (SSD Only) Enable TRIM: systemctl enable fstrim.timer
-    e. Set root password: passwd
+    c. Set root password: passwd
+    d. Disable the fucking beep: rmmod pcspkr; echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
         
 5. Install & configure bootloader
     a. Install intel-ucode or amd-ucode
