@@ -1,7 +1,7 @@
-Make a new tmux session with: 
+# Make a new tmux session with: 
     `tmux new -s <session name>`
 
-To list existing sessions:
+## To list existing sessions:
     `tmux ls`
 
 To attach to an existing session:
@@ -14,6 +14,7 @@ Create a new window with:
     lead+c
 
 Cycle between windows:
+
     * lead+n | next window
     * lead+p | prev window
     * lead+<num> | jump to window
