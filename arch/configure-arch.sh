@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Sets default lanbuage to English and makes network files
+# Sets default lanbuage to English, makes network files
 # must run as root and takes 'hostname' as argument
 
 [ -z "$1" ] && echo 'No hostname supplied' && exit 1
@@ -32,5 +32,9 @@ cat /etc/hosts
 
 # Make pacman pretty
 grep "^Color" /etc/pacman.conf > /dev/null || sed -i "s/^#Color/Color/" /etc/pacman.conf
+
+# Disable that fucking beep
+rmmod pcspkr
+echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
 
 echo "Done"

@@ -23,7 +23,7 @@ Installing i3
             i3lock | screen lock
             dmenu | runs commands and UI selection
             dunst | notification system
-            feh | wallpaper setter
+            xwallpaper | wallpaper setter
     d. cp /etc/X11/xinit/xinitrc ~/.xinitrc and replace last block with `exec i3`
     d. `startx` then add 'status_command i3blocks' to ~/.config/i3/config 
     e. For inital HiDpi scaling: 

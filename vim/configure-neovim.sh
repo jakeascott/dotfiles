@@ -1,11 +1,8 @@
 #!/bin/bash
 
-if ! dpkg --get-selections | grep -q "^neovim" > /dev/null; then
-    sudo apt install neovim
-fi
-
 # Install vim config
 echo 'Installing init.vim'
+[ ! -d ~/.config ] && mkdir ~/.config
 [ ! -d ~/.config/nvim ] && mkdir ~/.config/nvim 
 cp init.vim ~/.config/nvim/init.vim
 
