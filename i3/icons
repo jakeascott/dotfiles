@@ -1,0 +1,1 @@
+cat font-awesome-icons | dmenu -l 10 | awk '{print $1}' | xclip -i -sel c -f | xclip -i -sel p
