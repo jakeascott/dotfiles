@@ -6,7 +6,7 @@ alias ll='ls -goh'
 
 # file shortcuts
 alias brc='nvim ~/.bashrc'
-alias vrc='nvim ~/.vimrc'
+alias vrc='nvim ~/.config/nvim/init.vim'
 alias bal='nvim ~/.bash_aliases'
 alias sbrc='source ~/.bashrc'
 

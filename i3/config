@@ -180,13 +180,13 @@ bar {
 # exec_always will load evertime i3 is restarted
 
 # set dpi if needed (100% scaling is 96)
-exec xrandr --dpi 192
+#exec xrandr --dpi 192
 
 # compositer
-exec compton
+#exec compton
 
 # screen settings
-# exec_always xrandr --output <screen> --mode <resolution>
+#exec_always xrandr --output <screen> --mode <resolution>
 
 # wallpaper
-exec_always feh --bg-scale ~/Pictures/wallpaper.jpg
+#exec_always xwallpaper --maximize /path/to/wallpaper 

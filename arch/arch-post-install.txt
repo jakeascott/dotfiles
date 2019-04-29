@@ -2,37 +2,31 @@ On a fresh intall for an easy and nice setup can use LARBS
 curl -LO larbs.xyz/larbs.sh; then run as root: bash larbs.sh
 
 ===== Custom from fresh install ===== 
+1. Install the following packages:
+    a. Xorg: xorg-server xorg-xinit xorg-apps
+    b. Driver: xf86-video-<graphics> (to check: lspci | grep -e VGA -e 3d)
+    c. Fonts: ttf-dejavu ttf-font-awesome ttf-hack
+    d. i3: i3-gaps i3blocks i3lock dmenu termite compton
+    e. Utils: xclip libnotify dunst xwallpaper alsa-utils
 
-Installing i3
-    a. Install Xorg: 
-            xorg-server | Graphical server
-            xorg-xwininfo | tool to query info about windows
-            xorg-xinit | starts graphical server
-            xorg-xprop | tool for detecting window props 
-            xorg-xdpyinfo | Aids with resolution determination
-            xorg-xrdb | Allows user of .Xresources
-            xorg-xbacklight | enables screen brightness controls
-            xf86-video-<graphics> | Grapics driver (to check: lspci | grep -e VGA -e 3D)
-            xf86-input-synaptics | driver for touchpad
-            copmton | compositor for xorg
-            termite | terminal emulator
-    b. Install fonts: ttf-dejavu
-    c. Install i3: 
-            i3-gaps | i3 with gaps
-            i3blocks | status bar
-            i3lock | screen lock
-            dmenu | runs commands and UI selection
-            dunst | notification system
-            xwallpaper | wallpaper setter
-    d. cp /etc/X11/xinit/xinitrc ~/.xinitrc and replace last block with `exec i3`
-    d. `startx` then add 'status_command i3blocks' to ~/.config/i3/config 
-    e. For inital HiDpi scaling: 
-        - add 'Xft.dpi: 192' to ~/.Xresources
-        - copy termite config: 'cp /etc/xdg/termite/config ~/.config/termite/' and increase font size
-    f. feh --bg-scale path/to/file, then add ~/.fehbg & to ~/.xinitrc
-    g. add xrandr --output ${screen} --mode ${resolution}
-     
-10. Packages to look at: 
+2. Configure Xorg, i3, etc:
+    a. cp /etc/X11/xinit/xinitrc ~/.xinitrc; replace last block with `exec i3`
+    b. cp /etc/xdg/termite/config ~/.config/termite/
+
+3. Configure Sound: 
+    a. run `alsamixer`
+    b. Unmute 'Master' and 'PCM' increase until 0dB gain
+
+3. Notes
+    xf86-input-synaptics | driver for touchpad
+    `startx` then add 'status_command i3blocks' to ~/.config/i3/config 
+    HiDpi scaling: 
+        'Xft.dpi: 192' to ~/.Xresources or xrandr --dpi 192
+        add GDK_SCALE=2 to .profile
+    xrandr --output <screen> --mode <resolution> (add to .xinitrc
+    xwallpaper --maximize /path/to/wallpaper
+
+4. Package List: 
     lightDM, slick greeter | mint desktop manager
     ntp | System Clock
     ranger | terminal file manager
