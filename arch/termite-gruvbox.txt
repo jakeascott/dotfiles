@@ -1,6 +1,9 @@
 [colors]
-#hard contrast: background = #1d2021
+# Alpha background (requires compositor)
+#background = rgba(28, 28, 28, 0.95) 
+
 background = #282828
+#hard contrast: background = #1d2021
 #soft contrast: background = #32302f
 foreground = #ebdbb2
 foreground_bold = #ebdbb2

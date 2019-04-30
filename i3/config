@@ -1,68 +1,75 @@
 # i3 config file (v4)
-#
-# Please see https://i3wm.org/docs/userguide.html for a complete reference!
-#
 
 # Font
 font pango:monospace 8
 
 # Set the mod key
 set $mod Mod4
-floating_modifier $mod
-# Use Mouse+$mod to drag floating windows to their wanted position
 
-# remove titlebar
-#for_window [class="^."] border pixel 0
+# Set window borders
+for_window [class="^."] border pixel 0
 for_window [class="Firefox"] border pixel 0
 
-# if gaps is installed, set gaps
+# Set gaps (requires i3-gaps)
 #gaps inner 5
 #gaps outer 5 
 
-# Main Keybinds
+# ===== Keybinds ===== #
+# bindcode --release <keycode> to bind single key press
+# can use `xev` to find keycodes
+# split 
+bindsym $mod+backslash split toggle
+
+# System 
+#bindcode --release 133 exec dmenu_run
 bindsym $mod+d exec dmenu_run
 bindsym $mod+q kill
 bindsym $mod+f fullscreen toggle
-# change focus
+
+# Program 
+bindsym $mod+Return exec $TERMINAL 
+bindsym $mod+w exec $BROWSER
+bindsym $mod+Shift+l exec i3lock
+
+# Movement 
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
-# move focused window:
 bindsym $mod+Left move left
 bindsym $mod+Down move down
 bindsym $mod+Up move up
 bindsym $mod+Right move right
-# split keybinds 
-bindsym $mod+Shift+backslash split h
-bindsym $mod+backslash split v
-# change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+t layout tabbed
-bindsym $mod+e layout toggle split
-# toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
-# change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
-# focus the parent container
 bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
-# Program shortcuts
-bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+w exec firefox
-bindsym $mod++shift+l exec i3lock
+# Layout
+bindsym $mod+s layout stacking
+bindsym $mod+t layout tabbed
+bindsym $mod+e layout toggle split
 
-# Define nmes for default workspaces
-# Use variables to avoid repeating the names in multiple places.
-set $ws1 ""
-set $ws2 ""
+# Floating
+floating_modifier $mod
+# Use Mouse+$mod to drag floating windows to their wanted position
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+
+# i3 specific
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec "i3-msg exit"
+
+# ===== Workspaces ===== #
+
+# Define names for default workspaces
+set $ws1 "1"
+set $ws2 "2"
 set $ws3 "3"
 set $ws4 "4"
 set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
-set $ws8 ""
+set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
@@ -94,13 +101,6 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 # NOTE: use xprop to get program class
 assign [class="Firefox"] $ws2
 
-# reload the configuration file
-bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-msg exit"
-
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -125,11 +125,12 @@ mode "resize" {
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
 }
-
 bindsym $mod+r mode "resize"
 
-# define colorscheme (this is gruvbox)
-set $bg #282828 
+# ===== Colorscheme ===== #
+# Gruvbox colors
+set $bg #282828
+set $fg #ebdbb2
 set $red #cc241d 
 set $green #98971a 
 set $yellow #d79921 
@@ -146,16 +147,15 @@ client.unfocused        $darkgray   $darkgray       $yellow     $purple     $dar
 client.focused_inactive $darkgray   $darkgray       $yellow     $purple     $darkgray 
 client.urgent           $red        $red            $yellow     $red        $red   
 
-# remove border indicator 
-# hide_edge_borders both
+# ===== Bar ===== #
 
-# status bar config
 bar {
     # bar position
     position top
 
     # define status bar
-    # can soruce a config file with -c /path/to/blocks.conf
+    # default blocks config: /etc/i3blocks.conf
+    # can source a config file with -c /path/to/blocks.conf
     status_command i3blocks -c ~/.config/i3/i3blocks.conf
    
     # define status bar colors 
@@ -175,7 +175,7 @@ bar {
     }
 }
 
-# Programs to run when i3 launches
+# ===== i3 Startup ===== #
 # exec will load at startup
 # exec_always will load evertime i3 is restarted
 
@@ -184,9 +184,6 @@ bar {
 
 # compositer
 #exec compton
-
-# screen settings
-#exec_always xrandr --output <screen> --mode <resolution>
 
 # wallpaper
 #exec_always xwallpaper --maximize /path/to/wallpaper 

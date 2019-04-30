@@ -23,8 +23,9 @@ curl -LO larbs.xyz/larbs.sh; then run as root: bash larbs.sh
     HiDpi scaling: 
         'Xft.dpi: 192' to ~/.Xresources or xrandr --dpi 192
         add GDK_SCALE=2 to .profile
-    xrandr --output <screen> --mode <resolution> (add to .xinitrc
+    xrandr --output <screen> --mode <resolution> (add to .xinitrc)
     xwallpaper --maximize /path/to/wallpaper
+    lxapperance for gtk themes
 
 4. Package List: 
     lightDM, slick greeter | mint desktop manager
@@ -33,7 +34,6 @@ curl -LO larbs.xyz/larbs.sh; then run as root: bash larbs.sh
     bc | terminal based calculator
     calcurse | terminal based calander 
     dosfstools | allows computer to access dos-like filesystems
-    libnotify | allows desktop notifications
     exfat-utils | manage FAT drives
     mpd, mpc | music deamon and cli
     mpv | vidoe player
