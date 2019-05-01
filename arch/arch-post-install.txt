@@ -2,20 +2,21 @@ On a fresh intall for an easy and nice setup can use LARBS
 curl -LO larbs.xyz/larbs.sh; then run as root: bash larbs.sh
 
 ===== Custom from fresh install ===== 
-1. Install the following packages:
+1. Install the following packages: (bootstrap script)
     a. Xorg: xorg-server xorg-xinit xorg-apps
     b. Driver: xf86-video-<graphics> (to check: lspci | grep -e VGA -e 3d)
     c. Fonts: ttf-dejavu ttf-font-awesome ttf-hack
     d. i3: i3-gaps i3blocks i3lock dmenu termite compton
-    e. Utils: xclip libnotify dunst xwallpaper alsa-utils
+    e. Utils: xclip libnotify dunst xwallpaper htop acpi sysstat bc
+    f. Laptop: tlp
 
 2. Configure Xorg, i3, etc:
-    a. cp /etc/X11/xinit/xinitrc ~/.xinitrc; replace last block with `exec i3`
+    a. cp /etc/X11/xinit/xinitrc ~/.xinitrc; replace last block with 
+        eval $(/usr/bin/gnome-keyring/daemon --start --components=pkcs11,secrets,ssh)
+        export SSH_AUTH_SOCK
+        xrandr --output <screen> --mode <resolution>
+        exec i3
     b. cp /etc/xdg/termite/config ~/.config/termite/
-
-3. Configure Sound: 
-    a. run `alsamixer`
-    b. Unmute 'Master' and 'PCM' increase until 0dB gain
 
 3. Notes
     xf86-input-synaptics | driver for touchpad
@@ -23,7 +24,6 @@ curl -LO larbs.xyz/larbs.sh; then run as root: bash larbs.sh
     HiDpi scaling: 
         'Xft.dpi: 192' to ~/.Xresources or xrandr --dpi 192
         add GDK_SCALE=2 to .profile
-    xrandr --output <screen> --mode <resolution> (add to .xinitrc)
     xwallpaper --maximize /path/to/wallpaper
     lxapperance for gtk themes
 
@@ -31,22 +31,17 @@ curl -LO larbs.xyz/larbs.sh; then run as root: bash larbs.sh
     lightDM, slick greeter | mint desktop manager
     ntp | System Clock
     ranger | terminal file manager
-    bc | terminal based calculator
     calcurse | terminal based calander 
     dosfstools | allows computer to access dos-like filesystems
     exfat-utils | manage FAT drives
     mpd, mpc | music deamon and cli
-    mpv | vidoe player
+    mpv | video player
     ncmpcpp | ncurses music interface
     newsboat | RSS Client
     ntfs-3g | access NTFS partitions
-    pulseaudio | audio system
-    pusseaudio-alsa | interface with ALSA
-    pulsemixer | ncurses audio controller
     socat | socket utility
     tmux | terminal multiplexer (for dropdown terminals)
     unrar, unzip | uncompress files
-    xclip | allows copy/paste form command line
     xdotool | window action utilities on command line
     youtube-dl | download youtube vids
     zathura + plugins | document viewer

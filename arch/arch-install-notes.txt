@@ -1,8 +1,8 @@
 1. Pre-installation 
 	a. Make bootable .iso and verify signature 
 	b. Check if EFI or BIOS: ls /sys/firmware/efi/efivars
-    c. Ping archlinux.org to verify internet connection. If need wifi, set config file in /etc/netctl
-    d. Check system clock: timedatectl set-ntp true && timedatectl status
+    c. Ping to verify internet connection. For wifi, set config file in /etc/netctl
+    d. Set system clock: timedatectl set-ntp true && timedatectl status
     NOTE: If text too small, at archiso boot menu press 'tab' then: nomodeset video=1280x720
 
 2. Partition Drives
@@ -29,17 +29,15 @@
     e. Generate fstab: genfstab -U /mnt >> /mnt/etc/fstab
     f. Jump into arch install: arch-chroot /mnt
 
-4. Configure system
+4. Configure system & install bootloader
     a. curl -O 'https://gideonwashere.github.io/configure-arch.sh' and run it
     b. (SSD Only) Enable TRIM: systemctl enable fstrim.timer
     c. Set root password: passwd
-        
-5. Install & configure bootloader
-    a. Install intel-ucode or amd-ucode
-    b. curl -O 'https://gidoenwashere.github.io/configure-<Boot Loader>.sh'
-    c. (EFI) Run configure-systemd-boot.sh | (BIOS) Run configure-syslinux.sh
+    d. Install intel-ucode or amd-ucode
+    e. curl -O 'https://gidoenwashere.github.io/configure-<Boot Loader>.sh'
+    f. (EFI) Run configure-systemd-boot.sh | (BIOS) Run configure-syslinux.sh
 
-6. Network 
+6. Network
     a. (FOR NETMAN) Install networkmanager 
     b. start/enable NetworkManager.service
     NOTE: nmcli device wifi connect <SSID> password <pass> hidden yes
@@ -47,12 +45,12 @@
 
 7. 'exit' back to archiso, unmount drives 'umount -R /mnt', reboot, and remove iso.
 
-8. Users and finishing up
+8. Users & Security 
     a. Add users: useradd -m -g users -G wheel jake; passwd jake
     b. Grant user sudo privlages: visudo, uncomment wheel entry of choice. 
     c. disable root user: passwd -l root (undo with sudo passwd -u root)
-    d. Install neovim, git and ufw
+    d. install neovim git ufw pulseaudio pulseaudio-alsa pulsemixer gnome-keyring libsecret
     e. start/enable ufw.service, then run ufw enable, `ufw default deny incoming`
     f. Grab dotfiles: git clone 'https://github.com/gideonwashere/dotfiles.git'
     g. install bash and vim profiles
-    NOTE: Be SURE sudo works right before you diable root password!
+    NOTE: Be SURE sudo works before you diable root password!

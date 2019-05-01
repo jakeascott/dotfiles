@@ -23,7 +23,7 @@ set showcmd " display incomplete commands
 set incsearch " do incremental searching
 set linebreak " wrap lines on 'word' boundaries
 set scrolloff=3 " don't let cursor touch edge of viewport
-set splitright " Vertical splits use right half of screen
+set splitbelow splitright " splits use right/bottom half of screen
 set timeoutlen=100 " lower ^[ timeout
 if exists('&breakindent')
     set breakindent " Indent wrapped lines up to the same level
