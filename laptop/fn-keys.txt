@@ -1,0 +1,12 @@
+XF86AudioMute
+XF86AudioLowerVolume
+XF86AudioRaiseVolume
+XF86AudioMicMute
+Num_Lock
+Scroll_Lock
+XF86MonBrightnessDown
+XF86MonBrightnessUp
+XF86RFKill
+Home
+End
+Menu
