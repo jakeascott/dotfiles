@@ -5,9 +5,9 @@ curl -LO larbs.xyz/larbs.sh; then run as root: bash larbs.sh
 1. Install the following packages: (bootstrap script)
     a. Xorg: xorg-server xorg-xinit xorg-apps
     b. Driver: xf86-video-<graphics> (to check: lspci | grep -e VGA -e 3d)
-    c. Fonts: ttf-dejavu ttf-font-awesome ttf-hack
+    c. Fonts: ttf-dejavu ttf-font-awesome
     d. i3: i3-gaps i3blocks i3lock dmenu termite compton
-    e. Utils: xclip libnotify dunst xwallpaper htop acpi sysstat bc
+    e. Utils: xclip libnotify dunst xwallpaper htop acpi bc
     f. Laptop: tlp
 
 2. Configure Xorg, i3, etc:

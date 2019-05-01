@@ -4,7 +4,7 @@
 font pango:monospace 8
 
 # Set the mod key
-set $mod Mod4
+set $mod Mod1
 
 # Set window borders
 for_window [class="^."] border pixel 0
@@ -27,8 +27,8 @@ bindsym $mod+q kill
 bindsym $mod+f fullscreen toggle
 
 # Program 
-bindsym $mod+Return exec $TERMINAL 
-bindsym $mod+w exec $BROWSER
+bindsym $mod+Return exec i3-sensible-terminal 
+bindsym $mod+w exec firefox
 bindsym $mod+Shift+l exec i3lock
 
 # Movement 
@@ -179,11 +179,10 @@ bar {
 # exec will load at startup
 # exec_always will load evertime i3 is restarted
 
-# set dpi if needed (100% scaling is 96)
-#exec xrandr --dpi 192
-
-# compositer
-#exec compton
+# start dunst for notifications
+#exec --no-startup-id dunst
+# start compositer
+#exec --no-startup-id compton
 
 # wallpaper
-#exec_always xwallpaper --maximize /path/to/wallpaper 
+#exec_always --no-startup-id xwallpaper --maximize /path/to/wallpaper 
