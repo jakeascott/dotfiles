@@ -150,22 +150,25 @@ client.urgent           $red        $red            $yellow     $red        $red
 # ===== Bar ===== #
 
 bar {
+    # define status bar
+    # default config: /etc/i3blocks.conf
+    #status_command i3blocks
+    status_command i3blocks -c ~/.config/i3/statusbar
+    
     # bar position
     position top
-
-    # define status bar
-    # default blocks config: /etc/i3blocks.conf
-    # can source a config file with -c /path/to/blocks.conf
-    status_command i3blocks -c ~/.config/i3/i3blocks.conf
-   
+    
     # define status bar colors 
     colors {
         # bar background color
         background $bg
+        
         # default text color used for blocks
         statusline $yellow
+        
         # separator color
         #separator #000000
+        
         # workspace selection colors
         # CLASS             BORDER      BACKGROUND      TEXT
         focused_workspace   $aqua       $aqua           $darkgray
@@ -183,6 +186,5 @@ bar {
 #exec --no-startup-id dunst
 # start compositer
 #exec --no-startup-id compton
-
-# wallpaper
+# set wallpaper
 #exec_always --no-startup-id xwallpaper --maximize /path/to/wallpaper 

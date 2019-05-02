@@ -2,34 +2,37 @@ On a fresh intall for an easy and nice setup can use LARBS
 curl -LO larbs.xyz/larbs.sh; then run as root: bash larbs.sh
 
 ===== Custom from fresh install ===== 
-1. Install the following packages: (bootstrap script)
-    a. Xorg: xorg-server xorg-xinit xorg-apps
-    b. Driver: xf86-video-<graphics> (to check: lspci | grep -e VGA -e 3d)
-    c. Fonts: ttf-dejavu ttf-font-awesome
-    d. i3: i3-gaps i3blocks i3lock dmenu termite compton
-    e. Utils: xclip libnotify dunst xwallpaper htop acpi bc
-    f. Laptop: tlp
+Main Package List (run bootstrap script after this):
+    Xorg:   xorg-server xorg-xinit xorg-apps
+    Audio:  pulseaudio pulseaudio-alsa pulsemixer 
+    Driver: xf86-video-<graphics> (to check: lspci | grep -e VGA -e 3d)
+    Fonts:  ttf-dejavu otf-font-awesome
+    i3:     i3-gaps i3blocks i3lock dmenu termite compton
+    System: sysstat htop acpi lxapperance neofetch 
+    Utils:  xclip libnotify dunst xwallpaper bc 
+    Laptop: tlp xf86-input-synaptics
 
-2. Configure Xorg, i3, etc:
-    a. cp /etc/X11/xinit/xinitrc ~/.xinitrc; replace last block with 
-        eval $(/usr/bin/gnome-keyring/daemon --start --components=pkcs11,secrets,ssh)
-        export SSH_AUTH_SOCK
-        xrandr --output <screen> --mode <resolution>
-        exec i3
-    b. cp /etc/xdg/termite/config ~/.config/termite/
+Configuration Notes: 
+    XRANDR: xrandr --output <screen> --mode <resolution>
+            xrandr --dpi 192
+    XINIT:  /etc/X11/xinit/xinitrc ~/.xinitrc; replace last block with 
+            eval $(/usr/bin/gnome-keyring/daemon --start --components=pkcs11,secrets,ssh)
+            export SSH_AUTH_SOCK
+            exec i3
+    TERMITE:cp /etc/xdg/termite/config ~/.config/termite/
+    HIDPI:  GDK_SCALE=2 in .profile
+    
+AUR Helper:
+    YAY:    clone 'https://aur.archlinux.org/yay.git'
+            cd yay && makepkg -si
 
-3. Notes
-    xf86-input-synaptics | driver for touchpad
-    `startx` then add 'status_command i3blocks' to ~/.config/i3/config 
-    HiDpi scaling: 
-        'Xft.dpi: 192' to ~/.Xresources or xrandr --dpi 192
-        add GDK_SCALE=2 to .profile
-    xwallpaper --maximize /path/to/wallpaper
-    lxapperance for gtk themes
+GTK Themes: 
+    arc-gtk-theme *
+    adapta-gtk-theme
+    gruvbox-darker for firefox
 
-4. Package List: 
+Other Packages:
     lightDM, slick greeter | mint desktop manager
-    ntp | System Clock
     ranger | terminal file manager
     calcurse | terminal based calander 
     dosfstools | allows computer to access dos-like filesystems
