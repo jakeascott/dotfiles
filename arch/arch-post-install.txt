@@ -1,14 +1,10 @@
-On a fresh intall for an easy and nice setup can use LARBS
-curl -LO larbs.xyz/larbs.sh; then run as root: bash larbs.sh
-
-===== Custom from fresh install ===== 
 Main Package List (run bootstrap script after this):
     Xorg:   xorg-server xorg-xinit xorg-apps
     Audio:  pulseaudio pulseaudio-alsa pulsemixer 
     Driver: xf86-video-<graphics> (to check: lspci | grep -e VGA -e 3d)
-    Fonts:  ttf-dejavu otf-font-awesome
+    Fonts:  ttf-dejavu otf-font-awesome ttf-hack
     i3:     i3-gaps i3blocks i3lock dmenu termite compton
-    System: sysstat htop acpi lxapperance neofetch 
+    System: sysstat htop acpi lxappearance neofetch 
     Utils:  xclip libnotify dunst xwallpaper bc 
     Laptop: tlp xf86-input-synaptics
 
@@ -23,7 +19,7 @@ Configuration Notes:
     HIDPI:  GDK_SCALE=2 in .profile
     
 AUR Helper:
-    YAY:    clone 'https://aur.archlinux.org/yay.git'
+    YAY:    git clone 'https://aur.archlinux.org/yay.git'
             cd yay && makepkg -si
 
 GTK Themes: 
