@@ -8,7 +8,7 @@ CONFIG="$HOME/.config"
 
 echo 'Creating folders...'
 mkdir -vp $LOCAL/bin $LOCAL/share $LOCAL/aur
-mkdir -vp $CONFIG/i3 $CONFIG/termite $CONFIG/nvim $CONFIG/dunst $CONFIG/compton
+mkdir -vp $CONFIG/i3 $CONFIG/termite $CONFIG/nvim $CONFIG/dunst $CONFIG/compton $CONFIG/i3blocks
 
 echo 'Enabling touchpad for x...'
 sudo mkdir -vp /etc/X11/xorg.conf.d

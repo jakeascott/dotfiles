@@ -1,8 +1,0 @@
-Network/Wifi Connection
-Volume display
-cpu load
-cpu temp
-disk space and swap
-ram usage
-time/date
-battery

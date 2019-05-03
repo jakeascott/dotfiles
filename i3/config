@@ -7,7 +7,7 @@ font pango:monospace 8
 set $mod Mod1
 
 # Set window borders
-for_window [class="^."] border pixel 0
+for_window [class="^."] border pixel 2
 for_window [class="Firefox"] border pixel 0
 
 # Set gaps (requires i3-gaps)
@@ -47,10 +47,7 @@ bindsym $mod+a focus parent
 bindsym $mod+s layout stacking
 bindsym $mod+t layout tabbed
 bindsym $mod+e layout toggle split
-
-# Floating
-floating_modifier $mod
-# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod # Use Mouse+$mod to drag floating windows
 bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
@@ -59,9 +56,11 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-msg exit"
 
-# ===== Workspaces ===== #
+# Scripts
+bindsym $mod+grave exec icons
 
-# Define names for default workspaces
+# ===== Workspaces ===== #
+# Define names for workspaces
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
@@ -101,20 +100,13 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 # NOTE: use xprop to get program class
 assign [class="Firefox"] $ws2
 
-# resize window (you can also use the mouse for that)
+# resize window
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
         bindsym h resize shrink width 10 px or 10 ppt
         bindsym j resize grow height 10 px or 10 ppt
         bindsym k resize shrink height 10 px or 10 ppt
         bindsym l resize grow width 10 px or 10 ppt
-
-        # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
         bindsym Down resize grow height 10 px or 10 ppt
         bindsym Up resize shrink height 10 px or 10 ppt
@@ -140,6 +132,9 @@ set $aqua #689d68
 set $gray #a89984 
 set $darkgray #1d2021
 
+# window borders
+
+
 # window colors
 # CLASS                 BORDER      BACKGROUND      TEXT        INDICATOR   CHILD_BORDER
 client.focused          $green      $green          $darkgray   $purple     $darkgray 
@@ -148,12 +143,9 @@ client.focused_inactive $darkgray   $darkgray       $yellow     $purple     $dar
 client.urgent           $red        $red            $yellow     $red        $red   
 
 # ===== Bar ===== #
-
 bar {
     # define status bar
-    # default config: /etc/i3blocks.conf
-    #status_command i3blocks
-    status_command i3blocks -c ~/.config/i3/statusbar
+    status_command i3blocks
     
     # bar position
     position top
