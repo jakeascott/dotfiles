@@ -1,11 +1,7 @@
 Network/Wifi Connection
-Volume display
 cpu load
 cpu temp
-disk space and swap
-ram usage
-time/date
-battery
+disk space
 
 #!/bin/sh
 #GENERAL FORMAT OF i3Blocks SCRIPT

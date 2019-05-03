@@ -1,0 +1,8 @@
+#!/bin/sh
+# Requires pulsemixer
+case $BLOCK_BUTTON in
+    1) pulsemixer --toggle-mute
+esac
+
+[[ $(pulsemixer --get-mute) -eq 1 ]] echo MUTE && exit
+pulsemixer --get-volume | awk '{print "VOL "$1"%"}'

@@ -149,6 +149,9 @@ bar {
     
     # bar position
     position top
+   
+    # bar font
+    #font pango:monospace 8
     
     # define status bar colors 
     colors {
@@ -156,10 +159,10 @@ bar {
         background $bg
         
         # default text color used for blocks
-        statusline $yellow
+        statusline #fabd2f
         
         # separator color
-        #separator #000000
+        separator $fg
         
         # workspace selection colors
         # CLASS             BORDER      BACKGROUND      TEXT

@@ -5,8 +5,18 @@
 # Default blocks located in /usr/lib/i3blocks/
 
 # Global properties
-command=.config/i3blocks/$BLOCK_NAME
+command=$HOME/.config/i3blocks/$BLOCK_NAME
 separator_block_width=15
 markup=none
 
+[volume]
+interval=once
+signal=1
 
+[memory]
+label=RAM
+interval=15
+
+[clock]
+label=TIME
+interval=5

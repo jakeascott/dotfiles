@@ -1,0 +1,9 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+    1) notify-send "Left Click" ;;
+    2) notify-send "Middle Click" ;;
+    3) notify-send "Right Click" ;;
+esac
+
+echo "CLICK ME"

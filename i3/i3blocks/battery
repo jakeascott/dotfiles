@@ -1,14 +1,13 @@
 #!/bin/bash
+COLOR=\#b8bb26
+
 CSTATUS=$(acpi -b | awk '{print $3}' | sed 's/,//g')
 PERCENT=$(acpi -b | awk '{print $4}' | sed 's/[^0-9]//g')
 TIMEREM=$(acpi -b | awk '{print $5}' | sed 's/,//g')
 
-COLOR='\033[1;32m'
-NOCOL='\033[0m'
-
 if [[ ! $CSTATUS =~ Dis.* ]] 
 then
-    echo -e "${COLOR}$CSTATUS${NOCOL}"
+    echo
 else
     CSTATUS=
     [[ $PERCENT -le 80 ]] && CSTATUS=
@@ -17,3 +16,5 @@ else
     [[ $PERCENT -le 10 ]] && COLOR='\033[1;31m' && CSTATUS=
     echo -e "${COLOR}$CSTATUS  $PERCENT% [$TIMEREM]${NOCOL}"
 fi
+echo
+echo $COLOR
