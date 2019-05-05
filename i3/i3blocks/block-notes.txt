@@ -36,3 +36,18 @@ case $BLOCK_BUTTON in
 esac
 
 free -h | awk '/^Mem:/ {print $3 "/" $2}'
+
+# CENTERING ON BAR
+bar {
+  position top
+  workspace_buttons yes
+  status_command i3blocks -c ~/.config/i3blocks/wintitle.conf
+  align center
+}
+
+[window title]
+command=xdotool getactivewindow getwindowname
+interval=3
+color=#A6D1FA
+min_width=<resolution width>
+align=center

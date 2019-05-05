@@ -1,0 +1,14 @@
+#!/bin/bash
+# Requires networkmanager
+# get wireless signal info from /proc/net/wireless
+# formula <Quality-link> * 100 / 70
+CON=$(nmcli -g TYPE connection show --active)
+
+if [[ $CON =~ "wireless" ]]; then
+    SIGNAL=$(awk '/^w/ {print int($3 * 100 / 70) }' /proc/net/wireless)
+    echo "WIFI ${SIGNAL}%"
+elif [[ $CON =~ "ethernet" ]]; then
+    echo WIRED
+else
+    echo WIRED 
+fi
