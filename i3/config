@@ -47,7 +47,8 @@ bindsym $mod+a focus parent
 bindsym $mod+s layout stacking
 bindsym $mod+t layout tabbed
 bindsym $mod+e layout toggle split
-floating_modifier $mod # Use Mouse+$mod to drag floating windows
+# Use Mouse+$mod to drag floating windows
+floating_modifier $mod
 bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
