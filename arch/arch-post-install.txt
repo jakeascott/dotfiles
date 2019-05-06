@@ -5,7 +5,8 @@ Main Package List (run bootstrap script after this):
     Fonts:  ttf-dejavu otf-font-awesome ttf-hack
     i3:     i3-gaps i3blocks i3lock dmenu termite compton
     System: sysstat htop acpi lxappearance neofetch 
-    Utils:  xclip libnotify dunst xwallpaper bc 
+    Utils:  xclip xdotool libnotify dunst xwallpaper bc 
+    Media: mpd mpc mpv ncmpcpp youtube-dl
     Laptop: tlp xf86-input-synaptics
 
 Configuration Notes: 
@@ -29,20 +30,16 @@ GTK Themes:
 
 Other Packages:
     lightDM, slick greeter | mint desktop manager
+        start/enable lightdm.service
     ranger | terminal file manager
     calcurse | terminal based calander 
     dosfstools | allows computer to access dos-like filesystems
     exfat-utils | manage FAT drives
-    mpd, mpc | music deamon and cli
-    mpv | video player
-    ncmpcpp | ncurses music interface
     newsboat | RSS Client
     ntfs-3g | access NTFS partitions
     socat | socket utility
     tmux | terminal multiplexer (for dropdown terminals)
     unrar, unzip | uncompress files
-    xdotool | window action utilities on command line
-    youtube-dl | download youtube vids
     zathura + plugins | document viewer
     poppler | edit pdfs
     mediainfo | shows audio/video information
