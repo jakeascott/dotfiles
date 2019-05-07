@@ -1,1 +1,8 @@
 #!/bin/bash
+
+case $BLOCK_BUTTON in
+    1) [[ $(echo -e "no\nyes" | dmenu -p "Reboot?") =~ "yes" ]] && sudo reboot ;;
+    3) [[ $(echo -e "no\nyes" | dmenu -p "Shutdown?") =~ "yes" ]] && sudo shutdown now ;;
+esac
+
+echo " "

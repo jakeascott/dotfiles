@@ -20,3 +20,7 @@ interval=15
 [clock]
 label=TIME
 interval=5
+
+[power]
+label=PWR
+interval=once
