@@ -41,6 +41,12 @@ syntax on
 
 set mouse=a " activate mouse click, scroll, highlight, etc.
 
+" Clipboard
+" noremap <Leader>y "*y
+" noremap <Leader>p "*p
+" noremap <Leader>Y "+y
+" noremap <Leader>P "+p
+
 " Set colorscheme
 set background=dark
 "colorscheme gruvbox

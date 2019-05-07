@@ -5,8 +5,8 @@ Main Package List (run bootstrap script after this):
     Fonts:  ttf-dejavu otf-font-awesome ttf-hack
     i3:     i3-gaps i3blocks i3lock dmenu termite compton
     System: sysstat htop acpi lxappearance neofetch 
-    Utils:  xclip xdotool libnotify dunst xwallpaper bc 
-    Media: mpd mpc mpv ncmpcpp youtube-dl
+    Utils:  xclip xdotool libnotify dunst xwallpaper bc
+    Media: mpd mpc mpv ncmpcpp youtube-dl sxiv imagemagick
     Laptop: tlp xf86-input-synaptics
 
 Configuration Notes: 
@@ -29,10 +29,10 @@ GTK Themes:
     gruvbox-darker for firefox
 
 Other Packages:
-    lightDM, slick greeter | mint desktop manager
+    lightDM, slick greeter | desktop manager
         start/enable lightdm.service
     ranger | terminal file manager
-    calcurse | terminal based calander 
+    calcurse | terminal based calender 
     dosfstools | allows computer to access dos-like filesystems
     exfat-utils | manage FAT drives
     newsboat | RSS Client
@@ -40,10 +40,11 @@ Other Packages:
     socat | socket utility
     tmux | terminal multiplexer (for dropdown terminals)
     unrar, unzip | uncompress files
-    zathura + plugins | document viewer
+    zathura + djvu + mupdf | document viewer
     poppler | edit pdfs
     mediainfo | shows audio/video information
     atool | manages archives
     fzf | fuzzy finder tool
     highlight | highlight code output
     nmcli-dmenu | manage NetwMan with dmenu networkmanager-demenu-git AUR
+    docx2txt + odt2txt | docx and odt viewing in vifm
