@@ -24,9 +24,9 @@ AUR Helper:
             cd yay && makepkg -si
 
 GTK Themes: 
-    arc-gtk-theme *
+    arc-gtk-theme
     adapta-gtk-theme
-    gruvbox-darker for firefox
+    gtk-theme-arc-gruvbox-git * (AUR)
 
 Other Packages:
     lightDM, slick greeter | desktop manager
@@ -47,5 +47,4 @@ Other Packages:
     atool | manages archives
     fzf | fuzzy finder tool
     highlight | highlight code output
-    nmcli-dmenu | manage NetwMan with dmenu networkmanager-demenu-git AUR
     docx2txt + odt2txt | docx and odt viewing in vifm
