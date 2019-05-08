@@ -10,8 +10,8 @@
 
 # set global defaults
 export EDITOR="nvim"
-#export TERMINAL="termite"
-#export BROWSER="firefox"
+export TERMINAL="termite"
+export BROWSER="firefox"
 #export READER="zathura"
 #export FILE="vifm"
 

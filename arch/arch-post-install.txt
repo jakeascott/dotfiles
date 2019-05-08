@@ -33,6 +33,7 @@ Other Packages:
         start/enable lightdm.service
     ranger | terminal file manager
     calcurse | terminal based calender 
+    fcron | cronjob scheduler
     dosfstools | allows computer to access dos-like filesystems
     exfat-utils | manage FAT drives
     newsboat | RSS Client

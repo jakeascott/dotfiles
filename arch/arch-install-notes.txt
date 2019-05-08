@@ -33,7 +33,7 @@
     a. curl -O 'https://gideonwashere.github.io/configure-arch.sh' and run it
     b. (SSD Only) Enable TRIM: systemctl enable fstrim.timer
     c. Set root password: passwd
-    d. Install intel-ucode or amd-ucode
+    d. Install <proc>-ucode linux-headers linux-lts linux-lts-headers
     e. curl -O 'https://gidoenwashere.github.io/configure-<Boot Loader>.sh'
     f. (EFI) Run configure-systemd-boot.sh | (BIOS) Run configure-syslinux.sh
 

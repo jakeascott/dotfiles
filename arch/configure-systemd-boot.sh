@@ -28,14 +28,12 @@ EOL
 
 # Create boot loader config files
 echo 'Installing boot loader config files...'
-
 cat > /boot/loader/loader.conf << EOL
 default arch
 timeout 4
 console-mode max
 editor no
 EOL
-
 echo '/boot/loader/loader.conf installed'
 
 cat > /boot/loader/entries/arch.conf << EOL
@@ -45,7 +43,15 @@ initrd /intel-ucode.img
 initrd /initramfs-linux.img
 options root=PARTUUID=`blkid -s PARTUUID -o value $1` rw
 EOL
-
 echo '/boot/loader/entries/arch.conf installed'
+
+cat > /boot/loader/entries/arch-lts.conf << EOL
+title Arch Linux LTS
+linux /vmlinuz-linux-lts
+initrd /intel-ucode.img
+initrd /initramfs-linux-lts.img
+options root=PARTUUID=`blkid -s PARTUUID -o value $1` rw
+EOL
+echo '/boot/loader/entries/arch-lts.conf installed'
 
 echo 'Done'

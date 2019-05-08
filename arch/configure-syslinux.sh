@@ -21,10 +21,10 @@ LABEL arch
     APPEND root=$1 rw
     INITRD ../intel-ucode.img,../initramfs-linux.img
 
-LABEL archfallback
-    LINUX ../vmlinuz-linux
+LABEL arch-lts
+    LINUX ../vmlinuz-linux-lts
     APPEND root=$1 rw
-    INITRD ../intel-ucode.img,../initramfs-linux-fallback.img
+    INITRD ../intel-ucode.img,../initramfs-linux-lts.img
 EOL
 
 echo 'Installed /boot/syslinux/syslinux.cfg'
