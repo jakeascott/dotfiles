@@ -1,3 +1,4 @@
+BASE 16
 #282828 bg
 #cc241d red
 #98971a green
@@ -14,3 +15,9 @@
 #d3869b b_purple
 #8ec07c b_aqua
 #ebdbb2 fg
+
+EXTRA
+#1d2021 darkgray
+#fbf1c7 light
+#d65d0e orange
+#fe8019 b_orange
