@@ -6,9 +6,8 @@
     NOTE: If font too small: `setfont latarcyrheb-sun32`
 
 2. Partition Drives
-    a. List partitions: fdisk -l
-	b. Start fdisk: fdisk /dev/sdX
-	c. make GPT partitions for... 
+    a. List: fdisk -l; Start: fdisk /dev/sdX
+    b. make GPT partitions for... 
 		EFI: 550M, should have partition type 'EFI System'
 		SWAP: generally equal to RAM
 		ROOT: rest of drive
@@ -37,15 +36,13 @@
     e. curl -O 'https://gidoenwashere.github.io/configure-<Boot Loader>.sh'
     f. (EFI) Run configure-systemd-boot.sh | (BIOS) Run configure-syslinux.sh
 
-6. Network
-    a. (FOR NETMAN) Install networkmanager 
-    b. start/enable NetworkManager.service
+5. Network
+    a. Install networkmanager; start/enable NetworkManager.service
     NOTE: nmcli device wifi connect <SSID> password <pass> hidden yes
-    c. (FOR NETCTL) copy a profile to /etc/netctl, then netctl start/enable 'profile'
-ys
-7. 'exit' back to archiso, unmount drives 'umount -R /mnt', reboot, and remove iso.
 
-8. Users & Security 
+6. 'exit' back to archiso, unmount drives 'umount -R /mnt', reboot, and remove iso.
+
+7. Users & Security 
     a. Add users: useradd -m -g users -G wheel jake; passwd jake
     b. Grant user sudo privlages: visudo, uncomment wheel entry of choice. 
     c. disable root user: passwd -l root (undo with sudo passwd -u root)

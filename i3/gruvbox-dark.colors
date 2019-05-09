@@ -1,5 +1,4 @@
-BASE 16
-#282828 bg
+#282828 background
 #cc241d red
 #98971a green
 #d79921 yellow
@@ -14,10 +13,8 @@ BASE 16
 #83a598 b_blue
 #d3869b b_purple
 #8ec07c b_aqua
-#ebdbb2 fg
-
-EXTRA
-#1d2021 darkgray
-#fbf1c7 light
+#ebdbb2 foreground
+#1d2021 black
+#fbf1c7 white
 #d65d0e orange
 #fe8019 b_orange

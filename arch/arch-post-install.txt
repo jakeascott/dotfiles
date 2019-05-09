@@ -2,10 +2,10 @@ Main Package List (run bootstrap script after this):
     Xorg:   xorg-server xorg-xinit xorg-apps
     Audio:  pulseaudio pulseaudio-alsa pulsemixer 
     Driver: xf86-video-<graphics> (to check: lspci | grep -e VGA -e 3d)
-    Fonts:  ttf-dejavu otf-font-awesome ttf-hack
+    Fonts:  ttf-dejavu otf-font-awesome ttf-hack (fc-list for fonts)
     i3:     i3-gaps i3blocks i3lock dmenu termite compton
-    System: sysstat htop acpi lxappearance neofetch 
-    Utils:  xclip xdotool libnotify dunst xwallpaper bc
+    System: sysstat htop acpi lxappearance neofetch tmux
+    Utils:  xclip xdotool libnotify dunst xwallpaper bc fzf
     Media: mpd mpc mpv ncmpcpp youtube-dl sxiv imagemagick
     Laptop: tlp xf86-input-synaptics
 
@@ -39,12 +39,10 @@ Other Packages:
     newsboat | RSS Client
     ntfs-3g | access NTFS partitions
     socat | socket utility
-    tmux | terminal multiplexer (for dropdown terminals)
     unrar, unzip | uncompress files
     zathura + djvu + mupdf | document viewer
     poppler | edit pdfs
     mediainfo | shows audio/video information
     atool | manages archives
-    fzf | fuzzy finder tool
     highlight | highlight code output
     docx2txt + odt2txt | docx and odt viewing in vifm

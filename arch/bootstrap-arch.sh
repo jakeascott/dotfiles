@@ -63,5 +63,5 @@ cp $WORKDIR/i3/i3blocks/* $CONFIG/i3blocks/
 
 # Install scripts
 echo 'Installing scripts...'
-cp $WORKDIR/scripts/* $LOCAL/bin/
+cp $WORKDIR/scripts/* $LOCAL/bin/ 2> /dev/null
 cp $WORKDIR/scripts/res/* $LOCAL/share/
