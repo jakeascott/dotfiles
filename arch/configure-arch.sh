@@ -21,11 +21,11 @@ echo 'LANG=en_US.UTF-8' > /etc/locale.conf
 echo "Writing network files with hostname $1..."
 echo $1 > /etc/hostname
 
-cat > /etc/hosts << EOL
+cat > /etc/hosts << EOF
 127.0.0.1     localhost
 ::1           localhost
 127.0.1.1     $1.localdomain $1
-EOL
+EOF
 
 cat /etc/hostname
 cat /etc/hosts
@@ -33,7 +33,7 @@ cat /etc/hosts
 # Make pacman pretty
 grep "^Color" /etc/pacman.conf > /dev/null || sed -i "s/^#Color/Color/" /etc/pacman.conf
 
-# Disable that fucking beep
+# Disable that beep
 rmmod pcspkr
 echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
 

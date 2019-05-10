@@ -14,7 +14,7 @@ echo "Inserting pacman hooks..."
 
 mkdir -p /etc/pacman.d/hooks
 
-cat > /etc/pacman.d/hooks/100-systemd-boot.hook << EOL
+cat > /etc/pacman.d/hooks/100-systemd-boot.hook << EOF
 [Trigger]
 Type = Package
 Operation = Upgrade
@@ -24,34 +24,34 @@ Target = systemd
 Description = Updating systemd-boot
 When = PostTransaction
 Exec = /usr/bin/bootctl update
-EOL
+EOF
 
 # Create boot loader config files
 echo 'Installing boot loader config files...'
-cat > /boot/loader/loader.conf << EOL
+cat > /boot/loader/loader.conf << EOF
 default arch
 timeout 4
 console-mode max
 editor no
-EOL
+EOF
 echo '/boot/loader/loader.conf installed'
 
-cat > /boot/loader/entries/arch.conf << EOL
+cat > /boot/loader/entries/arch.conf << EOF
 title Arch Linux
 linux /vmlinuz-linux
 initrd /intel-ucode.img
 initrd /initramfs-linux.img
 options root=PARTUUID=`blkid -s PARTUUID -o value $1` rw
-EOL
+EOF
 echo '/boot/loader/entries/arch.conf installed'
 
-cat > /boot/loader/entries/arch-lts.conf << EOL
+cat > /boot/loader/entries/arch-lts.conf << EOF
 title Arch Linux LTS
 linux /vmlinuz-linux-lts
 initrd /intel-ucode.img
 initrd /initramfs-linux-lts.img
 options root=PARTUUID=`blkid -s PARTUUID -o value $1` rw
-EOL
+EOF
 echo '/boot/loader/entries/arch-lts.conf installed'
 
 echo 'Done'

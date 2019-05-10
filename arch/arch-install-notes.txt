@@ -6,34 +6,34 @@
     NOTE: If font too small: `setfont latarcyrheb-sun32`
 
 2. Partition Drives
-    a. List: fdisk -l; Start: fdisk /dev/sdX
-    b. make GPT partitions for... 
-		EFI: 550M, should have partition type 'EFI System'
+    a. List: fdisk -l; Start: fdisk /dev/sd<x>
+    b. Make GPT partitions for... 
+		EFI: 550M, partition type 'EFI System'
 		SWAP: generally equal to RAM
 		ROOT: rest of drive
-	d. format partitions: 
-        EFI: mkfs.fat -F32 /dev/sdXx
-        ROOT: mkfs.ext4 /dev/sdXx
-	e. designate swap partition: mkswap /dev/<swp> && swapon /dev/<swp>
-	f. mount drives
+	d. Format partitions: 
+        EFI: mkfs.fat -F32 /dev/<efi>
+        ROOT: mkfs.ext4 /dev/<root>
+	e. Designate swap partition: mkswap /dev/<swp> && swapon /dev/<swp>
+	f. Mount drives
 		mount /dev/<root> /mnt
         mkdir /mnt/boot && mount /dev/<efi> /mnt/boot
     NOTE: (BIOS) Ignore EFI and set <root> partition to 'Legacy BIOS Bootable'
 
 3. Install Arch
-    a. Sort /etc/pacman.d/mirrorlist so that closer mirrors are at the top
+    a. Sort /etc/pacman.d/mirrorlist so that faster mirrors are at the top
     b. pacman -Sy pacman-contrib
-    c. curl 'https://gideonwashere.github.io/update-mirrors.sh' | sh
+    c. curl 'https://jakeascott.github.io/update-mirrors.sh' | sh
     d. Intall Arch: pacstrap /mnt base base-devel
     e. Generate fstab: genfstab -U /mnt >> /mnt/etc/fstab
     f. Jump into arch install: arch-chroot /mnt
 
 4. Configure system & install bootloader
-    a. curl -O 'https://gideonwashere.github.io/configure-arch.sh' and run it
+    a. curl -O 'https://jakeascott.github.io/configure-arch.sh' and run it
     b. (SSD Only) Enable TRIM: systemctl enable fstrim.timer
     c. Set root password: passwd
     d. Install <proc>-ucode linux-headers linux-lts linux-lts-headers
-    e. curl -O 'https://gidoenwashere.github.io/configure-<Boot Loader>.sh'
+    e. curl -O 'https://jakeascott.github.io/configure-<Boot Loader>.sh'
     f. (EFI) Run configure-systemd-boot.sh | (BIOS) Run configure-syslinux.sh
 
 5. Network
@@ -43,10 +43,10 @@
 6. 'exit' back to archiso, unmount drives 'umount -R /mnt', reboot, and remove iso.
 
 7. Users & Security 
-    a. Add users: useradd -m -g users -G wheel jake; passwd jake
+    a. Add users: useradd -m -g users -G wheel <name>; passwd <name>
     b. Grant user sudo privlages: visudo, uncomment wheel entry of choice. 
     c. disable root user: passwd -l root (undo with sudo passwd -u root)
     d. install neovim git ufw gnome-keyring libsecret
     e. start/enable ufw.service, then run ufw enable
-    f. Grab dotfiles: git clone 'https://github.com/gideonwashere/dotfiles.git'
+    f. Grab dotfiles: git clone 'https://github.com/jakeascott/dotfiles.git'
     NOTE: Be SURE sudo works before you diable root password!
