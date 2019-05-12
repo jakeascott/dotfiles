@@ -1,20 +1,22 @@
 #!/bin/bash
-COLOR=\#b8bb26
+case $BLOCK_BUTTON in
+    1) notify-send "$(acpi -b | sed 's/Battery 0: //')" ;;
+esac
 
-CSTATUS=$(acpi -b | awk '{print $3}' | sed 's/,//g')
 PERCENT=$(acpi -b | awk '{print $4}' | sed 's/[^0-9]//g')
-TIMEREM=$(acpi -b | awk '{print $5}' | sed 's/,//g')
 
-if [[ ! $CSTATUS =~ Dis.* ]] 
+if [[ ! $(acpi -b | awk '{print $3}') =~ Dis.* ]] 
 then
-    echo
+    echo " $PERCENT"
+    echo 
+    echo "#b8bb26"
 else
     CSTATUS=
     [[ $PERCENT -le 80 ]] && CSTATUS=
-    [[ $PERCENT -le 55 ]] && COLOR='\033[1;33m' && CSTATUS=
-    [[ $PERCENT -le 30 ]] && COLOR='\033[1;33m' && CSTATUS=
-    [[ $PERCENT -le 10 ]] && COLOR='\033[1;31m' && CSTATUS=
-    echo -e "${COLOR}$CSTATUS  $PERCENT% [$TIMEREM]${NOCOL}"
+    [[ $PERCENT -le 50 ]] && COLOR="#fabd2f" && CSTATUS=
+    [[ $PERCENT -le 30 ]] && COLOR="#fabd2f" && CSTATUS=
+    [[ $PERCENT -le 10 ]] && COLOR="#fb4934" && CSTATUS=
+    echo "$CSTATUS $PERCENT"
 fi
-echo
+echo $CSTATUS
 echo $COLOR

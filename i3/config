@@ -1,20 +1,20 @@
 # i3 config file (v4)
 
 # Font
-font pango:monospace 10
+font pango:monospace 8
 
 # Set the mod key
-set $mod Mod1
+set $mod Mod4
 
 # Set window borders
 default_border pixel 1
 for_window [class="Firefox"] border none
 
 # Set gaps (requires i3-gaps)
-#gaps inner 5
-#gaps outer 5 
-#workspace $ws2 gaps inner 0
-#workspace $ws2 gaps outer 0
+gaps inner 5
+gaps outer 5 
+workspace $ws10 gaps inner 0
+workspace $ws10 gaps outer 0
 
 # ===== Colorscheme ===== #
 # Gruvbox colors
@@ -25,8 +25,10 @@ set $yellow #fabd2f
 set $blue #83a598
 set $purple #d3869b
 set $aqua #8ec07c
+set $orange #fe8019
 set $gray #a89984
 set $fg #ebdbb2
+
 
 # ===== Keybinds ===== #
 # bindcode --release <keycode> to bind single key press
@@ -36,13 +38,14 @@ bindsym $mod+semicolon split toggle
 
 # System 
 #bindcode --release 133 exec dmenu_run
-bindsym $mod+d exec dmenu_run -nb "$bg" -nf "$fg" -sb "$aqua" -sf "$bg"
-bindsym $mod+q kill
+bindsym $mod+d exec dmenu_run
+Bindsym $mod+q kill
 bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+q exec end-session
 
 # Program 
 bindsym $mod+Return exec $TERMINAL
-bindsym $mod+F2 exec $BROWSER
+bindsym $mod+w exec $BROWSER
 bindsym $mod+F4 exec i3lock
 
 # Movement 
@@ -73,15 +76,18 @@ bindsym $mod+Shift+e exec "i3-msg exit"
 
 # Scripts
 bindsym $mod+grave exec icons
+bindsym $mod+Shift+grave exec colors
 
 # Fn keys
-#bindsym XF86AudioMute exec pulsemixer --toggle-mute && sigblock 1
-#bindsym XF86AudioRaiseVolume exec pulsemixer --change-volume +1 && sigblock 1
-#bindsym Shift+XF86AudioRaiseVolume exec pulsemixer --change-volume +10 && sigblock 1
-#bindsym XF86AudioLowerVolume exec pulsemixer --change-volume -1 && sigblock 1
-#bindsym Shift+XF86AudioLowerVolume exec pulsemixer --change-volume -10 && sigblock 1
-#bindsym XF86MonBrightnessDown
-#bindsym XF86MonBrightnessUp
+bindsym XF86AudioMute exec --no-startup-id pulsemixer --toggle-mute && sigblock 1
+bindsym XF86AudioRaiseVolume exec --no-startup-id pulsemixer --change-volume +1 && sigblock 1
+bindsym Shift+XF86AudioRaiseVolume exec --no-startup-id pulsemixer --change-volume +10 && sigblock 1
+bindsym XF86AudioLowerVolume exec --no-startup-id pulsemixer --change-volume -1 && sigblock 1
+bindsym Shift+XF86AudioLowerVolume exec --no-startup-id pulsemixer --change-volume -10 && sigblock 1
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight +1 && sigblock 2
+bindsym Shift+XF86MonBrightnessUp exec --no-startup-id xbacklight +10 && sigblock 2
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -1 && sigblock 2
+bindsym Shift+XF86MonBrightnessDown exec --no-startup-id xbacklight -10 && sigblock 2
 #bindsym XF86AudioMicMute
 #bindsym XF86RFKill
 
@@ -96,7 +102,7 @@ set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
-set $ws10 "10"
+set $ws10 ""
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -124,7 +130,7 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 
 # reserve workspaces for certain programs
 # NOTE: use xprop to get program class
-assign [class="Firefox"] $ws2
+assign [class="Firefox"] $ws10
 
 # resize window
 mode "resize" {
@@ -181,7 +187,7 @@ bar {
         focused_workspace   $aqua       $aqua           $bg
         inactive_workspace  $bg         $bg             $fg
         active_workspace    $bg         $bg             $fg
-        urgent_workspace    $yellow     $yellow         $bg
+        urgent_workspace    $orange     $orange         $bg
     }
 }
 
@@ -190,8 +196,8 @@ bar {
 # exec_always will load evertime i3 is restarted
 
 # start dunst for notifications
-#exec --no-startup-id dunst
+exec --no-startup-id dunst
 # start compositer
-#exec --no-startup-id compton
+exec --no-startup-id compton
 # set wallpaper
-#exec_always --no-startup-id xwallpaper --maximize  ~/.local/share/wallpaper
+exec_always --no-startup-id xwallpaper --maximize  ~/.local/share/wallpaper

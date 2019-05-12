@@ -6,21 +6,43 @@
 
 # Global properties
 command=$HOME/.config/i3blocks/$BLOCK_NAME
-separator_block_width=15
+separator_block_width=30
 markup=none
+
+[brightness]
+label=
+interval=once
+signal=2
+align=center
 
 [volume]
 interval=once
 signal=1
+align=center
 
 [memory]
-label=RAM
+label=
+interval=15
+separator=false
+
+[temp]
+label=
 interval=15
 
+[network]
+interval=15
+align=center
+
+[battery]
+interval=60
+align=center
+
 [clock]
-label=TIME
+label=
+command=date "+%-I:%M%P"
 interval=5
+align=center
 
 [power]
-label=PWR
 interval=once
+align=center

@@ -1,5 +1,5 @@
 #!/bin/bash
-free | awk '/^Mem:/ {printf "%.2f\n", $3 / $2}'
+free -h | awk '/^Mem:/ {print $3}' | sed 's/i//'
 echo
 if [[ ! $(free | awk '/^Swap/ {print $3}') -eq 0 ]] 
 then

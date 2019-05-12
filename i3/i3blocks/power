@@ -5,4 +5,7 @@ case $BLOCK_BUTTON in
     3) [[ $(echo -e "no\nyes" | dmenu -p "Shutdown?") =~ "yes" ]] && sudo shutdown now ;;
 esac
 
-echo " "
+echo " "
+echo " "
+echo "#83a598"
+

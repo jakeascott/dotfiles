@@ -2,13 +2,17 @@
 # Requires networkmanager
 # get wireless signal info from /proc/net/wireless
 # formula <Quality-link> * 100 / 70
+case $BLOCK_BUTTON in
+    1)notify-send "$(nmcli -g NAME c show --active)" ;;
+esac
+
 CON=$(nmcli -g TYPE connection show --active)
 
 if [[ $CON =~ "wireless" ]]; then
     SIGNAL=$(awk '/^w/ {print int($3 * 100 / 70) }' /proc/net/wireless)
-    echo "WIFI ${SIGNAL}%"
+    echo " ${SIGNAL}"
 elif [[ $CON =~ "ethernet" ]]; then
-    echo WIRED
+    echo 
 else
-    echo WIRED 
+    echo 
 fi
