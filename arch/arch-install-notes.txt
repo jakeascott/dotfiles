@@ -32,7 +32,7 @@
     a. curl -O 'https://jakeascott.github.io/configure-arch.sh' and run it
     b. (SSD Only) Enable TRIM: systemctl enable fstrim.timer
     c. Set root password: passwd
-    d. Install <proc>-ucode linux-headers linux-lts linux-lts-headers
+    d. Install <proc>-ucode linux-headers
     e. curl -O 'https://jakeascott.github.io/configure-<Boot Loader>.sh'
     f. (EFI) Run configure-systemd-boot.sh | (BIOS) Run configure-syslinux.sh
 

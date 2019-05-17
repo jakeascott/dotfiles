@@ -30,7 +30,7 @@ EOF
 echo 'Installing boot loader config files...'
 cat > /boot/loader/loader.conf << EOF
 default arch
-timeout 4
+timeout 0
 console-mode max
 editor no
 EOF
@@ -44,14 +44,5 @@ initrd /initramfs-linux.img
 options root=PARTUUID=`blkid -s PARTUUID -o value $1` rw
 EOF
 echo '/boot/loader/entries/arch.conf installed'
-
-cat > /boot/loader/entries/arch-lts.conf << EOF
-title Arch Linux LTS
-linux /vmlinuz-linux-lts
-initrd /intel-ucode.img
-initrd /initramfs-linux-lts.img
-options root=PARTUUID=`blkid -s PARTUUID -o value $1` rw
-EOF
-echo '/boot/loader/entries/arch-lts.conf installed'
 
 echo 'Done'
