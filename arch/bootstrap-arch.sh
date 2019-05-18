@@ -2,7 +2,7 @@
 # Run as normal user
 
 echo 'Be sure to install appropriate graphics driver.'
-#sudo pacman -S xorg-server xorg-xinit xorg-apps pulseaudio pulseaudio-alsa pulsemixer ttf-dejavu otf-font-awesome i3-gaps i3blocks i3lock dmenu termite compton sysstat htop acpi lxappearance neofetch xclip xdotool libnotify dunst xwallpaper bc firefox
+sudo pacman -S xorg-server xorg-xinit xorg-apps pulseaudio pulseaudio-alsa pulsemixer ttf-dejavu otf-font-awesome i3-gaps i3blocks i3lock dmenu termite compton sysstat htop acpi lxappearance neofetch xclip xdotool libnotify dunst xwallpaper bc fzf tmux firefox
 
 WORKDIR=$(pwd | sed 's/dotfiles.*/dotfiles/')
 LOCAL="$HOME/.local"
@@ -12,20 +12,6 @@ echo 'Creating folders...'
 mkdir -vp $LOCAL/bin $LOCAL/share $LOCAL/src
 mkdir -vp $CONFIG/i3 $CONFIG/termite $CONFIG/nvim $CONFIG/dunst $CONFIG/compton $CONFIG/i3blocks
 
-#echo 'Enabling touchpad for x...'
-#sudo mkdir -vp /etc/X11/xorg.conf.d
-#sudo cat > /etc/X11/xorg.conf.d/90-touchpad.conf << 'EOF'
-#Section "InputClass"
-#    Identifier "touchpad"
-#    MatchIsTouchpad "on"
-#    Driver "libinput"
-#    Option "Tapping" "on"
-#    Option "TappingButtonMap" "lmr"
-#    Option "NaturalScrolling" "on"
-#    Option "ScrollMethod" "twofinger"
-#EndSection
-#EOF
-
 echo 'Copying config files...'
 cat /etc/X11/xinit/xinitrc | sed -e "/^xclock\|^twm\|xterm\|^$/d" > $HOME/.xinitrc
 cat >> $HOME/.xinitrc << 'EOF'
@@ -34,11 +20,9 @@ export SSH_AUTH_SOCK
 exec i3
 EOF
 
-cp /etc/xdg/compton.conf $CONFIG/compton/
-# TODO: make termite config file available
-cp /etc/xdg/termite/config $CONFIG/termite/
-cat $WORKDIR/arch/termite-gruvbox.txt >> $CONFIG/termite/config
-cp /usr/share/dunst/dunstrc $CONFIG/dunst/
+cp /etc/xdg/compton.conf $CONFIG/compton/compton.conf
+cp $WORKDIR/configs/termite $CONFIG/termite/config
+cp $WORKDIR/configs/dunstrc $CONFIG/dunst/dunstrc
 
 # Installing bash config
 echo 'Removing old bash config...'
