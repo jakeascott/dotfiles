@@ -2,7 +2,7 @@
 # Run as normal user
 
 echo 'Be sure to install appropriate graphics driver.'
-sudo pacman -S xorg-server xorg-xinit xorg-apps pulseaudio pulseaudio-alsa pulsemixer ttf-dejavu otf-font-awesome i3-gaps i3blocks i3lock dmenu termite compton sysstat htop acpi lxappearance neofetch xclip xdotool libnotify dunst xwallpaper bc fzf tmux firefox
+sudo pacman -S --no-confirm xorg-server xorg-xinit xorg-apps pulseaudio pulseaudio-alsa pulsemixer ttf-dejavu otf-font-awesome i3-gaps i3blocks i3lock dmenu termite compton sysstat htop acpi lxappearance neofetch xclip xdotool libnotify dunst xwallpaper bc fzf tmux firefox dash
 
 WORKDIR=$(pwd | sed 's/dotfiles.*/dotfiles/')
 LOCAL="$HOME/.local"
@@ -39,6 +39,24 @@ echo 'Installing vim-plug...'
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 mkdir -vp ~/.local/share/nvim/site/plugged
 nvim +:PlugInstall +:qall
+
+# symlink dash
+sudo ln -sfT dash /usr/bin/sh
+
+# Install pacman hook
+cat > 110-dash-symlink.hook << EOF
+[Trigger]
+Type = Package
+Operation = Install
+Operation = Upgrade
+Target = bash
+
+[Action]
+Description = Re-pointing /bin/sh symlink to dash...
+When = PostTransaction
+Exec = /usr/bin/ln -sfT dash /usr/bin/sh
+Depends = dash
+EOF
 
 # Install i3
 echo 'Installing i3 config...'
