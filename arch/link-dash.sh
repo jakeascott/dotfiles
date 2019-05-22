@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo pacman -S --no-confirm dash
+sudo pacman -S dash
 sudo ln -sfT dash /usr/bin/sh
 
 # Install pacman hook
