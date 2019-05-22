@@ -10,4 +10,7 @@ echo 'Installing vim-plug'
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 mkdir -vp ~/.local/share/nvim/site/plugged
 
-echo 'Done. Open nvim and run :PlugInstall to install plugins'
+# Install plugins
+nvim +:PlugInstall +:qall
+
+echo 'Done.'
