@@ -1,8 +1,8 @@
 #!/bin/bash
-
 # run as root
 # Grabs top 5 arch mirrors from web and puts them in /etc/pacman.d/mirrorlist
 
+pacman -Q pacman-contrib &>/dev/null || sudo pacman -Sq pacman-contrib
 echo 'Creating backup of old mirrorlist...'
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
 

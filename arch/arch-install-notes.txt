@@ -36,17 +36,13 @@
     e. curl -O 'https://jakeascott.github.io/configure-<Boot Loader>.sh'
     f. (EFI) Run configure-systemd-boot.sh | (BIOS) Run configure-syslinux.sh
 
-5. Network
-    a. Install networkmanager; start/enable NetworkManager.service
-    NOTE: nmcli device wifi connect <SSID> password <pass> hidden yes
-
-6. 'exit' back to archiso, unmount drives 'umount -R /mnt', reboot, and remove iso.
-
-7. Users & Security 
-    a. install neovim git ufw gnome-keyring 
-    b. start/enable ufw.service, then run ufw enable
+5. Network, Users & Security
+    a. Install networkmanager ufw neovim git gnome-keyring
+    b. Enable NetworkManager.service and ufw.service
     c. Add users: useradd -m -g users -G wheel <name>; passwd <name>
     d. Grant user sudo privlages: visudo, uncomment wheel entry of choice. 
     e. disable root user: passwd -l root (undo with sudo passwd -u root)
-    f. Grab dotfiles: git clone 'https://github.com/jakeascott/dotfiles.git'
     NOTE: Be SURE sudo works before you diable root password!
+    NOTE: nmcli device wifi connect <SSID> password <pass> hidden yes
+
+6. 'exit' back to archiso, unmount drives 'umount -R /mnt', reboot, and remove iso.
