@@ -36,16 +36,18 @@ rmmod pcspkr
 echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
 
 # Add/remove programs
-pacman -Sq linux-headers networkmanager ufw neovim git gnome-keyring
-pacman -R nano
+pacman -Sq --noconfirm linux-headers networkmanager ufw neovim git gnome-keyring
+pacman -R --noconfirm nano
 
 # Enable networkmanager and firewall
 systemctl enable NetworkManager.service
 systemctl enable ufw.service
 
 # Add user
+echo "Enter ROOT password..."
 passwd
 useradd -m -g users -G wheel jake
+echo "Enter USER password..."
 passwd jake
 
 echo "Done."

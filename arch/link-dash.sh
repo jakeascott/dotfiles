@@ -4,7 +4,7 @@ sudo pacman -S dash
 sudo ln -sfT dash /usr/bin/sh
 
 # Install pacman hook
-cat > 110-dash-symlink.hook << EOF
+cat > /etc/pacman.d/hooks/110-dash-symlink.hook << EOF
 [Trigger]
 Type = Package
 Operation = Install

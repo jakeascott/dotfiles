@@ -2,7 +2,7 @@
 # Run as normal user
 
 echo 'Be sure to install appropriate graphics driver.'
-sudo pacman -S dash xorg-server xorg-xinit xorg-apps sxhkd pulseaudio pulseaudio-alsa pulsemixer ttf-dejavu otf-font-awesome sysstat htop acpi lxappearance neofetch xclip xdotool libnotify dunst compton termite feh imagemagick bc 
+sudo pacman -S --noconfirm xorg-server xorg-xinit xorg-apps sxhkd pulseaudio pulseaudio-alsa pulsemixer ttf-dejavu otf-font-awesome sysstat htop acpi lxappearance neofetch xclip xdotool libnotify dunst compton termite feh imagemagick bc 
 
 WORKDIR=$(pwd | sed 's/dotfiles.*/dotfiles/')
 LOCAL="$HOME/.local"
@@ -38,22 +38,6 @@ echo 'Installing vim-plug...'
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 mkdir -vp ~/.local/share/nvim/site/plugged
 nvim +:PlugInstall +:qall
-
-# Install pacman hook and symlink dash
-cat > 110-dash-symlink.hook << EOF
-[Trigger]
-Type = Package
-Operation = Install
-Operation = Upgrade
-Target = bash
-
-[Action]
-Description = Re-pointing /bin/sh symlink to dash...
-When = PostTransaction
-Exec = /usr/bin/ln -sfT dash /usr/bin/sh
-Depends = dash
-EOF
-sudo ln -sfT dash /usr/bin/sh
 
 # Install scripts
 echo 'Installing scripts...'
