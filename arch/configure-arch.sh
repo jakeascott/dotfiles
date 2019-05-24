@@ -1,9 +1,7 @@
-#!/bin/bash
-
-# Sets default lanbuage to English, makes network files
+#!/bin/sh
 # must run as root and takes 'hostname' as argument
 
-[ -z "$1" ] && echo 'No hostname supplied' && exit 1
+[ -z "$1" ] && echo 'Usage: configure-arch.sh HOSTNAME' && exit 1
 
 # Timezone and clock set
 echo "Setting timezone to Los_Angeles..."
@@ -33,8 +31,21 @@ cat /etc/hosts
 # Make pacman pretty
 grep "^Color" /etc/pacman.conf > /dev/null || sed -i "s/^#Color/Color/" /etc/pacman.conf
 
-# Disable that beep
+# Disable the beep
 rmmod pcspkr
 echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
 
-echo "Done"
+# Add/remove programs
+pacman -Sq linux-headers networkmanager ufw neovim git gnome-keyring
+pacman -R nano
+
+# Enable networkmanager and firewall
+systemctl enable NetworkManager.service
+systemctl enable ufw.service
+
+# Add user
+passwd
+useradd -m -g users -G wheel jake
+passwd jake
+
+echo "Done."

@@ -2,7 +2,7 @@
 # Run as normal user
 
 echo 'Be sure to install appropriate graphics driver.'
-sudo pacman -S xorg-server xorg-xinit xorg-apps pulseaudio pulseaudio-alsa pulsemixer ttf-dejavu otf-font-awesome i3-gaps i3blocks i3lock dmenu termite compton sysstat htop acpi lxappearance neofetch xclip xdotool libnotify dunst xwallpaper bc fzf tmux firefox dash
+sudo pacman -S dash xorg-server xorg-xinit xorg-apps sxhkd pulseaudio pulseaudio-alsa pulsemixer ttf-dejavu otf-font-awesome sysstat htop acpi lxappearance neofetch xclip xdotool libnotify dunst compton termite feh imagemagick bc 
 
 WORKDIR=$(pwd | sed 's/dotfiles.*/dotfiles/')
 LOCAL="$HOME/.local"
@@ -10,21 +10,20 @@ CONFIG="$HOME/.config"
 
 echo 'Creating folders...'
 mkdir -vp $LOCAL/bin $LOCAL/share $LOCAL/src
-mkdir -vp $CONFIG/i3 $CONFIG/termite $CONFIG/nvim $CONFIG/dunst $CONFIG/compton $CONFIG/i3blocks
+mkdir -vp $CONFIG/nvim $CONFIG/dunst $CONFIG/compton $CONFIG/termite
 
 echo 'Copying config files...'
 cat /etc/X11/xinit/xinitrc | sed -e "/^xclock\|^twm\|xterm\|^$/d" > $HOME/.xinitrc
 cat >> $HOME/.xinitrc << 'EOF'
 eval $(/usr/bin/gnome-keyring/daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
-exec i3
 EOF
 
 cp /etc/xdg/compton.conf $CONFIG/compton/compton.conf
 cp $WORKDIR/configs/termite $CONFIG/termite/config
 cp $WORKDIR/configs/dunstrc $CONFIG/dunst/dunstrc
 
-# Installing bash config
+# Install bash config
 echo 'Removing old bash config...'
 rm -f $HOME/\.bash*
 
@@ -40,10 +39,7 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs 'https://raw.
 mkdir -vp ~/.local/share/nvim/site/plugged
 nvim +:PlugInstall +:qall
 
-# symlink dash
-sudo ln -sfT dash /usr/bin/sh
-
-# Install pacman hook
+# Install pacman hook and symlink dash
 cat > 110-dash-symlink.hook << EOF
 [Trigger]
 Type = Package
@@ -57,11 +53,7 @@ When = PostTransaction
 Exec = /usr/bin/ln -sfT dash /usr/bin/sh
 Depends = dash
 EOF
-
-# Install i3
-echo 'Installing i3 config...'
-cp $WORKDIR/i3/config $CONFIG/i3/config
-cp $WORKDIR/i3/i3blocks/* $CONFIG/i3blocks/
+sudo ln -sfT dash /usr/bin/sh
 
 # Install scripts
 echo 'Installing scripts...'
