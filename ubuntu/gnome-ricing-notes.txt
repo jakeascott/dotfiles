@@ -1,0 +1,12 @@
+# Can change gnome-terminal colors with gogh
+bash -c  "$(wget -qO- https://git.io/vQgMr)"
+
+# Packages
+build-essential
+gnome-tweaks
+gnome-shell-extensions
+
+# Pop GTK Theme
+sudo add-apt-repository ppa:system76/pop
+sudo apt update
+sudo apt install pop-theme

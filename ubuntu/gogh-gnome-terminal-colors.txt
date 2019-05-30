@@ -1,3 +1,0 @@
-# NOT A SCRIPT THIS FILE IS JUST TO SAVE THE COMMAND
-
-bash -c  "$(wget -qO- https://git.io/vQgMr)"
