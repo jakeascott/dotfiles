@@ -1,11 +1,10 @@
 #!/bin/bash
 
-sudo pacman -S --no-confirm dash
-
+sudo pacman -S dash
 sudo ln -sfT dash /usr/bin/sh
 
 # Install pacman hook
-cat > 110-dash-symlink.hook << EOF
+cat > /etc/pacman.d/hooks/110-dash-symlink.hook << EOF
 [Trigger]
 Type = Package
 Operation = Install
@@ -17,3 +16,4 @@ Description = Re-pointing /bin/sh symlink to dash...
 When = PostTransaction
 Exec = /usr/bin/ln -sfT dash /usr/bin/sh
 Depends = dash
+EOF

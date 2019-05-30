@@ -11,42 +11,30 @@
 		EFI: 550M, partition type 'EFI System'
 		SWAP: generally equal to RAM
 		ROOT: rest of drive
-	d. Format partitions: 
+	c. Format partitions: 
         EFI: mkfs.fat -F32 /dev/<efi>
         ROOT: mkfs.ext4 /dev/<root>
-	e. Designate swap partition: mkswap /dev/<swp> && swapon /dev/<swp>
-	f. Mount drives
+	d. Designate swap partition: mkswap /dev/<swp> && swapon /dev/<swp>
+	e. Mount drives
 		mount /dev/<root> /mnt
         mkdir /mnt/boot && mount /dev/<efi> /mnt/boot
     NOTE: (BIOS) Ignore EFI and set <root> partition to 'Legacy BIOS Bootable'
 
 3. Install Arch
-    a. Sort /etc/pacman.d/mirrorlist so that faster mirrors are at the top
-    b. pacman -Sy pacman-contrib
-    c. curl 'https://jakeascott.github.io/update-mirrors.sh' | sh
-    d. Intall Arch: pacstrap /mnt base base-devel
-    e. Generate fstab: genfstab -U /mnt >> /mnt/etc/fstab
-    f. Jump into arch install: arch-chroot /mnt
+    a. curl 'https://jakeascott.github.io/update-mirrors.sh' | sh
+    b. Intall Arch: pacstrap /mnt base base-devel
+    c. Generate fstab: genfstab -U /mnt >> /mnt/etc/fstab
+    d. Jump into arch install: arch-chroot /mnt
 
 4. Configure system & install bootloader
     a. curl -O 'https://jakeascott.github.io/configure-arch.sh' and run it
-    b. (SSD Only) Enable TRIM: systemctl enable fstrim.timer
-    c. Set root password: passwd
-    d. Install <proc>-ucode linux-headers
-    e. curl -O 'https://jakeascott.github.io/configure-<Boot Loader>.sh'
-    f. (EFI) Run configure-systemd-boot.sh | (BIOS) Run configure-syslinux.sh
-
-5. Network
-    a. Install networkmanager; start/enable NetworkManager.service
+    b. Install <proc>-ucode
+    c. curl -O 'https://jakeascott.github.io/configure-<Boot Loader>.sh'
+    d. (EFI) Run configure-systemd-boot.sh | (BIOS) Run configure-syslinux.sh
+    e. Grant user sudo privlages: /etc/sudoers uncomment wheel entry of choice. 
+    f. disable root user: passwd -l root (undo with sudo passwd -u root)
+    NOTE: For SSD TRIM: systemctl enable fstrim.timer
+    NOTE: Be SURE sudo works before you diable root password!
     NOTE: nmcli device wifi connect <SSID> password <pass> hidden yes
 
-6. 'exit' back to archiso, unmount drives 'umount -R /mnt', reboot, and remove iso.
-
-7. Users & Security 
-    a. Add users: useradd -m -g users -G wheel <name>; passwd <name>
-    b. Grant user sudo privlages: visudo, uncomment wheel entry of choice. 
-    c. disable root user: passwd -l root (undo with sudo passwd -u root)
-    d. install neovim git ufw gnome-keyring libsecret
-    e. start/enable ufw.service, then run ufw enable
-    f. Grab dotfiles: git clone 'https://github.com/jakeascott/dotfiles.git'
-    NOTE: Be SURE sudo works before you diable root password!
+5. 'exit' back to archiso, unmount drives 'umount -R /mnt', reboot, and remove iso.

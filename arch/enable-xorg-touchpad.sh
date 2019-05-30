@@ -10,7 +10,7 @@ Section "InputClass"
     Driver "libinput"
     Option "Tapping" "on"
     Option "TappingButtonMap" "lmr"
-    Option "NaturalScrolling" "on"
+    Option "NaturalScrolling" "off"
     Option "ScrollMethod" "twofinger"
 EndSection
 EOF
