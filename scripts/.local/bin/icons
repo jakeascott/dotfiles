@@ -1,0 +1,3 @@
+#!/bin/bash
+cat $HOME/.local/share/font-awesome-icons | dmenu -l 10 | awk '{print $1}' | xclip -i -sel c -f | xclip -i -sel p
+[ ! -z $(xclip -o -sel p) ] && notify-send "$(xclip -o -sel p) copied to clipboard"

@@ -41,7 +41,7 @@ bindsym $mod+semicolon split toggle
 bindsym $mod+d exec dmenu_run
 Bindsym $mod+q kill
 bindsym $mod+f fullscreen toggle
-bindsym $mod+Shift+q exec end-session
+bindsym $mod+Shift+q exec --no-startup-id end-session
 
 # Program 
 bindsym $mod+Return exec $TERMINAL
@@ -167,6 +167,9 @@ bar {
     
     # bar position
     position top
+
+    # custom bar separator
+    #separator_symbol "<your separator"
    
     # bar font
     #font pango:monospace 8

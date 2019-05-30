@@ -1,3 +1,5 @@
 #!/bin/sh
-#date "+%-I:%M%P %D "
-date "+%-I:%M%P "
+case $BLOCK_BUTTON in
+    1)notify-send "$(date "+%a %d %b %Y")" ;;
+esac
+date "+%-I:%M%P"

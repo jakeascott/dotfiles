@@ -26,7 +26,7 @@ interval=15
 separator=false
 
 [temp]
-label=
+label=
 interval=15
 
 [network]
@@ -39,7 +39,6 @@ align=center
 
 [clock]
 label=
-command=date "+%-I:%M%P"
 interval=5
 align=center
 

@@ -14,9 +14,9 @@ else
     CSTATUS=
     [[ $PERCENT -le 80 ]] && CSTATUS=
     [[ $PERCENT -le 50 ]] && COLOR="#fabd2f" && CSTATUS=
-    [[ $PERCENT -le 30 ]] && COLOR="#fabd2f" && CSTATUS=
+    [[ $PERCENT -le 30 ]] && COLOR="#fe8019" && CSTATUS=
     [[ $PERCENT -le 10 ]] && COLOR="#fb4934" && CSTATUS=
     echo "$CSTATUS $PERCENT"
+    echo $CSTATUS
+    echo $COLOR
 fi
-echo $CSTATUS
-echo $COLOR

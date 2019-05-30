@@ -1,0 +1,6 @@
+#!/bin/sh
+
+case "$(printf "shutdown\nreboot" | dmenu -sb "#fe8019" -p "Shutdown?")" in
+    shutdown) sudo shutdown now ;;
+    reboot) sudo reboot ;;
+esac
