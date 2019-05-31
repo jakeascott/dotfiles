@@ -2,7 +2,7 @@
 # Run as normal user
 
 echo 'Be sure to install appropriate graphics driver.'
-sudo pacman -S --noconfirm xorg-server xorg-xinit xorg-apps sxhkd pulseaudio pulseaudio-alsa pulsemixer ttf-dejavu otf-font-awesome sysstat htop acpi lxappearance neofetch xclip xdotool libnotify dunst compton termite feh imagemagick bc 
+sudo pacman -Sy --noconfirm xorg-server xorg-xinit xorg-apps sxhkd pulseaudio pulseaudio-alsa pulsemixer ttf-dejavu otf-font-awesome sysstat htop acpi lxappearance neofetch xclip xdotool libnotify dunst compton termite feh imagemagick bc 
 
 WORKDIR=$(pwd | sed 's/dotfiles.*/dotfiles/')
 LOCAL="$HOME/.local"
