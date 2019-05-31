@@ -41,5 +41,5 @@ nvim +:PlugInstall +:qall
 
 # Install scripts
 echo 'Installing scripts...'
-cp $WORKDIR/scripts/* $LOCAL/bin/ 2> /dev/null
+cp $WORKDIR/scripts/bin/* $LOCAL/bin/
 cp $WORKDIR/scripts/res/* $LOCAL/share/
