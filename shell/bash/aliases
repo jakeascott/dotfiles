@@ -18,14 +18,5 @@ alias gitc='git commit -m'
 alias gitp='git push'
 alias gits='git status'
 
-# apt aliases
-alias apti='sudo apt install'
-alias aptu='sudo apt update'
-alias aptg='sudo apt upgrade'
-alias aptr='sudo apt remove'
-alias aptp='sudo apt purge'
-alias apts='apt search'
-alias upgrade='sudo apt update && sudo apt upgrade'
-
 # fun aliases
 alias starwars='telnet towel.blinkenlights.nl'

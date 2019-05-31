@@ -31,6 +31,7 @@ Other Packages:
     lightDM, slick greeter | desktop manager
         start/enable lightdm.service
     calcurse | terminal based calender 
+    sxhkd | X keybind deamon
     fcron | cronjob scheduler
     dosfstools | allows computer to access dos-like filesystems
     exfat-utils | manage FAT drives
