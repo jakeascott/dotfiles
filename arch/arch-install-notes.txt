@@ -33,7 +33,7 @@
     d. (EFI) Run configure-systemd-boot.sh | (BIOS) Run configure-syslinux.sh
     e. Grant user sudo privlages: /etc/sudoers uncomment wheel entry of choice. 
     f. disable root user: passwd -l root (undo with sudo passwd -u root)
-    NOTE: For SSD TRIM: systemctl enable fstrim.timer
+    NOTE: SSD TRIM: systemctl enable fstrim.timer
     NOTE: Be SURE sudo works before you diable root password!
     NOTE: nmcli device wifi connect <SSID> password <pass> hidden yes
 

@@ -13,7 +13,7 @@ export EDITOR="nvim"
 export TERMINAL="termite"
 export BROWSER="firefox"
 #export READER="zathura"
-#export FILE="vifm"
+#export FILE="ranger"
 
 # For HiDPI
 #export GDK_SCALE=2
