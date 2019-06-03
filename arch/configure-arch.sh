@@ -1,7 +1,8 @@
 #!/bin/sh
 # must run as root and takes 'hostname' as argument
 
-[ -z "$1" ] && echo 'Usage: configure-arch.sh HOSTNAME' && exit 1
+[ -z "$1" ] && echo 'Usage: configure-arch.sh HOSTNAME USERNAME' && exit 1
+[ -z "$2" ] && echo 'Usage: configure-arch.sh HOSTNAME USERNAME' && exit 1
 
 # Timezone and clock set
 echo "Setting timezone to Los_Angeles..."
@@ -36,18 +37,13 @@ rmmod pcspkr
 echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
 
 # Add/remove programs
-pacman -Sq --noconfirm linux-headers networkmanager ufw neovim git gnome-keyring
 pacman -R --noconfirm nano
-
-# Enable networkmanager and firewall
-systemctl enable NetworkManager.service
-systemctl enable ufw.service
 
 # Add user
 echo "Enter ROOT password..."
 passwd
-useradd -m -g users -G wheel jake
+useradd -m -g users -G wheel $2
 echo "Enter USER password..."
-passwd jake
+passwd $2
 
 echo "Done."

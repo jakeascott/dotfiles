@@ -28,13 +28,17 @@
 
 4. Configure system & install bootloader
     a. curl -O 'https://jakeascott.github.io/configure-arch.sh' and run it
-    b. Install <proc>-ucode
-    c. curl -O 'https://jakeascott.github.io/configure-<Boot Loader>.sh'
+    b. curl -O 'https://jakeascott.github.io/configure-<Boot Loader>.sh'
+    c. Install intel-ucode linux-headers networkmanager ufw neovim git gnome-keyring
     d. (EFI) Run configure-systemd-boot.sh | (BIOS) Run configure-syslinux.sh
-    e. Grant user sudo privlages: /etc/sudoers uncomment wheel entry of choice. 
-    f. disable root user: passwd -l root (undo with sudo passwd -u root)
+    e. Enable NetworkManager and ufw
     NOTE: SSD TRIM: systemctl enable fstrim.timer
-    NOTE: Be SURE sudo works before you diable root password!
-    NOTE: nmcli device wifi connect <SSID> password <pass> hidden yes
 
 5. 'exit' back to archiso, unmount drives 'umount -R /mnt', reboot, and remove iso.
+    
+6. Finish up 
+    a. Check networkmanager and ufw are working
+    b. Grant user sudo privlages: visudo uncomment wheel entry of choice. 
+    c. disable root user: passwd -l root (undo with sudo passwd -u root)
+    NOTE: Be SURE sudo works before you diable root password!
+    NOTE: nmcli device wifi connect <SSID> password <PASS> hidden yes
