@@ -43,7 +43,7 @@ pacman -R --noconfirm nano
 echo "Enter ROOT password..."
 passwd
 useradd -m -g users -G wheel $2
-echo "Enter USER password..."
+echo "Enter $2 password..."
 passwd $2
 
 echo "Done."
