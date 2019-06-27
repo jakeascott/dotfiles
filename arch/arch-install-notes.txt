@@ -1,6 +1,6 @@
 1. Pre-installation 
-	a. Make bootable .iso and verify signature 
-	b. Check if EFI or BIOS: ls /sys/firmware/efi/efivars
+    a. Make bootable .iso and verify signature 
+    b. Check if EFI or BIOS: ls /sys/firmware/efi/efivars
     c. Check internet connection. For wifi, set config file in /etc/netctl
     d. Set system clock: timedatectl set-ntp true && timedatectl status
     NOTE: If font too small: `setfont latarcyrheb-sun32`
@@ -8,15 +8,15 @@
 2. Partition Drives
     a. List: fdisk -l; Start: fdisk /dev/sd<x>
     b. Make GPT partitions for... 
-		EFI: 550M, partition type 'EFI System'
-		SWAP: generally equal to RAM
-		ROOT: rest of drive
-	c. Format partitions: 
+        EFI: 550M, partition type 'EFI System'
+        SWAP: generally equal to RAM
+        ROOT: rest of drive	
+    c. Format partitions: 
         EFI: mkfs.fat -F32 /dev/<efi>
         ROOT: mkfs.ext4 /dev/<root>
-	d. Designate swap partition: mkswap /dev/<swp> && swapon /dev/<swp>
-	e. Mount drives
-		mount /dev/<root> /mnt
+    d. Designate swap partition: mkswap /dev/<swp> && swapon /dev/<swp>
+    e. Mount drives
+        mount /dev/<root> /mnt
         mkdir /mnt/boot && mount /dev/<efi> /mnt/boot
     NOTE: (BIOS) Ignore EFI and set <root> partition to 'Legacy BIOS Bootable'
 
