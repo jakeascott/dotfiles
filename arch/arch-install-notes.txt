@@ -28,7 +28,7 @@
 
 4. Configure system & install bootloader
     a. curl -O 'https://jakeascott.github.io/configure-arch.sh' and run it
-    b. curl -O 'https://jakeascott.github.io/configure-<Boot Loader>.sh'
+    b. curl -O 'https://jakeascott.github.io/configure-<Boot Looder>.sh'
     c. Install intel-ucode linux-headers networkmanager ufw neovim git gnome-keyring
     d. (EFI) Run configure-systemd-boot.sh | (BIOS) Run configure-syslinux.sh
     e. Enable NetworkManager and ufw
