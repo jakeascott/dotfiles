@@ -15,4 +15,6 @@ elif [[ $CON =~ "ethernet" ]]; then
     echo 
 else
     echo 
+    echo 
+    echo "#fb4934"
 fi

@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "$(whoami) "
+echo " "
+echo "#83a598"

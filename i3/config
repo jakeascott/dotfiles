@@ -9,12 +9,13 @@ set $mod Mod4
 # Set window borders
 default_border pixel 1
 for_window [class="Firefox"] border none
+for_window [class="libreoffice"] border none
 
 # Set gaps (requires i3-gaps)
 gaps inner 5
 gaps outer 5 
-workspace $ws10 gaps inner 0
-workspace $ws10 gaps outer 0
+workspace $ws2 gaps inner 0
+workspace $ws2 gaps outer 0
 
 # ===== Colorscheme ===== #
 # Gruvbox colors
@@ -29,7 +30,6 @@ set $orange #fe8019
 set $gray #a89984
 set $fg #ebdbb2
 
-
 # ===== Keybinds ===== #
 # bindcode --release <keycode> to bind single key press
 # can use `xev` to find keycodes
@@ -38,7 +38,7 @@ bindsym $mod+semicolon split toggle
 
 # System 
 #bindcode --release 133 exec dmenu_run
-bindsym $mod+d exec dmenu_run
+bindsym $mod+p exec dmenu_run
 Bindsym $mod+q kill
 bindsym $mod+f fullscreen toggle
 bindsym $mod+Shift+q exec --no-startup-id end-session
@@ -93,16 +93,16 @@ bindsym Shift+XF86MonBrightnessDown exec --no-startup-id xbacklight -10 && sigbl
 
 # ===== Workspaces ===== #
 # Define names for workspaces
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
+set $ws1 ""
+set $ws2 ""
+set $ws3 ""
 set $ws4 "4"
-set $ws5 "5"
+set $ws5 ""
 set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 ""
+set $ws7 ""
+set $ws8 ""
+set $ws9 ""
+set $ws10 ""
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -130,7 +130,8 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 
 # reserve workspaces for certain programs
 # NOTE: use xprop to get program class
-assign [class="Firefox"] $ws10
+assign [class="Firefox"] $ws2
+assign [class="libreoffice"] $ws5
 
 # resize window
 mode "resize" {
@@ -198,9 +199,9 @@ bar {
 # exec will load at startup
 # exec_always will load evertime i3 is restarted
 
-# start dunst for notifications
-exec --no-startup-id dunst
-# start compositer
+exec --no-startup-id xrandr --dpi 192
+exec --no-startup-id xset r rate 300 50
+
 exec --no-startup-id compton
-# set wallpaper
-exec_always --no-startup-id xwallpaper --maximize  ~/.local/share/wallpaper
+exec --no-startup-id dunst
+exec_always --no-startup-id feh --no-fehbg --bg-scale $HOME/.local/share/wallpaper.png

@@ -42,6 +42,7 @@ label=
 interval=5
 align=center
 
-[power]
+[user]
+label=
 interval=once
 align=center
