@@ -1,7 +1,8 @@
 #!/bin/bash
+# Run as root
 
-sudo pacman -S dash
-sudo ln -sfT dash /usr/bin/sh
+pacman -S dash
+ln -sfT dash /usr/bin/sh
 
 # Install pacman hook
 mkdir -pv /etc/pacman.d/hooks/
