@@ -41,7 +41,7 @@ title Arch Linux
 linux /vmlinuz-linux
 initrd /intel-ucode.img
 initrd /initramfs-linux.img
-options root=PARTUUID=`blkid -s PARTUUID -o value $1` rw
+options root=PARTUUID=`blkid -s PARTUUID -o value $1` rw quiet
 EOF
 echo '/boot/loader/entries/arch.conf installed'
 
