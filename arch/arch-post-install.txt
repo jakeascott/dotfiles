@@ -23,9 +23,7 @@ AUR Helper:
             cd yay && makepkg -si
 
 GTK Themes: 
-    arc-gtk-theme
-    adapta-gtk-theme
-    gtk-theme-arc-gruvbox-git * (AUR)
+    Make your own with: yay -S oomox
 
 Other Packages:
     lightDM, slick greeter | desktop manager
