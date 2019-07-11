@@ -1,0 +1,11 @@
+#!/bin/sh
+# Syncs repositores and downloads updates
+
+ping -q -c 1 1.1.1.1 >/dev/null 2>&1 || exit
+
+notify-send "Checking for package updates..."
+
+sudo pacman -Syyuw --noconfirm || notify-send "Error downloading updates."
+
+pkill -RTMIN+3 i3blocks
+notify-send "Sync complete."
