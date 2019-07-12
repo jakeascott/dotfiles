@@ -1,5 +1,5 @@
 [Unit]
-Description=Check repositories for updated packages once per day
+Description=Runs pacsync once per day
 
 [Timer]
 OnCalendar=daily

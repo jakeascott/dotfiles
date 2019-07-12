@@ -1,6 +1,0 @@
-[Unit]
-Description=Check for updates every 24hr and sends notification.
-
-[Service]
-Type=simple
-ExecStart=/home/jake/.local/bin/pacsync
