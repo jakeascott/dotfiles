@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/bin/sh
 free -h | awk '/^Mem:/ {print $3}' | sed 's/i//'
 echo
-if [[ ! $(free | awk '/^Swap/ {print $3}') -eq 0 ]] 
+if [ $(free | awk '/^Swap/ {print $3}') -gt 0 ] 
 then
-    echo \#663399
+    echo "#fe8019"
 fi
