@@ -2,6 +2,7 @@
 # Requires networkmanager
 # get wireless signal info from /proc/net/wireless
 # formula <Quality-link> * 100 / 70
+
 case $BLOCK_BUTTON in
     1)notify-send "$(nmcli -g NAME c show --active)" ;;
 esac

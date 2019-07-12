@@ -1,0 +1,13 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+    1) $TERMINAL -e pacupgrade ;;
+esac
+
+PACS=$(pacman -Qu | wc -l)
+
+if [ $PACS -gt 0 ] ; then 
+    echo " $PACS"
+    echo "$PACS"
+    echo "#fabd2f"
+fi
