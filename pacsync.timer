@@ -1,0 +1,10 @@
+[Unit]
+Description=Check repositories for updated packages once per day
+
+[Timer]
+OnCalendar=daily
+Persistent=true
+RandomizedDelaySec=60
+
+[Install]
+WantedBy=timers.target
