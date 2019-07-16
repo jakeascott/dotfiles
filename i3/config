@@ -93,16 +93,16 @@ bindsym Shift+XF86MonBrightnessDown exec --no-startup-id xbacklight -10 && sigbl
 
 # ===== Workspaces ===== #
 # Define names for workspaces
-set $ws1 ""
-set $ws2 ""
-set $ws3 ""
-set $ws4 "4"
-set $ws5 ""
-set $ws6 "6"
-set $ws7 ""
-set $ws8 ""
-set $ws9 ""
-set $ws10 ""
+set $ws1 "1:"
+set $ws2 "2:"
+set $ws3 "3:"
+set $ws4 "4:"
+set $ws5 "5:"
+set $ws6 "6:"
+set $ws7 "7:"
+set $ws8 "8:"
+set $ws9 "9:"
+set $ws10 "10:"
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -170,10 +170,13 @@ bar {
     position top
 
     # custom bar separator
-    #separator_symbol "<your separator"
+    #separator_symbol "<your separator>"
    
     # bar font
     #font pango:monospace 8
+    
+    # strips numbers from workspaces with names of form [n]:[name]
+    strip_workspace_numbers yes
     
     # define status bar colors 
     colors {
