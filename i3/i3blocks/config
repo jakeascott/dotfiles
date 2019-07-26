@@ -10,7 +10,7 @@ separator_block_width=30
 markup=none
 
 [updates]
-interval=60
+interval=once
 signal=3
 align=center
 

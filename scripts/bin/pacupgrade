@@ -1,5 +1,5 @@
 #!/bin/sh
 # Upgrades packages
 
-sudo pacman -Syu --noconfirm
+yay -Syu --noconfirm
 pkill -RTMIN+3 i3blocks
