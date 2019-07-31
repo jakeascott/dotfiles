@@ -1,5 +1,5 @@
 #!/bin/sh
-# must run as root and takes 'hostname' as argument
+# must run as root and takes 'hostname' and 'username' as argument
 
 [ -z "$1" ] && echo 'Usage: configure-arch.sh HOSTNAME USERNAME' && exit 1
 [ -z "$2" ] && echo 'Usage: configure-arch.sh HOSTNAME USERNAME' && exit 1
@@ -43,7 +43,7 @@ pacman -R --noconfirm nano
 echo "Enter ROOT password..."
 passwd
 useradd -m -g users -G wheel $2
-echo "Enter $2 password..."
+echo "Enter password for $2..."
 passwd $2
 
 echo "Done."

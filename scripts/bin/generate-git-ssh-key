@@ -9,3 +9,4 @@ ssh-add ~/.ssh/id_rsa
 
 # copy key to clipboard
 cat ~/.ssh/id_rsa.pub | xclip -i -sel c
+echo "SSH key copied to clipboard"

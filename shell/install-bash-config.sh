@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Installs .profile .bashrc .aliases
 echo 'Removing old bash config...'

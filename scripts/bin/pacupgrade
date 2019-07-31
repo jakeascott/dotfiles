@@ -1,5 +1,5 @@
 #!/bin/sh
-# Upgrades packages
+# Upgrades downloaded packages
 
 yay -Syu --noconfirm
 pkill -RTMIN+3 i3blocks

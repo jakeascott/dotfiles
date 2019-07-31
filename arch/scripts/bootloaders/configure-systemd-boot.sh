@@ -12,7 +12,7 @@ bootctl update
 # Insert pacman hooks
 echo "Inserting pacman hooks..."
 
-mkdir -p /etc/pacman.d/hooks
+mkdir -vp /etc/pacman.d/hooks
 
 cat > /etc/pacman.d/hooks/100-systemd-boot.hook << EOF
 [Trigger]
@@ -21,7 +21,7 @@ Operation = Upgrade
 Target = systemd
 
 [Action]
-Description = Updating systemd-boot
+Description = Updating systemd-boot.
 When = PostTransaction
 Exec = /usr/bin/bootctl update
 EOF

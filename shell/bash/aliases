@@ -9,8 +9,11 @@ alias brc='nvim ~/.bashrc'
 alias vrc='nvim ~/.config/nvim/init.vim'
 alias bal='nvim ~/.aliases'
 alias sbrc='source ~/.bashrc'
+alias i3c='nvim ~/.config/i3/config'
 
 # directory shortcuts
+alias scripts='cd ~/.local/bin && ll'
+alias config='cd ~/.config && ll'
 
 # git aliases
 alias gita='git add .'
