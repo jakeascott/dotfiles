@@ -2,7 +2,7 @@
 # Run as normal user
 
 echo 'Be sure to install appropriate graphics driver.'
-sudo pacman -Sy --noconfirm xorg-server xorg-xinit xorg-apps pulseaudio pulseaudio-alsa pulsemixer ttf-dejavu otf-font-awesome otf-fira-code otf-fira-sans otf-fira-mono sysstat htop acpi lxappearance xclip xdotool libnotify kitty dunst compton imagemagick feh bc firefox i3-gaps i3blocks
+sudo pacman -Sy --noconfirm xorg-server xorg-xinit xorg-apps pulseaudio pulseaudio-alsa pulsemixer ttf-dejavu otf-font-awesome otf-fira-code otf-fira-sans otf-fira-mono xdg-user-dirs sysstat htop acpi lxappearance xclip xdotool libnotify kitty dunst compton imagemagick feh bc firefox i3-gaps i3blocks
 
 WORKDIR=$(pwd | sed 's/dotfiles.*/dotfiles/')
 LOCAL="$HOME/.local"
@@ -33,3 +33,5 @@ echo 'Installing vim-plug...'
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 mkdir -vp ~/.local/share/nvim/site/plugged
 nvim +:PlugInstall +:qall
+
+xdg-user-dirs-update
