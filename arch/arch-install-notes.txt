@@ -22,14 +22,13 @@
 
 3. Install Arch
     a. curl 'https://jakeascott.github.io/update-mirrors.sh' | sh
-    b. Intall Arch: pacstrap /mnt base base-devel
-    c. Generate fstab: genfstab -U /mnt >> /mnt/etc/fstab
-    d. Jump into arch install: arch-chroot /mnt
+    b. pacstrap /mnt base base-devel intel-ucode networkmanager ufw neovim git
+    c. genfstab -U /mnt >> /mnt/etc/fstab
+    d. arch-chroot /mnt
 
 4. Configure system & install bootloader
     a. curl -O 'https://jakeascott.github.io/configure-arch.sh' and run it
     b. curl -O 'https://jakeascott.github.io/configure-<Boot Looder>.sh'
-    c. Install intel-ucode linux-headers networkmanager ufw neovim git gnome-keyring
     d. (EFI) Run configure-systemd-boot.sh | (BIOS) Run configure-syslinux.sh
     e. Enable NetworkManager and ufw
     NOTE: SSD TRIM: systemctl enable fstrim.timer

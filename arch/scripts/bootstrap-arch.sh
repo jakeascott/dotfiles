@@ -2,22 +2,15 @@
 # Run as normal user
 
 echo 'Be sure to install appropriate graphics driver.'
-sudo pacman -Sy --noconfirm xorg-server xorg-xinit xorg-apps pulseaudio pulseaudio-alsa pulsemixer ttf-dejavu otf-font-awesome sysstat htop acpi lxappearance xclip xdotool libnotify dunst compton imagemagick feh bc firefox
+sudo pacman -Sy --noconfirm xorg-server xorg-xinit xorg-apps pulseaudio pulseaudio-alsa pulsemixer ttf-dejavu otf-font-awesome sysstat htop acpi lxappearance xclip xdotool libnotify dunst compton imagemagick feh bc firefox i3-gaps i3-blocks
 
 WORKDIR=$(pwd | sed 's/dotfiles.*/dotfiles/')
 LOCAL="$HOME/.local"
 CONFIG="$HOME/.config"
 
-echo 'Creating folders...'
-mkdir -vp $LOCAL/bin $LOCAL/share $LOCAL/src
-mkdir -vp $CONFIG/nvim $CONFIG/dunst $CONFIG/compton $CONFIG/termite
 
 echo 'Copying config files...'
 cat /etc/X11/xinit/xinitrc | sed -e "/^xclock\|^twm\|xterm\|^$/d" > $HOME/.xinitrc
-cat >> $HOME/.xinitrc << 'EOF'
-eval $(/usr/bin/gnome-keyring/daemon --start --components=pkcs11,secrets,ssh)
-export SSH_AUTH_SOCK
-EOF
 
 cp /etc/xdg/compton.conf $CONFIG/compton/compton.conf
 cp $WORKDIR/configs/termite $CONFIG/termite/config
