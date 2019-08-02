@@ -1,8 +1,8 @@
 #!/bin/sh
 # must run as root and takes 'hostname' and 'username' as argument
 
-[ -z "$1" ] && echo 'Usage: configure-arch.sh HOSTNAME USERNAME' && exit 1
-[ -z "$2" ] && echo 'Usage: configure-arch.sh HOSTNAME USERNAME' && exit 1
+[ -z "$1" ] && echo 'Usage: ./configure-arch.sh HOSTNAME USERNAME' && exit 1
+[ -z "$2" ] && echo 'Usage: ./configure-arch.sh HOSTNAME USERNAME' && exit 1
 
 # Timezone and clock set
 echo "Setting timezone to Los_Angeles..."
@@ -36,7 +36,7 @@ grep "^Color" /etc/pacman.conf > /dev/null || sed -i "s/^#Color/Color/" /etc/pac
 rmmod pcspkr
 echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
 
-# Add/remove programs
+# Remove nano
 pacman -R --noconfirm nano
 
 # Add user

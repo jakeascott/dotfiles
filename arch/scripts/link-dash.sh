@@ -1,7 +1,7 @@
 #!/bin/bash
 # Run as root
 
-pacman -S dash
+pacman -S --noconfirm dash
 ln -sfT dash /usr/bin/sh
 
 # Install pacman hook
