@@ -2,7 +2,7 @@
 # Run as normal user
 
 echo 'Be sure to install appropriate graphics driver.'
-sudo pacman -Sy --noconfirm xorg-server xorg-xinit xorg-apps pulseaudio pulseaudio-alsa pulsemixer ttf-dejavu otf-font-awesome otf-fira-code otf-fira-sans otf-fira-mono sysstat htop acpi lxappearance xclip xdotool libnotify kitty dunst compton imagemagick feh bc firefox i3-gaps i3-blocks
+sudo pacman -Sy --noconfirm xorg-server xorg-xinit xorg-apps pulseaudio pulseaudio-alsa pulsemixer ttf-dejavu otf-font-awesome otf-fira-code otf-fira-sans otf-fira-mono sysstat htop acpi lxappearance xclip xdotool libnotify kitty dunst compton imagemagick feh bc firefox i3-gaps i3blocks
 
 WORKDIR=$(pwd | sed 's/dotfiles.*/dotfiles/')
 LOCAL="$HOME/.local"
@@ -14,8 +14,11 @@ mkdir -pv $CONFIG
 echo 'Copying config files...'
 cat /etc/X11/xinit/xinitrc | sed -e "/^xclock\|^twm\|xterm\|^$/d" > $HOME/.xinitrc
 
-cp -R "$WORKDIR/config" $CONFIG
-cp -R "$WORKDIR/local"  $LOCAL
+cp -r $WORKDIR/config/* $CONFIG/
+cp -r $WORKDIR/local/*  $LOCAL/
+
+sudo cp -r $WORKDIR/gtk-themes/my-gruvbox-gtk /user/share/themes/
+sudo cp -r $WORKDIR/gtk-themes/my-gruvbox-icons /user/share/icons/
 
 # Install bash config
 echo 'Removing old bash config...'
