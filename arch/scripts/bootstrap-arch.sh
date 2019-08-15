@@ -13,6 +13,7 @@ mkdir -pv $CONFIG
 
 echo 'Copying config files...'
 cat /etc/X11/xinit/xinitrc | sed -e "/^xclock\|^twm\|xterm\|^$/d" > $HOME/.xinitrc
+echo 'exec i3' >> $HOME/.xinitrc
 
 cp -r $WORKDIR/config/* $CONFIG/
 cp -r $WORKDIR/local/*  $LOCAL/
