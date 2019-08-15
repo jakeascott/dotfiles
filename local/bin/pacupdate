@@ -5,6 +5,7 @@ ping -q -c 1 1.1.1.1 >/dev/null 2>&1 || exit
 
 notify-send "Checking for package updates..."
 
+#checkupdates | grep -c .
 sudo pacman -Syyuw --noconfirm || notify-send "ERROR: Failed to download updates."
 
 pkill -RTMIN+3 i3blocks
