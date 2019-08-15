@@ -35,3 +35,4 @@ mkdir -vp ~/.local/share/nvim/site/plugged
 nvim +:PlugInstall +:qall
 
 xdg-user-dirs-update
+systemctl --user daemon-reload

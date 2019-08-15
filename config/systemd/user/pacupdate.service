@@ -3,4 +3,4 @@ Description=Sync repositories and download package updates.
 
 [Service]
 Type=oneshot
-ExecStart=/home/jake/.local/bin/pacsync
+ExecStart=/home/jake/.local/bin/pacupdate

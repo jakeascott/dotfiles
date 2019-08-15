@@ -1,8 +1,8 @@
 [Unit]
-Description=Runs pacsync once per day
+Description=Runs pacupdate once per week
 
 [Timer]
-OnCalendar=daily
+OnCalendar=weekly
 Persistent=true
 RandomizedDelaySec=60
 

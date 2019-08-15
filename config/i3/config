@@ -75,8 +75,8 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-msg exit"
 
 # Scripts
-bindsym $mod+grave exec icons
-bindsym $mod+Shift+grave exec colors
+bindsym $mod+grave exec list-icons
+bindsym $mod+Shift+grave exec list-colors
 
 # Fn keys
 bindsym XF86AudioMute exec --no-startup-id pulsemixer --toggle-mute && sigblock 1
