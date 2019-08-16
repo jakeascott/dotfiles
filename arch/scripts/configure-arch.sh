@@ -36,6 +36,12 @@ grep "^Color" /etc/pacman.conf > /dev/null || sed -i "s/^#Color/Color/" /etc/pac
 rmmod pcspkr
 echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
 
+# Make default tty font bigger
+cat > /etc/vconsole.conf << EOF
+FONT=latarcyrheb-sun32
+FONT_MAP=8859-2
+EOF
+
 # Add/Remove programs
 pacman -S --noconfirm pacman-contrib
 pacman -R --noconfirm nano
