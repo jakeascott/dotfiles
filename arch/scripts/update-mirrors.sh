@@ -2,6 +2,11 @@
 # run as root
 # Grabs top 5 arch mirrors from web and puts them in /etc/pacman.d/mirrorlist
 
+if ! [ $(id -u) = 0 ]; then
+    echo 'Must run as root.'
+    exit 1
+fi
+
 pacman -Q pacman-contrib &>/dev/null || sudo pacman -Syq --noconfirm pacman-contrib
 echo 'Creating backup of old mirrorlist...'
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
