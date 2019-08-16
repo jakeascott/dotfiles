@@ -1,4 +1,11 @@
-# ~/.bashrc executed when new interactive shell is launched. 
+#===========================================
+#     _               _              
+#    | |__   __ _ ___| |__  _ __ ___ 
+#    | '_ \ / _` / __| '_ \| '__/ __|
+# _  | |_) | (_| \__ \ | | | | | (__ 
+#(_) |_.__/ \__,_|___/_| |_|_|  \___|
+# 
+# ==========================================
 
 # activate vi mode
 set -o vi
@@ -17,7 +24,7 @@ HISTSIZE=1000
 HISTFILESIZE=500
 
 # Set prompt (color: \[\e[XXm\]text)
-PS1='[\[\e[07;01;91m\]\u\[\e[27;01;93m\]@\[\e[01;95m\]\h\[\e[01;92m\] \w\[\e[00m\]]$ '
+PS1='[\[\e[01;91m\]\u\[\e[01;92m\] \W\[\e[00m\]]# '
 
 # Apply LS & GREP colors 
 LS_COLORS=$LS_COLORS:'di=7;32:ex=1;35:ln=4;36:' ; export LS_COLORS
@@ -28,8 +35,12 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias diff='diff --color=auto'
 
-# useful ROOT aliases
+# aliases
 alias mkd='mkdir -pv'
-alias v='vim'
+alias v='nvim'
 alias la='ls -Agoh'
 alias ll='ls -goh'
+
+# file shortcuts
+alias brc='nvim ~/.bashrc'
+alias sbrc='source ~/.bashrc'

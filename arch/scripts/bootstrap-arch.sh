@@ -28,6 +28,7 @@ rm -f $HOME/\.bash*
 cp $WORKDIR/shell/profile $HOME/.profile && echo '~/.profile copied'
 cp $WORKDIR/shell/bash/bashrc $HOME/.bashrc && echo '~/.bashrc copied'
 cp $WORKDIR/shell/bash/aliases $HOME/.aliases && echo '~/.aliases copied'
+sudo cp $WORKDIR/shell/bash/root-bashrc /root/.bashrc && echo '/root/.bashrc copied'
 
 # Installing nvim config
 echo 'Installing vim-plug...'

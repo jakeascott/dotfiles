@@ -1,22 +1,21 @@
-#!/bin/bash
+#!/bin/sh
 case $BLOCK_BUTTON in
     1) notify-send "$(acpi -b | sed 's/Battery 0: //')" ;;
 esac
 
 PERCENT=$(acpi -b | awk '{print $4}' | sed 's/[^0-9]//g')
 
-if [[ ! $(acpi -b | awk '{print $3}') =~ Dis.* ]] 
-then
-    echo " $PERCENT"
-    echo 
-    echo "#b8bb26"
-else
+if [ $(acpi -b | awk '{print $3}') = "Discharging," ] ; then
     CSTATUS=
-    [[ $PERCENT -le 80 ]] && CSTATUS=
-    [[ $PERCENT -le 50 ]] && COLOR="#fabd2f" && CSTATUS=
-    [[ $PERCENT -le 30 ]] && COLOR="#fe8019" && CSTATUS=
-    [[ $PERCENT -le 10 ]] && COLOR="#fb4934" && CSTATUS=
+    [ $PERCENT -le 80 ] && CSTATUS=
+    [ $PERCENT -le 50 ] && COLOR="#fabd2f" && CSTATUS=
+    [ $PERCENT -le 30 ] && COLOR="#fe8019" && CSTATUS=
+    [ $PERCENT -le 10 ] && COLOR="#fb4934" && CSTATUS=
     echo "$CSTATUS $PERCENT"
     echo $CSTATUS
     echo $COLOR
+else
+    echo " $PERCENT"
+    echo 
+    echo "#b8bb26"
 fi

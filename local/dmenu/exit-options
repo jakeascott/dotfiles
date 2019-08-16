@@ -2,7 +2,7 @@
 
 OPTIONS="Poweroff\nReboot\nSuspend\nHibernate\nLock"
 
-case "$(printf $OPTIONS | dmenu -sb "#fe8019" -p "Choose option")" in
+case "$(printf $OPTIONS | dmenu -sb "#d3869b" -p "Exit options")" in
     Poweroff) systemctl poweroff ;;
     Reboot) systemctl reboot ;;
     Suspend) systemctl suspend ;;
