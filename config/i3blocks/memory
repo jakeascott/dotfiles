@@ -1,7 +1,10 @@
 #!/bin/sh
-free -h | awk '/^Mem:/ {print $3}' | sed 's/i//'
-echo
-if [ $(free | awk '/^Swap/ {print $3}') -gt 0 ] 
-then
-    echo "#fe8019"
+USED=$(free | awk '/^Mem/ {print ($3 + $5)}')
+
+if [ $USED -gt 1024000 ] ; then
+    printf "%.1fG\n" $(echo $USED/1024/1024 | bc -l)
+else 
+    printf "%.1fM\n" $(echo $USED/1024 | bc -l)
 fi
+echo
+[ $(free | awk '/^Swap/ {print $3}') -gt 0 ] && echo "#fe8019"
