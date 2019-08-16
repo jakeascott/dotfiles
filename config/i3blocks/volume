@@ -3,5 +3,9 @@
 case $BLOCK_BUTTON in
     1) pulsemixer --toggle-mute
 esac
-[ $(pulsemixer --get-mute) -eq 1 ] && echo  && exit
-pulsemixer --get-volume | awk '{print " "$1}'
+
+if [ $(pulsemixer --get-mute) -eq 1 ] ; then
+    echo 
+else
+    pulsemixer --get-volume | awk '{print " "$1}'
+fi

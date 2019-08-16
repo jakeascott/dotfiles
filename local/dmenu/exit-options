@@ -1,0 +1,11 @@
+#!/bin/sh
+
+OPTIONS="Poweroff\nReboot\nSuspend\nHibernate\nLock"
+
+case "$(printf $OPTIONS | dmenu -sb "#fe8019" -p "Choose option")" in
+    Poweroff) systemctl poweroff ;;
+    Reboot) systemctl reboot ;;
+    Suspend) systemctl suspend ;;
+    Hibernate) systemctl hibernate ;;
+    Lock) lock-screen
+esac

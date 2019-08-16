@@ -18,8 +18,8 @@ echo 'exec i3' >> $HOME/.xinitrc
 cp -r $WORKDIR/config/* $CONFIG/
 cp -r $WORKDIR/local/*  $LOCAL/
 
-sudo cp -r $WORKDIR/gtk-themes/my-gruvbox-gtk /user/share/themes/
-sudo cp -r $WORKDIR/gtk-themes/my-gruvbox-icons /user/share/icons/
+sudo cp -r $WORKDIR/gtk-themes/my-gruvbox-gtk /usr/share/themes/
+sudo cp -r $WORKDIR/gtk-themes/my-gruvbox-icons /usr/share/icons/
 
 # Install bash config
 echo 'Removing old bash config...'
