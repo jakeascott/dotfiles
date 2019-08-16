@@ -10,7 +10,7 @@ separator_block_width=30
 markup=none
 
 [updates]
-interval=once
+interval=3600
 signal=3
 align=center
 
@@ -19,6 +19,7 @@ label=
 interval=once
 signal=2
 align=center
+separator=false
 
 [volume]
 interval=once

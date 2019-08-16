@@ -6,7 +6,7 @@ Main Package List (run bootstrap script after this):
     i3:     i3-gaps i3blocks i3lock dmenu termite compton
     System: sysstat htop acpi lxappearance neofetch
     Utils:  xclip xdotool dunst feh bc fzf ranger
-    Media: mpd mpc mpv ncmpcpp youtube-dl sxiv imagemagick
+    Media: mpd mpc mpv ncmpcpp youtube-dl imagemagick
     Laptop: tlp xf86-input-synaptics
 
 Configuration Notes: 

@@ -47,10 +47,6 @@ set laststatus=2
 
 " Set colorscheme
 set background=dark
-"colorscheme gruvbox
-
-" Set colorscheme
-set background=dark
 colorscheme gruvbox
 
 " Save buffer shortcut 
@@ -61,8 +57,3 @@ nnoremap <Leader>y "*y
 nnoremap <Leader>p "*p
 nnoremap <Leader>Y "+y
 nnoremap <Leader>P "+p
-
-" Autoclose tags
-inoremap ( ()<Left>
-inoremap { {}<Left>
-inoremap [ []<Left>

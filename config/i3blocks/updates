@@ -4,7 +4,7 @@ case $BLOCK_BUTTON in
     1) $TERMINAL -e pacupgrade ;;
 esac
 
-PACS=$(pacman -Qu | wc -l)
+PACS=$(checkupdates | grep -c .)
 
 if [ $PACS -gt 0 ] ; then 
     echo " $PACS"
