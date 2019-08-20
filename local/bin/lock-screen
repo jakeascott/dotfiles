@@ -1,3 +1,8 @@
 #!/bin/sh
 # Wrapper for i3lock, see man i3lock for options
-i3lock --indicator -k -B1 --timecolor=#ebdbb2ff --datecolor=#ebdbb2ff --insidecolor=#1d2021cc --insidevercolor=#1d202100 --insidewrongcolor=#cc241dcc --ringcolor=#689d6aff --ringvercolor=#689d6a00 --ringwrongcolor=#fb4934ff --keyhlcolor=#b16286ff --bshlcolor=#d79921ff --verifcolor=#00000000 --wrongcolor=#00000000 --line-uses-inside --ring-width 5
+# pass -c option to dispaly wallpaper only
+if ! [ -z $1 ] && [ $1 = "-c" ] ; then
+    i3lock --indicator -k -i $HOME/.local/share/wallpaper --timecolor=#ebdbb2ff --datecolor=#ebdbb2ff --insidecolor=#1d2021cc --insidevercolor=#1d202100 --insidewrongcolor=#cc241dcc --ringcolor=#689d6aff --ringvercolor=#689d6a00 --ringwrongcolor=#fb4934ff --keyhlcolor=#b16286ff --bshlcolor=#d79921ff --verifcolor=#00000000 --wrongcolor=#00000000 --line-uses-inside --ring-width 5
+else
+    i3lock --indicator -k -B1 --timecolor=#ebdbb2ff --datecolor=#ebdbb2ff --insidecolor=#1d2021cc --insidevercolor=#1d202100 --insidewrongcolor=#cc241dcc --ringcolor=#689d6aff --ringvercolor=#689d6a00 --ringwrongcolor=#fb4934ff --keyhlcolor=#b16286ff --bshlcolor=#d79921ff --verifcolor=#00000000 --wrongcolor=#00000000 --line-uses-inside --ring-width 5
+fi

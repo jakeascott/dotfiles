@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if ! [ -z $1 ] && [ -f $1 ] ; then
+    ln -sf $(realpath $1) $HOME/.local/share/wallpaper
+fi
+
+feh --no-fehbg --bg-scale $HOME/.local/share/wallpaper

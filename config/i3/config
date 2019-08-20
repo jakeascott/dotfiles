@@ -3,8 +3,9 @@
 # Font
 font pango:monospace 8
 
-# Set the mod key
+# Set config variables
 set $mod Mod4
+set $execn exec --no-startup-id
 
 # Set window borders
 default_border pixel 1
@@ -16,6 +17,8 @@ gaps inner 5
 gaps outer 5 
 workspace $ws2 gaps inner 0
 workspace $ws2 gaps outer 0
+workspace $ws4 gaps inner 0
+workspace $ws4 gaps outer 0
 
 # ===== Colorscheme ===== #
 # Gruvbox colors
@@ -38,15 +41,16 @@ bindsym $mod+semicolon split toggle
 
 # System 
 #bindcode --release 133 exec dmenu_run
-bindsym $mod+p exec dmenu_run
+bindsym $mod+p $execn dmenu_run
 Bindsym $mod+q kill
 bindsym $mod+f fullscreen toggle
-bindsym $mod+Shift+q exec --no-startup-id end-session
+bindsym $mod+Shift+q $execn exit-options
 
 # Program 
 bindsym $mod+Return exec $TERMINAL
-bindsym $mod+w exec $BROWSER
-bindsym $mod+F4 exec i3lock
+bindsym $mod+Shift+Return $execn $TERMINAL -e ranger
+bindsym $mod+F2 exec $BROWSER
+bindsym $mod+x $execn lock-screen
 
 # Movement 
 bindsym $mod+h focus left
@@ -61,7 +65,7 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # Layout
-bindsym $mod+s layout stacking
+bindsym $mod+w layout stacking
 bindsym $mod+t layout tabbed
 bindsym $mod+e layout toggle split
 # Use Mouse+$mod to drag floating windows
@@ -79,15 +83,15 @@ bindsym $mod+grave exec list-icons
 bindsym $mod+Shift+grave exec list-colors
 
 # Fn keys
-bindsym XF86AudioMute exec --no-startup-id pulsemixer --toggle-mute && sigblock 1
-bindsym XF86AudioRaiseVolume exec --no-startup-id pulsemixer --change-volume +1 && sigblock 1
-bindsym Shift+XF86AudioRaiseVolume exec --no-startup-id pulsemixer --change-volume +10 && sigblock 1
-bindsym XF86AudioLowerVolume exec --no-startup-id pulsemixer --change-volume -1 && sigblock 1
-bindsym Shift+XF86AudioLowerVolume exec --no-startup-id pulsemixer --change-volume -10 && sigblock 1
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight +1 && sigblock 2
-bindsym Shift+XF86MonBrightnessUp exec --no-startup-id xbacklight +10 && sigblock 2
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -1 && sigblock 2
-bindsym Shift+XF86MonBrightnessDown exec --no-startup-id xbacklight -10 && sigblock 2
+bindsym XF86AudioMute $execn pulsemixer --toggle-mute && sigblock 1
+bindsym XF86AudioRaiseVolume $execn pulsemixer --change-volume +1 && sigblock 1
+bindsym Shift+XF86AudioRaiseVolume $execn pulsemixer --change-volume +10 && sigblock 1
+bindsym XF86AudioLowerVolume $execn pulsemixer --change-volume -1 && sigblock 1
+bindsym Shift+XF86AudioLowerVolume $execn pulsemixer --change-volume -10 && sigblock 1
+bindsym XF86MonBrightnessUp $execn xbacklight +1 && sigblock 2
+bindsym Shift+XF86MonBrightnessUp $execn xbacklight +10 && sigblock 2
+bindsym XF86MonBrightnessDown $execn xbacklight -1 && sigblock 2
+bindsym Shift+XF86MonBrightnessDown $execn xbacklight -10 && sigblock 2
 #bindsym XF86AudioMicMute
 #bindsym XF86RFKill
 
@@ -96,8 +100,8 @@ bindsym Shift+XF86MonBrightnessDown exec --no-startup-id xbacklight -10 && sigbl
 set $ws1 "1:"
 set $ws2 "2:"
 set $ws3 "3:"
-set $ws4 "4:"
-set $ws5 "5:"
+set $ws4 "4:"
+set $ws5 "5:"
 set $ws6 "6:"
 set $ws7 "7:"
 set $ws8 "8:"
@@ -131,7 +135,7 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 # reserve workspaces for certain programs
 # NOTE: use xprop to get program class
 assign [class="firefox"] $ws2
-assign [class="libreoffice"] $ws5
+assign [class="libreoffice"] $ws4
 
 # resize window
 mode "resize" {
@@ -201,10 +205,6 @@ bar {
 # ===== i3 Startup ===== #
 # exec will load at startup
 # exec_always will load evertime i3 is restarted
-
-exec --no-startup-id xrandr --dpi 192
-exec --no-startup-id xset r rate 300 50
-
-exec --no-startup-id compton
-exec --no-startup-id dunst
-exec_always --no-startup-id feh --no-fehbg --bg-scale $HOME/.local/share/wallpaper
+$execn compton
+$execn dunst
+$execn set-wallpaper
