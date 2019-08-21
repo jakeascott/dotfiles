@@ -1,11 +1,11 @@
 #!/bin/sh
 
 case $BLOCK_BUTTON in
-    1) notify-send "$(echo "Right click to update..." && checkupdates | head)" ;; 
+    1) notify-send "$(echo "Right click to update..." && cat /tmp/available-updates | head)" ;; 
     3) $TERMINAL -e pacupgrade ;;
 esac
 
-PACS=$(checkupdates | grep -c .)
+PACS=$(checkupdates | tee /tmp/available-updates | grep -c .)
 
 if [ $PACS -gt 0 ] ; then 
     echo " $PACS"
