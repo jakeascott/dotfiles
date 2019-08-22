@@ -3,9 +3,23 @@
 # Font
 font pango:monospace 8
 
-# Set config variables
+
+# ===== Basic Configs ===== #
 set $mod Mod4
 set $execn exec --no-startup-id
+set $term --no-startup-id $TERMINAL -e
+
+# Gruvbox colors
+set $bg #282828
+set $red #fb4934
+set $green #b8bb26
+set $yellow #fabd2f
+set $blue #83a598
+set $purple #d3869b
+set $aqua #8ec07c
+set $orange #fe8019
+set $gray #a89984
+set $fg #ebdbb2
 
 # Set window borders
 default_border pixel 1
@@ -20,37 +34,24 @@ workspace $ws2 gaps outer 0
 workspace $ws4 gaps inner 0
 workspace $ws4 gaps outer 0
 
-# ===== Colorscheme ===== #
-# Gruvbox colors
-set $bg #282828
-set $red #fb4934
-set $green #b8bb26
-set $yellow #fabd2f
-set $blue #83a598
-set $purple #d3869b
-set $aqua #8ec07c
-set $orange #fe8019
-set $gray #a89984
-set $fg #ebdbb2
-
 # ===== Keybinds ===== #
 # bindcode --release <keycode> to bind single key press
 # can use `xev` to find keycodes
-# split 
-bindsym $mod+semicolon split toggle
 
-# System 
-#bindcode --release 133 exec dmenu_run
-bindsym $mod+p $execn dmenu_run
+# i3 control
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec "i3-msg exit"
 Bindsym $mod+q kill
 bindsym $mod+f fullscreen toggle
-bindsym $mod+Shift+q $execn exit-options
-
-# Program 
-bindsym $mod+Return exec $TERMINAL
-bindsym $mod+Shift+Return $execn $TERMINAL -e ranger
-bindsym $mod+F2 exec $BROWSER
-bindsym $mod+x $execn lock-screen
+bindsym $mod+semicolon split toggle
+bindsym $mod+b layout stacking
+bindsym $mod+n layout tabbed
+bindsym $mod+m layout toggle split
+# Use Mouse+$mod to drag floating windows
+floating_modifier $mod
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
 
 # Movement 
 bindsym $mod+h focus left
@@ -64,23 +65,23 @@ bindsym $mod+Right move right
 bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
-# Layout
-bindsym $mod+w layout stacking
-bindsym $mod+t layout tabbed
-bindsym $mod+e layout toggle split
-# Use Mouse+$mod to drag floating windows
-floating_modifier $mod
-bindsym $mod+Shift+space floating toggle
-bindsym $mod+space focus mode_toggle
+# Resize
+bindsym $mod+i resize grow width 10 px or 10 ppt
+bindsym $mod+Shift+i resize shrink width 10 px or 10 ppt
+bindsym $mod+o resize shrink height 10 px or 10 ppt
+bindsym $mod+Shift+o resize grow height 10 px or 10 ppt
 
-# i3 specific
-bindsym $mod+Shift+c reload
-bindsym $mod+Shift+r restart
-bindsym $mod+Shift+e exec "i3-msg exit"
+# Program shortcuts 
+bindsym $mod+Return exec $TERMINAL
+bindsym $mod+Shift+Return $execn dmenu_run
+bindsym $mod+r exec $term $FILE
+bindsym $mod+w exec $BROWSER, focus
+bindsym $mod+x $execn lock-screen
 
 # Scripts
-bindsym $mod+grave exec list-icons
-bindsym $mod+Shift+grave exec list-colors
+bindsym $mod+Shift+q $execn exit-options
+bindsym $mod+grave $execn list-icons
+bindsym $mod+Shift+grave $execn list-colors
 
 # Fn keys
 bindsym XF86AudioMute $execn pulsemixer --toggle-mute && sigblock 1
@@ -94,6 +95,15 @@ bindsym XF86MonBrightnessDown $execn xbacklight -1 && sigblock 2
 bindsym Shift+XF86MonBrightnessDown $execn xbacklight -10 && sigblock 2
 #bindsym XF86AudioMicMute
 #bindsym XF86RFKill
+
+# ===== Window Colors ===== #
+# CLASS                 BORDER      BACKGROUND      TEXT        INDICATOR   CHILD_BORDER
+client.focused          $bg         $bg             $bg         $gray       $aqua 
+client.unfocused        $bg         $bg             $bg         $gray       $bg
+client.focused_inactive $bg         $bg             $bg         $gray       $bg 
+client.urgent           $red        $red            $bg         $red        $red
+client.placeholder      #000000     #0c0c0c         #ffffff     #000000     #0c0c0c
+client.background       #ffffff
 
 # ===== Workspaces ===== #
 # Define names for workspaces
@@ -119,6 +129,8 @@ bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
+bindsym $mod+Shift+h workspace prev
+bindsym $mod+Shift+l workspace next
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
@@ -137,63 +149,25 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 assign [class="firefox"] $ws2
 assign [class="libreoffice"] $ws4
 
-# resize window
-mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
-        bindsym k resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
-
-        # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
-}
-bindsym $mod+r mode "resize"
-
-# window colors
-# CLASS                 BORDER      BACKGROUND      TEXT        INDICATOR   CHILD_BORDER
-client.focused          $bg         $bg             $bg         $gray       $aqua 
-client.unfocused        $bg         $bg             $bg         $gray       $bg
-client.focused_inactive $bg         $bg             $bg         $gray       $bg 
-client.urgent           $red        $red            $bg         $red        $red
-client.placeholder      #000000     #0c0c0c         #ffffff     #000000     #0c0c0c
-client.background       #ffffff
 
 # ===== Bar ===== #
 bar {
-    # define status bar
-    status_command i3blocks
-    
-    # bar position
-    position top
-
-    # custom bar separator
-    #separator_symbol "<your separator>"
-   
-    # bar font
     #font pango:monospace 8
+    status_command i3blocks
+    position top
+    #separator_symbol "<your separator>"
     
     # strips numbers from workspaces with names of form [n]:[name]
     strip_workspace_numbers yes
     
     # define status bar colors 
     colors {
-        # bar background color
+        # Block colors 
         background $bg
-        
-        # default text color used for blocks
         statusline $fg
-        
-        # separator color
         separator $fg
         
-        # workspace selection colors
+        # Workspace selection colors
         # CLASS             BORDER      BACKGROUND      TEXT
         focused_workspace   $aqua       $aqua           $bg
         inactive_workspace  $bg         $bg             $fg
@@ -207,4 +181,4 @@ bar {
 # exec_always will load evertime i3 is restarted
 $execn compton
 $execn dunst
-$execn set-wallpaper
+exec_always --no-startup-id set-wallpaper
