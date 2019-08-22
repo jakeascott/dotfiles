@@ -3,11 +3,9 @@
 # Font
 font pango:monospace 8
 
-
 # ===== Basic Configs ===== #
 set $mod Mod4
 set $execn exec --no-startup-id
-set $term --no-startup-id $TERMINAL -e
 
 # Gruvbox colors
 set $bg #282828
@@ -45,8 +43,8 @@ bindsym $mod+Shift+e exec "i3-msg exit"
 Bindsym $mod+q kill
 bindsym $mod+f fullscreen toggle
 bindsym $mod+semicolon split toggle
-bindsym $mod+b layout stacking
-bindsym $mod+n layout tabbed
+#bindsym $mod+b layout stacking
+#bindsym $mod+n layout tabbed
 bindsym $mod+m layout toggle split
 # Use Mouse+$mod to drag floating windows
 floating_modifier $mod
@@ -66,15 +64,15 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # Resize
-bindsym $mod+i resize grow width 10 px or 10 ppt
-bindsym $mod+Shift+i resize shrink width 10 px or 10 ppt
-bindsym $mod+o resize shrink height 10 px or 10 ppt
-bindsym $mod+Shift+o resize grow height 10 px or 10 ppt
+bindsym $mod+i resize grow height 10 px or 10 ppt
+bindsym $mod+u resize shrink height 10 px or 10 ppt
+bindsym $mod+o resize grow width 10 px or 10 ppt
+bindsym $mod+y resize shrink width 10 px or 10 ppt
 
 # Program shortcuts 
 bindsym $mod+Return exec $TERMINAL
 bindsym $mod+Shift+Return $execn dmenu_run
-bindsym $mod+r exec $term $FILE
+bindsym $mod+r $execn $TERMINAL -e $FILE
 bindsym $mod+w exec $BROWSER, focus
 bindsym $mod+x $execn lock-screen
 
@@ -129,8 +127,8 @@ bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
-bindsym $mod+Shift+h workspace prev
-bindsym $mod+Shift+l workspace next
+bindsym $mod+Shift+j workspace prev
+bindsym $mod+Shift+k workspace next
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
@@ -143,12 +141,13 @@ bindsym $mod+Shift+7 move container to workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
+bindsym $mod+Shift+h move container to workspace prev
+bindsym $mod+Shift+l move container to workspace next
 
 # reserve workspaces for certain programs
 # NOTE: use xprop to get program class
 assign [class="firefox"] $ws2
 assign [class="libreoffice"] $ws4
-
 
 # ===== Bar ===== #
 bar {
