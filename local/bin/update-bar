@@ -1,0 +1,3 @@
+#!/bin/bash
+nm-online &> /dev/null
+sigblock 3 && sigblock 4
