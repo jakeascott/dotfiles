@@ -80,6 +80,8 @@ bindsym $mod+x $execn lock-screen
 bindsym $mod+Shift+q $execn exit-options
 bindsym $mod+grave $execn list-icons
 bindsym $mod+Shift+grave $execn list-colors
+bindsym $mod+F8 $execn mount-drive
+bindsym $mod+F9 $execn umount-drive
 
 # Fn keys
 bindsym XF86AudioMute $execn pulsemixer --toggle-mute && sigblock 1

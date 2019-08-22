@@ -1,0 +1,13 @@
+#!/bin/bash
+
+MOUNTED=$(lsblk -lp | awk '/part \/mnt/ {print $1,"("$4")"}')
+if [ -z "$MOUNTED" ] ; then
+    notify-send "No mounted drives detected"
+    exit 0
+fi
+
+DRIVE=$(echo "$MOUNTED" | dmenu -i -p "Choose a drive to unmount." | awk '{print $1}')
+[ -z "$DRIVE" ] && exit 0
+
+FOLDER=$(lsblk -lp | grep $DRIVE | awk '{print $7}')
+sudo umount $FOLDER && notify-send "$DRIVE unmounted from $FOLDER"
