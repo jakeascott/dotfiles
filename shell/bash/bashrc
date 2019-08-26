@@ -31,7 +31,7 @@ LS_COLORS=$LS_COLORS:'di=7;32:ex=1;35:ln=4;36:' ; export LS_COLORS
 # GREP_COLOR="1;32"; export GREP_COLOR
 
 # Enable color for various commands
-alias ls='ls --color=auto'
+alias ls='ls -hN --color=auto --group-directories-first'
 alias grep='grep --color=auto'
 alias diff='diff --color=auto'
 
