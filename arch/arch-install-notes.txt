@@ -22,9 +22,10 @@
 
 3. Install Arch
     a. curl 'https://jakeascott.github.io/update-mirrors.sh' | sh
-    b. pacstrap /mnt base base-devel intel-ucode networkmanager ufw neovim git
+    b. pacstrap /mnt base base-devel 
     c. genfstab -U /mnt >> /mnt/etc/fstab
     d. arch-chroot /mnt
+    e. pacman -S intel-ucode networkmanager ufw neovim git gnome-keyring
 
 4. Configure system & install bootloader
     a. curl -O 'https://jakeascott.github.io/configure-arch.sh' and run it

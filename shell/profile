@@ -16,6 +16,9 @@ export EDITOR="nvim"
 #export READER="zathura"
 #export FILE="ranger"
 
+# For consistant QT/GTK themes (requires qt5-styleplugins)
+#export QT_QPA_PLATFORMTHEME=gtk2
+
 # For HiDPI
 #export GDK_SCALE=2
 #export GDK_DPI_SCALE=0.5 # if having trouble with font size
