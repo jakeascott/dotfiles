@@ -197,5 +197,6 @@ for_window [instance="popup"] floating enable, resize set 1280 720, border pixel
 # exec_always will load evertime i3 is restarted
 $execn compton
 $execn dunst
+$execn nextcloud
 $execn update-bar
 exec_always --no-startup-id set-wallpaper
