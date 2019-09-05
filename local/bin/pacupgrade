@@ -1,5 +1,5 @@
 #!/bin/sh
 # Upgrades packages
 
-yay -Syu --noconfirm
+$TERMINAL --hold --name popup -e yay -Syu
 pkill -RTMIN+3 i3blocks

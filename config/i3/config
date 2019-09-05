@@ -3,15 +3,6 @@
 # Font
 font pango:monospace 8
 
-#for_window [instance="dropdown"] floating enable
-#for_window [instance="dropdown"] resize set 640 480
-#for_window [instance="dropdown"] move scratchpad
-#for_window [instance="dropdown"] border pixel 3
-#$execn $TERMINAL -n dropdown
-
-#bindsym $mod+d [instance="dropdown"] sratchpad show; [instance="dropdown"] move position center
-
-
 # ===== Basic Configs ===== #
 set $mod Mod4
 set $execn exec --no-startup-id
@@ -69,7 +60,7 @@ bindsym $mod+Left move left
 bindsym $mod+Down move down
 bindsym $mod+Up move up
 bindsym $mod+Right move right
-bindsym $mod+a focus parent
+#bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # Resize
@@ -81,8 +72,8 @@ bindsym $mod+y resize shrink width 10 px or 10 ppt
 # Program shortcuts 
 bindsym $mod+Return exec $TERMINAL
 bindsym $mod+Shift+Return $execn dmenu_run
-bindsym $mod+r $execn $TERMINAL -e $FILE
 bindsym $mod+w exec $BROWSER, focus
+bindsym $mod+r exec $TERMINAL -e ranger
 bindsym $mod+x $execn lock-screen
 bindsym $mod+Shift+x $execn lock-screen -c
 
@@ -189,6 +180,17 @@ bar {
         urgent_workspace    $orange     $orange         $bg
     }
 }
+
+# ===== Scratchpads ===== #
+for_window [instance="calc"] floating enable, move scratchpad, resize set 1280 720, border pixel 2
+$execn $TERMINAL --name calc -e R -q
+bindsym $mod+a [instance="calc"] scratchpad show; [instance="calc"] move position center
+
+for_window [instance="scratch"] floating enable, move scratchpad, resize set 1280 720, border pixel 2
+$execn $TERMINAL --name scratch
+bindsym $mod+s [instance="scratch"] scratchpad show; [instance="scratch"] move position center
+
+for_window [instance="popup"] floating enable, resize set 1280 720, border pixel 2
 
 # ===== i3 Startup ===== #
 # exec will load at startup
