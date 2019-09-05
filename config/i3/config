@@ -75,6 +75,7 @@ bindsym $mod+Shift+Return $execn dmenu_run
 bindsym $mod+r $execn $TERMINAL -e $FILE
 bindsym $mod+w exec $BROWSER, focus
 bindsym $mod+x $execn lock-screen
+bindsym $mod+Shift+x $execn lock-screen -c
 
 # Scripts
 bindsym $mod+Shift+q $execn exit-options
@@ -82,6 +83,8 @@ bindsym $mod+grave $execn list-icons
 bindsym $mod+Shift+grave $execn list-colors
 bindsym $mod+F9 $execn mount-drive
 bindsym $mod+F10 $execn umount-drive
+#bindsym $mod+F11
+#bindsym $mod+F12
 
 # Fn keys
 bindsym XF86AudioMute $execn pulsemixer --toggle-mute && sigblock 1
@@ -110,13 +113,14 @@ client.background       #ffffff
 set $ws1 "1:"
 set $ws2 "2:"
 set $ws3 "3:"
-set $ws4 "4:"
-set $ws5 "5:"
-set $ws6 "6:"
-set $ws7 "7:"
-set $ws8 "8:"
-set $ws9 "9:"
-set $ws10 "10:"
+set $ws4 "4:"
+set $ws5 "5:"
+set $ws6 "6:"
+set $ws7 "7:"
+set $ws8 "8:"
+set $ws9 "9:"
+set $ws10 "10:"
+
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -182,4 +186,5 @@ bar {
 # exec_always will load evertime i3 is restarted
 $execn compton
 $execn dunst
+$execn update-bar
 exec_always --no-startup-id set-wallpaper

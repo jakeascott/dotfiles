@@ -1,0 +1,13 @@
+[Unit]
+Description=Reloads i3bar once network is up
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=idle
+ExecStart=touch /home/jake/ran
+#ExecStart=/home/jake/.local/bin/sigblock 3
+#ExecStart=/home/jake/.local/bin/sigblock 4
+
+[Install]
+WantedBy=default.target
