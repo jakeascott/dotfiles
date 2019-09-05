@@ -3,6 +3,15 @@
 # Font
 font pango:monospace 8
 
+#for_window [instance="dropdown"] floating enable
+#for_window [instance="dropdown"] resize set 640 480
+#for_window [instance="dropdown"] move scratchpad
+#for_window [instance="dropdown"] border pixel 3
+#$execn $TERMINAL -n dropdown
+
+#bindsym $mod+d [instance="dropdown"] sratchpad show; [instance="dropdown"] move position center
+
+
 # ===== Basic Configs ===== #
 set $mod Mod4
 set $execn exec --no-startup-id
