@@ -26,7 +26,7 @@ for_window [class="libreoffice"] border none
 
 # Set gaps (requires i3-gaps)
 gaps inner 5
-gaps outer 5 
+gaps outer 5
 workspace $ws2 gaps inner 0
 workspace $ws2 gaps outer 0
 workspace $ws4 gaps inner 0
@@ -40,7 +40,7 @@ workspace $ws4 gaps outer 0
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-msg exit"
-Bindsym $mod+q kill
+bindsym $mod+q kill
 bindsym $mod+f fullscreen toggle
 bindsym $mod+semicolon split toggle
 #bindsym $mod+b layout stacking
@@ -51,7 +51,7 @@ floating_modifier $mod
 bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
-# Movement 
+# Movement
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
@@ -69,7 +69,7 @@ bindsym $mod+u resize shrink height 10 px or 10 ppt
 bindsym $mod+o resize grow width 10 px or 10 ppt
 bindsym $mod+y resize shrink width 10 px or 10 ppt
 
-# Program shortcuts 
+# Program shortcuts
 bindsym $mod+Return exec $TERMINAL
 bindsym $mod+Shift+Return $execn dmenu_run
 bindsym $mod+w exec $BROWSER, focus
@@ -101,9 +101,9 @@ bindsym Shift+XF86MonBrightnessDown $execn xbacklight -10 && sigblock 2
 
 # ===== Window Colors ===== #
 # CLASS                 BORDER      BACKGROUND      TEXT        INDICATOR   CHILD_BORDER
-client.focused          $bg         $bg             $bg         $gray       $aqua 
+client.focused          $bg         $bg             $bg         $gray       $aqua
 client.unfocused        $bg         $bg             $bg         $gray       $bg
-client.focused_inactive $bg         $bg             $bg         $gray       $bg 
+client.focused_inactive $bg         $bg             $bg         $gray       $bg
 client.urgent           $red        $red            $bg         $red        $red
 client.placeholder      #000000     #0c0c0c         #ffffff     #000000     #0c0c0c
 client.background       #ffffff
@@ -161,17 +161,17 @@ bar {
     status_command i3blocks
     position top
     #separator_symbol "<your separator>"
-    
+
     # strips numbers from workspaces with names of form [n]:[name]
     strip_workspace_numbers yes
-    
-    # define status bar colors 
+
+    # define status bar colors
     colors {
-        # Block colors 
+        # Block colors
         background $bg
         statusline $fg
         separator $fg
-        
+
         # Workspace selection colors
         # CLASS             BORDER      BACKGROUND      TEXT
         focused_workspace   $aqua       $aqua           $bg
