@@ -23,11 +23,6 @@ Plug 'vim-airline/vim-airline'
 call plug#end()
 " }}}
 
-" Colorscheme -------------------------------------------------------- {{{
-set background=dark
-colorscheme gruvbox
-" }}}
-
 " General Settings --------------------------------------------------- {{{
 set mouse=a " Activate mouse
 set number relativenumber " line numbers
@@ -36,15 +31,20 @@ set scrolloff=3 " don't let cursor touch edge of viewport
 set splitbelow splitright " vertical splits use right half of screen
 set iskeyword+=- " treat dash separated words as one word object
 set inccommand=nosplit " interactive find and replace preview
-if exists('&breakindent')
-    set breakindent " Indent wrapped lines up to the same level
-endif
+set breakindent " Indent wrapped lines up to the same level
+set path+=** " Search down into subfolders
+
+let g:netrw_banner=0 " Disable banner in netrw
 
 " Tab settings
 set expandtab " Expand tabs into spaces
 set tabstop=4 " default to 4 spaces for hard tab
 set softtabstop=4 " default to 4 spaces for soft tab
 set shiftwidth=4 " for when <tab> is pressed at beginning of line
+
+" Colorscheme
+set background=dark
+colorscheme gruvbox
 " }}}
 
 " General Shortcuts -------------------------------------------------- {{{
@@ -82,6 +82,8 @@ nnoremap <leader>- :sp<cr>
 nnoremap <leader>/ :nohlsearch<cr> :echo "Search cleared."<cr>
 nnoremap <c-u> viwU
 nnoremap <tab> za
+"nnoremap ; :
+"nnoremap : ;
 " }}}
 
 " Insert mode mappings ----------------------------------------------- {{{
@@ -191,6 +193,16 @@ augroup END
 " }}}
 " }}}
 
-" Other stuff -------------------------------------------------------- {{{
+" Notes -------------------------------------------------------------- {{{
 onoremap ih :<c-u>execute "normal! ?^==\\+$\r:nohlsearch\rkvg_"<cr>
+
+" ^n for autocomple selections
+" ^x^n autocomplete just this file
+" ^x^f autocomplete filenames
+" ^x^] autocomplete tags
+" ^P scroll back in list
+
+" :read to imput file contents into file
+" :-1read no extra line
+
 " }}}
