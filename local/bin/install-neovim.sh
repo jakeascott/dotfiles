@@ -1,9 +1,11 @@
 #!/bin/bash
 
+DIR=$(pwd | sed 's/dotfiles.\+/dotfiles/g')
+
 # Install vim config
 echo 'Installing init.vim'
-[ ! -d ~/.config/nvim ] && mkdir -vp ~/.config/nvim 
-cp init.vim ~/.config/nvim/init.vim
+[ ! -d ~/.config/nvim ] && mkdir -vp ~/.config/nvim
+ln -sf $DIR/config/nvim/init.vim ~/.config/nvim/init.vim && echo 'vimrc simlinked'
 
 # Get vim-plug
 echo 'Installing vim-plug'

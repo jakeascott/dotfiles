@@ -14,6 +14,7 @@ let maplocalleader = "\<space>"
 " ----- Vim Plugged ----- "
 call plug#begin('~/.local/share/nvim/site/plugged')
 Plug 'morhetz/gruvbox'
+Plug 'vim-airline/vim-airline'
 " Plug 'kassio/neoterm'
 " vim-test
 " deoplete.nvim | nvim-completion-manager | asyncomplete | webcomplete
@@ -22,14 +23,20 @@ Plug 'morhetz/gruvbox'
 call plug#end()
 " }}}
 
+" Colorscheme -------------------------------------------------------- {{{
+set background=dark
+colorscheme gruvbox
+" }}}
+
 " General Settings --------------------------------------------------- {{{
 set mouse=a " Activate mouse
-set number " line numbers
+set number relativenumber " line numbers
 set linebreak " wrap lines on 'word' boundaries
 set scrolloff=3 " don't let cursor touch edge of viewport
 set splitbelow splitright " vertical splits use right half of screen
 set iskeyword+=- " treat dash separated words as one word object
 set inccommand=nosplit " interactive find and replace preview
+set ignorecase smartcase " Regex ignores case if query is lowercase
 if exists('&breakindent')
     set breakindent " Indent wrapped lines up to the same level
 endif
@@ -39,12 +46,6 @@ set expandtab " Expand tabs into spaces
 set tabstop=4 " default to 4 spaces for hard tab
 set softtabstop=4 " default to 4 spaces for soft tab
 set shiftwidth=4 " for when <tab> is pressed at beginning of line
-
-" Set colorscheme
-set background=dark
-colorscheme gruvbox
-highlight Search ctermbg=LightGreen ctermfg=0
-highlight IncSearch ctermbg=LightGreen ctermfg=0
 " }}}
 
 " General Shortcuts -------------------------------------------------- {{{
@@ -77,10 +78,11 @@ nnoremap <leader>d ^d$
 nnoremap <leader>v viw
 nnoremap <leader>y "+y
 nnoremap <leader>p "+p
-nnoremap <leader>\ :vsp
-nnoremap <leader>- :sp
+nnoremap <leader>\ :vsp<cr>
+nnoremap <leader>- :sp<cr>
 nnoremap <leader>/ :nohlsearch<cr> :echo "Search cleared."<cr>
 nnoremap <c-u> viwU
+nnoremap <tab> za
 " }}}
 
 " Insert mode mappings ----------------------------------------------- {{{
