@@ -36,7 +36,6 @@ set scrolloff=3 " don't let cursor touch edge of viewport
 set splitbelow splitright " vertical splits use right half of screen
 set iskeyword+=- " treat dash separated words as one word object
 set inccommand=nosplit " interactive find and replace preview
-set ignorecase smartcase " Regex ignores case if query is lowercase
 if exists('&breakindent')
     set breakindent " Indent wrapped lines up to the same level
 endif
@@ -185,9 +184,10 @@ augroup END
 " }}}
 
 " LaTex file settings ------------------------------------------------ {{{
-"augroup filetype_tex
-"autocmd FileType tex nnoremap ,bf \textbf{}<ESC>?\\{<Enter>a
-"augroup END
+augroup filetype_tex
+    autocmd!
+    autocmd FileType tex nnoremap ,bf i\textbf{}<ESC>i
+augroup END
 " }}}
 " }}}
 
