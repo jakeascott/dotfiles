@@ -1,3 +1,3 @@
 # dotfiles
 
-Jake's scripts, dotfiles & scripts.
+Jake's scripts, dotfiles & notes.
