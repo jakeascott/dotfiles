@@ -137,6 +137,15 @@ tnoremap <a-k> <c-\><c-n><c-w>k
 tnoremap <a-l> <c-\><c-n><c-w>l
 " }}}
 
+" File templates -------------------------------------------- {{{
+nnoremap \html :-1read ~/.local/share/nvim/skel/skel.html<cr>^3jf><esc>:setfiletype html<cr>a
+nnoremap \python :-1read ~/.local/share/nvim/skel/skel.py<cr>^3j3f"<esc>:setfiletype python<cr>i
+nnoremap \c :-1read ~/.local/share/nvim/skel/skel.c<cr><esc>:setfiletype c<cr>
+nnoremap \ch :-1read ~/.local/share/nvim/skel/skel.h<cr><esc>:setfiletype c<cr>
+nnoremap \sh ggi#!/bin/sh<esc>:setfiletype sh<cr>a<cr><cr>
+nnoremap \bash ggi#!/bin/bash<esc>:setfiletype sh<cr>a<cr><cr>
+" }}}
+
 " FileType settings -------------------------------------------------- {{{
 " Global file settings ----------------------------------------------- {{{
 augroup gobal
@@ -181,14 +190,18 @@ augroup END
 " Html file settings ------------------------------------------------- {{{
 augroup filetype_html
     autocmd!
+    autocmd FileType html nnoremap <buffer> <localleader>c I<!--<space><esc>A<space>--><esc>
     autocmd FileType html nnoremap <buffer> <localleader>f Vatzf
+    autocmd FileType html nnoremap <buffer> <localleader>h1 i<h1></h1><esc>F>a
+    autocmd FileType html nnoremap <buffer> <localleader>li i<li></li><esc>F>a
+    autocmd FileType html nnoremap <buffer> <localleader>ul i<ul></ul><esc>F>a<cr><esc>kf>a<cr>
 augroup END
 " }}}
 
 " LaTex file settings ------------------------------------------------ {{{
 augroup filetype_tex
     autocmd!
-    autocmd FileType tex nnoremap ,bf i\textbf{}<ESC>i
+    autocmd FileType tex nnoremap <leader>bf i\textbf{}<ESC>i
 augroup END
 " }}}
 " }}}
