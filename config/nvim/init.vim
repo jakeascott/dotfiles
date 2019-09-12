@@ -138,10 +138,11 @@ tnoremap <a-l> <c-\><c-n><c-w>l
 " }}}
 
 " File templates -------------------------------------------- {{{
-nnoremap \html :-1read ~/.local/share/nvim/skel/skel.html<cr>^3jf><esc>:setfiletype html<cr>a
-nnoremap \python :-1read ~/.local/share/nvim/skel/skel.py<cr>^3j3f"<esc>:setfiletype python<cr>i
+nnoremap \html :-1read ~/.local/share/nvim/skel/skel.html<cr><esc>:setfiletype html<cr>^3jf>a
+nnoremap \python :-1read ~/.local/share/nvim/skel/skel.py<cr><esc>:setfiletype python<cr>^3j3f"i
 nnoremap \c :-1read ~/.local/share/nvim/skel/skel.c<cr><esc>:setfiletype c<cr>
 nnoremap \ch :-1read ~/.local/share/nvim/skel/skel.h<cr><esc>:setfiletype c<cr>
+nnoremap \tex :-1read ~/.local/share/nvim/skel/skel.tex<cr><esc>:setfiletype tex<cr>^3jf{a
 nnoremap \sh ggi#!/bin/sh<esc>:setfiletype sh<cr>a<cr><cr>
 nnoremap \bash ggi#!/bin/bash<esc>:setfiletype sh<cr>a<cr><cr>
 " }}}
