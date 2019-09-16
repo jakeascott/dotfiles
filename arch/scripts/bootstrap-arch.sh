@@ -2,14 +2,14 @@
 # Run as normal user
 
 echo 'Be sure to install appropriate graphics driver.'
-sudo pacman -Sy --noconfirm xorg-server xorg-xinit xorg-apps pulseaudio pulseaudio-alsa pulsemixer ttf-dejavu otf-font-awesome otf-fira-code otf-fira-sans otf-fira-mono xdg-user-dirs sysstat htop acpi lxappearance xclip xdotool libnotify kitty dunst compton imagemagick feh bc firefox i3-gaps i3blocks
+sudo pacman -Sy --noconfirm xorg-server xorg-xinit xorg-apps pulseaudio pulseaudio-alsa pulsemixer ttf-dejavu otf-font-awesome otf-fira-code otf-fira-sans otf-fira-mono xdg-user-dirs sysstat htop acpi lxappearance xclip xdotool libnotify kitty dunst compton imagemagick feh bc firefox
 
 WORKDIR=$(pwd | sed 's/dotfiles.*/dotfiles/')
 LOCAL="$HOME/.local"
 CONFIG="$HOME/.config"
 
 mkdir -pv $LOCAL
-mkdir -pv $CONFIG 
+mkdir -pv $CONFIG
 
 echo 'Copying config files...'
 cp $WORKDIR/shell/xinitrc $HOME/.xinitrc && echo '~/.xinitrc copied'

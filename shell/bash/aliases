@@ -1,6 +1,7 @@
 # useful aliases
 alias mkd='mkdir -pv'
 alias v='nvim'
+alias vim='nvim'
 alias la='ls -Agoh'
 alias ll='ls -goh'
 
@@ -9,7 +10,8 @@ alias brc='nvim ~/.bashrc'
 alias vrc='nvim ~/.config/nvim/init.vim'
 alias bal='nvim ~/.aliases'
 alias sbrc='source ~/.bashrc'
-alias i3c='nvim ~/.config/i3/config'
+alias wmc='nvim ~/.config/i3/config'
+alias bar='nvim ~/.config/i3blocks/config'
 
 # directory shortcuts
 alias scripts='cd ~/.local/bin && ll'

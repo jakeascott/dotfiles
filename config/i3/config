@@ -71,7 +71,7 @@ bindsym $mod+y resize shrink width 10 px or 10 ppt
 
 # Program shortcuts
 bindsym $mod+Return exec $TERMINAL
-bindsym $mod+Shift+Return $execn dmenu_run
+bindsym $mod+Space $execn dmenu_run
 bindsym $mod+w exec $BROWSER, focus
 bindsym $mod+r exec $TERMINAL -e ranger
 bindsym $mod+x $execn lock-screen
