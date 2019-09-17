@@ -1,2 +1,0 @@
-If grub menu is coming up for 30s at boot, grub thinks it's failing previous shutdown
-To fix: set GRUB_RECORDFAIL_TIMEOUT=X in /etc/default/grub, then run sudo update-grub

@@ -1,21 +1,29 @@
 # useful aliases
 alias mkd='mkdir -pv'
-alias v='nvim'
 alias vim='nvim'
+alias v='nvim'
 alias la='ls -Agoh'
 alias ll='ls -goh'
+alias fonts='fc-list'
+alias py='python'
 
 # file shortcuts
+alias bpr='nvim ~/.profile'
+alias sbpr='source ~/.profile'
 alias brc='nvim ~/.bashrc'
 alias vrc='nvim ~/.config/nvim/init.vim'
 alias bal='nvim ~/.aliases'
 alias sbrc='source ~/.bashrc'
 alias wmc='nvim ~/.config/i3/config'
 alias bar='nvim ~/.config/i3blocks/config'
+#alias wmc='nvim ~/.config/bspwm/bspwmrc'
+#alias hkc='nvim ~/.config/sxhkd/sxhkdrc'
+#alias bar='nvim ~/.config/polybar/config'
 
 # directory shortcuts
-alias scripts='cd ~/.local/bin && ll'
-alias config='cd ~/.config && ll'
+alias bin='cd ~/.local/bin && ll'
+alias locl='cd ~/.local && ll'
+alias conf='cd ~/.config && ll'
 
 # git aliases
 alias gita='git add .'

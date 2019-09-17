@@ -1,0 +1,42 @@
+#!/bin/sh
+# =========================================================
+#    _
+#   | |__  ___ _ ____      ___ __ ___  _ __ ___
+#   | '_ \/ __| '_ \ \ /\ / / '_ ` _ \| '__/ __|
+#   | |_) \__ \ |_) \ V  V /| | | | | | | | (__
+#   |_.__/|___/ .__/ \_/\_/ |_| |_| |_|_|  \___|
+#             |_|
+#
+#   Binary Space Partitioning Window Manager Config
+#   Sample config in /usr/share/doc/bspwm/examples/bspwmrc
+#
+# =========================================================
+
+# Autostart ------------------------------------------- {{{
+sxhkd &
+compton &
+dunst &
+polybar -r primary &
+nm-applet &
+# }}}
+
+# Monitors/Workspaces --------------------------------- {{{
+bspc monitor -d 1 2 3 4 5 6 7 8 9 0
+# }}}
+
+# Config ---------------------------------------------- {{{
+bspc config border_width         2
+bspc config window_gap           10
+
+bspc config split_ratio          0.5
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+# }}}
+
+# Colors ---------------------------------------------- {{{
+bspc config normal_border_color  "#689d6a"
+# }}}
+
+# Rules ----------------------------------------------- {{{
+bspc rule -a firefox desktop='^2' follow=on
+# }}}

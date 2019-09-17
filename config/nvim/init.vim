@@ -15,6 +15,7 @@ let maplocalleader = "\<space>"
 call plug#begin('~/.local/share/nvim/site/plugged')
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
+Plug 'kovetskiy/sxhkd-vim'
 " Plug 'kassio/neoterm'
 " vim-test
 " deoplete.nvim | nvim-completion-manager | asyncomplete | webcomplete
@@ -166,6 +167,30 @@ augroup filetype_vim
 augroup END
 " }}}
 
+" Ini file settings -------------------------------------------------- {{{
+augroup filetype_ini
+    autocmd!
+    autocmd FileType dosini nnoremap <buffer> <localleader>c I;<esc>
+    autocmd FileType dosini setlocal foldmethod=marker
+augroup END
+" }}}
+
+" Sxhkd file settings -------------------------------------------------- {{{
+augroup filetype_sxhkd
+    autocmd!
+    autocmd FileType sxhkd nnoremap <buffer> <localleader>c I#<esc>
+    autocmd FileType sxhkd setlocal foldmethod=marker
+augroup END
+" }}}
+
+" Shell script file settings ----------------------------------------- {{{
+augroup filetype_sh
+    autocmd!
+    autocmd FileType sh nnoremap <buffer> <localleader>c I#<esc>
+    autocmd FileType sh setlocal foldmethod=marker
+augroup END
+" }}}
+
 " Python file settings ----------------------------------------------- {{{
 augroup filetype_python
     autocmd!
@@ -178,13 +203,6 @@ augroup END
 augroup filetype_c
     autocmd!
     autocmd FileType c nnoremap <buffer> <localleader>c I//<esc>
-augroup END
-" }}}
-
-" Shell script file settings ----------------------------------------- {{{
-augroup filetype_sh
-    autocmd!
-    autocmd FileType sh nnoremap <buffer> <localleader>c I#<esc>
 augroup END
 " }}}
 
