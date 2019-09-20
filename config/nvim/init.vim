@@ -203,6 +203,7 @@ augroup END
 augroup filetype_c
     autocmd!
     autocmd FileType c nnoremap <buffer> <localleader>c I//<esc>
+    autocmd FileType c nnoremap <buffer> <localleader>z :!make<cr>
 augroup END
 " }}}
 

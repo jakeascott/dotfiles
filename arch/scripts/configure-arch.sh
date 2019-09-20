@@ -49,7 +49,7 @@ pacman -R --noconfirm nano
 # Add user
 echo "Enter ROOT password..."
 passwd
-useradd -m -g users -G wheel $2
+useradd -mU -G wheel,uucp,video,audio,storage,games,input $2
 echo "Enter password for $2..."
 passwd $2
 
