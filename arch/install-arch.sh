@@ -23,29 +23,31 @@ password2=$(dialog --stdout --passwordbox "Enter admin password agian" 0 0)
 clear
 [[ "$password" == "$password2" ]] || ( echo "Passwords did not match"; exit 1; )
 
-### Install Start ###
-
 devicelist=$(lsblk -dplnx size -o name,size | grep -Ev "boot|rpmb|loop" | tac)
 device=$(dialog --stdout --menu "Select installation disk" 0 0 0 ${devicelist}) || exit 1
 clear
-
-# start logging
-exec $> >(tee "install.log")
-
-timedatectl set-ntp true
 
 # put user into fdisk
 fdisk "${device}"
 
 # allow user to assign partitions
 part_list=$(lsblk -pnx name | grep -E "$device.+part" | awk '{print $1, $4}')
-part_boot=$(dialog --stdout --menu "Select boot partition" 0 0 0 ${part_list})
+part_boot=$(dialog --stdout --menu "Select boot partition" 0 0 0 ${part_list}) || exit 1
 clear
 part_list=$(echo "$part_list" | grep -v "$part_boot")
-part_root=$(dialog --stdout --menu "Select root partition" 0 0 0 ${part_list})
+part_root=$(dialog --stdout --menu "Select root partition" 0 0 0 ${part_list}) || exit 1
 clear
 part_list=$(echo "$part_list" | grep -v "$part_root")
-part_swap=$(dialog --stdout --menu "Select swap partition" 0 0 0 ${part_list})
+part_swap=$(dialog --stdout --menu "Select swap partition" 0 0 0 ${part_list}) || exit 1
+
+### Install Start ###
+
+timedatectl set-ntp true
+echo 'Refreshing keyring...'
+pacman-key --refresh-keys
+
+# start logging
+exec &> >(tee "install.log")
 
 # format partitions
 wipefs "${part_boot}"
@@ -61,14 +63,19 @@ mount "${part_root}" /mnt
 mkdir /mnt/boot
 mount "${part_boot}" /mnt/boot
 
+# Install pacman-contrib and update mirrorlist
+pacman -Q pacman-contrib &>/dev/null || sudo pacman -Syq --noconfirm pacman-contrib
+cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+
+curl -s "https://www.archlinux.org/mirrorlist/?country=US&protocol=https&ip_version=4&ip_version=6&uuse_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^## U/d' | rankmirrors -n 5 - > /etc/pacman.d/mirrorlist
+
 # begin arch install
-pacstrap /mnt base base-devel
+pacstrap /mnt base base-devel intel-ucode
 genfstab -U /mnt >> /mnt/etc/fstab
 
 # set timezone and clock
-ln -sf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
-hwclock --systohc
-date
+ln -sf /mnt/usr/share/zoneinfo/America/Los_Angeles /mnt/etc/localtime
+arch-chroo /mnt hwclock --systohc
 
 # Set language
 sed -i 's/#en_US.UTF-8/en_US.UTF-8/' /mnt/etc/locale.gen
@@ -114,7 +121,7 @@ title Arch Linux
 linux /vmlinuz-linux
 initrd /intel-ucode.img
 initrd /initramfs-linux.img
-options root=PARTUUID=$(blkid -s PARTUUID -o value "$part_root") rw quiet
+options root=PARTUUID=$(blkid -s PARTUUID -o value "${part_root}") rw quiet
 EOF
 
 # Make pacman pretty
@@ -131,7 +138,7 @@ FONT_MAP=8859-2
 EOF
 
 # remove programs
-arch-chroot /mnt pacman -R --noconfirm nano
+arch-chroot /mnt pacman -Rq --noconfirm nano
 
 # add admin user
 arch-chroot /mnt useradd -mU -G wheel,uucp,video,audio,storage,games,input "$username"
@@ -140,5 +147,5 @@ echo "$username:$password" | chpasswd --root /mnt
 echo "root:$password" | chpasswd --root /mnt
 
 # Exit info
-echo "Main install done. Edit sudoers with visudo, disable root password passwd -l root"
+echo "\nMain install done. Edit sudoers with visudo, disable root password passwd -l root"
 echo "umount -R /mnt; reboot and remove iso"
