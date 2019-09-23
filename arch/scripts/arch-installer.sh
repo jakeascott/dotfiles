@@ -176,12 +176,16 @@ arch-chroot /mnt pacman -R --noconfirm nano
 # add admin user
 arch-chroot /mnt useradd -mU -G wheel,uucp,video,audio,storage,games,input "$username"
 
-# Change user and root passwords need to
-
+# Change user and root passwords
 echo "$username:$password" | arch-chroot /mnt chpasswd
 echo "root:$password" | arch-chroot /mnt chpasswd
 
+# Edit sudoers file to enable wheel group
+sed -i 's/# %wheel ALL=(ALL) NO/%wheel ALL=(ALL) NO/' /mnt/etc/sudoers
+
+# Disable root password
+arch-chroot /mnt passwd -l root
+
 # Exit info
 echo
-echo "Main install done. Edit sudoers with visudo, disable root password passwd -l root"
-echo "umount -R /mnt; reboot and remove iso"
+echo "Main install done. umount -R /mnt; reboot and remove iso"
