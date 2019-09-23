@@ -4,44 +4,75 @@
 set -uo pipefail
 trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND; exit $s' ERR
 
+echo -n "Use large font? [y/N] "
+read large_font
+if [[ ${large_font,,} == "y" ]] ; then
+    setfont latarcyrheb-sun32
+fi
+
 # Check for EFI
-[[ $(ls /sys/firmware/efi/efivars | wc -l) -gt 0 ]] || ( echo "No EFI detected. This script is for EFI systems only."; exit 1; )
+if [[ $(ls /sys/firmware/efi/efivars 2> /dev/null | wc -l) -eq 0 ]] ; then
+    echo "No EFI detected. This script is for EFI systems only."
+    exit 1
+fi
 
 # Get user parameters
-hostname=$(dialog --stdout --inputbox "Enter hostname" 0 0) || exit 1
-clear
+echo -n "Enter hostname: "
+read hostname
 : ${hostname:?'hostname cannot be empty'}
 
-username=$(dialog --stdout --inputbox "Enter admin username" 0 0) || exit 1
-clear
+echo -n "Enter admin username: "
+read username
 : ${username:?'username cannot be empty'}
 
-password=$(dialog --stdout --passwordbox "Enter admin password" 0 0) || exit 1
-clear
+echo -n "Enter admin password: "
+read -s password
 : ${password:?'password cannot be empty'}
-password2=$(dialog --stdout --passwordbox "Enter admin password agian" 0 0)
-clear
-[[ "$password" == "$password2" ]] || ( echo "Passwords did not match"; exit 1; )
+echo
+echo -n "Enter admin password again: "
+read -s password2
+echo
+if [[ "$password" == "$password2" ]] ; then
+    echo "Passwords did not match"
+    exit 1
+fi
 
 devicelist=$(lsblk -dplnx size -o name,size | grep -Ev "boot|rpmb|loop" | tac)
 device=$(dialog --stdout --menu "Select installation disk" 0 0 0 ${devicelist}) || exit 1
 clear
 
-# put user into fdisk
-fdisk "${device}"
+# calculated size of swap partition
+swap_size=$(free --mebi | awk '/Mem:/ {print $2}')
+swap_end=$(( $swap_size + 550 + 1))MiB
 
-# allow user to assign partitions
-part_list=$(lsblk -pnx name | grep -E "$device.+part" | awk '{print $1, $4}')
-part_boot=$(dialog --stdout --menu "Select boot partition" 0 0 0 ${part_list}) || exit 1
-clear
-part_list=$(echo "$part_list" | grep -v "$part_boot")
-part_root=$(dialog --stdout --menu "Select root partition" 0 0 0 ${part_list}) || exit 1
-clear
-part_list=$(echo "$part_list" | grep -v "$part_root")
-part_swap=$(dialog --stdout --menu "Select swap partition" 0 0 0 ${part_list}) || exit 1
+echo "Installing arch on $device with"
+echo "HOSTNAME: $hostname"
+echo "USERNAME: $username"
+echo
+echo "Drive $device with be wiped and the following partitions with be created..."
+echo "BOOT: 550MB"
+echo "SWAP: ${swap_size}MB"
+echo "ROOT: Rest of Drive"
+echo
+
+echo -n "Do you wish to continue? [Y/n] "
+read confirm
+[[ ${confirm,,} == "n" ]] && exit 1
 
 ### Install Start ###
 
+# partition drive
+parted --script "${device}" mklabel gpt \
+    mkpart ESP fat32 1Mib 551MiB \
+    set 1 boot on \
+    mkpart primary linux-swap 551MiB ${swap_end} \
+    mkpart primary ext4 ${swap_end} 100%
+
+part_boot="${device}1"
+part_swap="${device}2"
+part_root="${device}3"
+
+# set time and refresh keys
 timedatectl set-ntp true
 echo 'Refreshing keyring...'
 pacman-key --refresh-keys
@@ -75,7 +106,7 @@ genfstab -U /mnt >> /mnt/etc/fstab
 
 # set timezone and clock
 ln -sf /mnt/usr/share/zoneinfo/America/Los_Angeles /mnt/etc/localtime
-arch-chroo /mnt hwclock --systohc
+arch-chroot /mnt hwclock --systohc
 
 # Set language
 sed -i 's/#en_US.UTF-8/en_US.UTF-8/' /mnt/etc/locale.gen
@@ -131,21 +162,26 @@ grep "^Color" /mnt/etc/pacman.conf > /dev/null || sed -i "s/^#Color/Color/" /mnt
 arch-chroot /mnt rmmod pcspkr
 echo "blacklist pcspkr" > /mnt/etc/modprobe.d/nobeep.conf
 
-# Make default tty font bigger
+# Make large font permanent
+if [[ ${large_font,,} == "y" ]] ; then
 cat > /mnt/etc/vconsole.conf << EOF
 FONT=latarcyrheb-sun32
 FONT_MAP=8859-2
 EOF
+fi
 
 # remove programs
-arch-chroot /mnt pacman -Rq --noconfirm nano
+arch-chroot /mnt pacman -R --noconfirm nano
 
 # add admin user
 arch-chroot /mnt useradd -mU -G wheel,uucp,video,audio,storage,games,input "$username"
 
-echo "$username:$password" | chpasswd --root /mnt
-echo "root:$password" | chpasswd --root /mnt
+# Change user and root passwords need to
+
+echo "$username:$password" | arch-chroot /mnt chpasswd
+echo "root:$password" | arch-chroot /mnt chpasswd
 
 # Exit info
-echo "\nMain install done. Edit sudoers with visudo, disable root password passwd -l root"
+echo
+echo "Main install done. Edit sudoers with visudo, disable root password passwd -l root"
 echo "umount -R /mnt; reboot and remove iso"
