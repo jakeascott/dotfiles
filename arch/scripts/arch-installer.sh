@@ -1,9 +1,11 @@
 #!/bin/bash
+# Arch install script
 
-# setting to help script fail loudly
+# settings to make script fail loudly
 set -uo pipefail
 trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND; exit $s' ERR
 
+# for hidpi
 echo -n "Use large font? [y/N] "
 read large_font
 if [[ ${large_font,,} == "y" ]] ; then
@@ -12,7 +14,7 @@ fi
 
 # Check for EFI
 if [[ $(ls /sys/firmware/efi/efivars 2> /dev/null | wc -l) -eq 0 ]] ; then
-    echo "No EFI detected. This script is for EFI systems only."
+    echo "No EFI detected. This script is for UEFI systems only."
     exit 1
 fi
 
@@ -29,15 +31,16 @@ echo -n "Enter admin password: "
 read -s password
 : ${password:?'password cannot be empty'}
 echo
-echo -n "Enter admin password again: "
+echo -n "Retype admin password: "
 read -s password2
 echo
-if [[ "$password" == "$password2" ]] ; then
+if [[ ! "$password" == "$password2" ]] ; then
     echo "Passwords did not match"
     exit 1
 fi
 
-devicelist=$(lsblk -dplnx size -o name,size | grep -Ev "boot|rpmb|loop" | tac)
+# get disks for install
+devicelist=$(lsblk -dpnx size -o name,size | grep -Ev "boot|rpmb|loop" | tac)
 device=$(dialog --stdout --menu "Select installation disk" 0 0 0 ${devicelist}) || exit 1
 clear
 
@@ -46,14 +49,14 @@ swap_size=$(free --mebi | awk '/Mem:/ {print $2}')
 swap_end=$(( $swap_size + 550 + 1))MiB
 
 _message="
-Installing arch on $device with
-HOSTNAME: $hostname
-USERNAME: $username
+Installing arch on $device with...
+Hostname: $hostname
+Username: $username
 
 Drive $device with be wiped and the following partitions with be created...
-BOOT: 550MB
-SWAP: ${swap_size}MB
-ROOT: Rest of Drive
+BOOT: 550M
+SWAP: ${swap_size}M
+ROOT: Rest of drive
 "
 echo "$_message"
 
@@ -73,13 +76,6 @@ parted --script "${device}" mklabel gpt \
 part_boot="${device}1"
 part_swap="${device}2"
 part_root="${device}3"
-
-echo "Partitions created..."
-lsblk
-echo "BOOT: $part_boot | SWAP: $part_swap | ROOT: $part_root"
-echo -n "Continue with these partitions? [Y/n] "
-read confirm2
-[[ ${confirm2,,} == "n" ]] && exit 1
 
 # set time and refresh keys
 timedatectl set-ntp true
@@ -110,7 +106,7 @@ cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
 curl -s "https://www.archlinux.org/mirrorlist/?country=US&protocol=https&ip_version=4&ip_version=6&uuse_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^## U/d' | rankmirrors -n 5 - > /etc/pacman.d/mirrorlist
 
 # begin arch install
-pacstrap /mnt base base-devel intel-ucode
+pacstrap /mnt base base-devel intel-ucode networkmanager ufw neovim git
 genfstab -U /mnt >> /mnt/etc/fstab
 
 # set timezone and clock
@@ -172,12 +168,22 @@ arch-chroot /mnt rmmod pcspkr
 echo "blacklist pcspkr" > /mnt/etc/modprobe.d/nobeep.conf
 
 # Make large font permanent
-if [[ ${large_font,,} == "y" ]] ; then
+if [[ ${large_font,,} == "y" ]]; then
 cat > /mnt/etc/vconsole.conf << EOF
 FONT=latarcyrheb-sun32
 FONT_MAP=8859-2
 EOF
 fi
+
+# Check if device is SSD, if so enable trim timer
+if [[ $(lsblk -Ddbpnl -o name,disc-gran | grep "$device" | awk '{print $2}') -gt 0 ]]; then
+    arch-chroot /mnt systemctl enable fstrim.timer
+fi
+
+# Enable networkmanager and ufw
+arch-chroot /mnt systemctl enable NetworkManager.service
+arch-chroot /mnt systemctl enable ufw.service
+arch-chroot /mnt ufw enable
 
 # remove programs
 arch-chroot /mnt pacman -R --noconfirm nano
@@ -195,6 +201,8 @@ sed -i 's/# %wheel ALL=(ALL) NO/%wheel ALL=(ALL) NO/' /mnt/etc/sudoers
 # Disable root password
 arch-chroot /mnt passwd -l root
 
+# unmount drive
+umount -R /mnt || echo "Failed to unmount /mnt"
+
 # Exit info
-echo
-echo "Main install done. umount -R /mnt; reboot and remove iso"
+echo -e "\nMain install done. reboot and remove iso"

@@ -102,6 +102,8 @@ vnoremap <leader>( y`<i(<esc>`>a)<esc>
 vnoremap <leader>{ y`<i{<esc>`>a}<esc>
 vnoremap <leader>[ y`<i[<esc>`>a]<esc>
 vnoremap <leader>< y`<i<<esc>`>a><esc>
+nnoremap <leader>y "+y
+nnoremap <leader>p "+p
 " }}}
 
 " Terminal mode mappings --------------------------------------------- {{{

@@ -1,56 +1,61 @@
-#!/bin/sh
-# must run as root and takes 'hostname' and 'username' as argument
+#!/bin/bash
+# Run this after clean arch install to get default setup
+# Run as normal user
 
-[ -z "$1" ] && echo 'Usage: ./configure-arch.sh HOSTNAME USERNAME' && exit 1
-[ -z "$2" ] && echo 'Usage: ./configure-arch.sh HOSTNAME USERNAME' && exit 1
+# Ensure arch is up-to-date
+sudo pacman -Syu
 
-# Timezone and clock set
-echo "Setting timezone to Los_Angeles..."
-ln -sf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
-hwclock --systohc
-date
+if [[ $(pacman -Qs xf86-video | wc -l) -eq 0 ]]; then
+    echo "No Xorg graphics drivers detected"
+    echo "Install appropriate graphics driver for: "
+    echo "$(lspci | grep -e VGA -e 3d)"
+    echo -e "\nAvailable Drivers..."
+    echo "$(pacman -Ss xf86-video | grep 'xf86' | sed 's/.*\///' | awk '{print $1}')"
+fi
 
-# Set language
-echo "Setting language to en_US.UTF-8..."
-sed -i 's/#en_US.UTF-8/en_US.UTF-8/' /etc/locale.gen
-locale-gen
-echo 'LANG=en_US.UTF-8' > /etc/locale.conf
+sudo pacman -S --noconfirm xorg-server xorg-xinit xorg-apps pulseaudio \
+    pulseaudio-alsa pulsemixer ttf-dejavu otf-font-awesome otf-fira-code \
+    otf-fira-sans otf-fira-mono xdg-user-dirs sysstat htop acpi lxappearance \
+    xclip xdotool libnotify kitty dunst compton imagemagick feh bc firefox
 
-# Network setup
-echo "Writing network files with hostname $1..."
-echo $1 > /etc/hostname
+WORKDIR=$(find $HOME -name dotfiles)
+[ ! -d $WORKDIR ] && echo "No dotfiles found. Aborting config install." && exit 1
+LOCAL="$HOME/.local"
+CONFIG="$HOME/.config"
+CACHE="$HOME/.cache"
 
-cat > /etc/hosts << EOF
-127.0.0.1     localhost
-::1           localhost
-127.0.1.1     $1.localdomain $1
-EOF
+# Copy configs into local directories
+mkdir -pv $LOCAL $CONFIG $CACHE
+cp -r $WORKDIR/config/* $CONFIG/
+cp -r $WORKDIR/local/*  $LOCAL/
 
-cat /etc/hostname
-cat /etc/hosts
+# Install GTK themes
+sudo cp -r $WORKDIR/gtk-themes/my-gruvbox-gtk /usr/share/themes/
+sudo cp -r $WORKDIR/gtk-themes/my-gruvbox-icons /usr/share/icons/
 
-# Make pacman pretty
-grep "^Color" /etc/pacman.conf > /dev/null || sed -i "s/^#Color/Color/" /etc/pacman.conf
+# Install bash config
+rm -f $HOME/\.bash*
 
-# Disable the beep
-rmmod pcspkr
-echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
+ln -sf $WORKDIR/shell/profile $HOME/.profile
+ln -sf $WORKDIR/shell/bash/bashrc $HOME/.bashrc
+ln -sf $WORKDIR/shell/bash/aliases $HOME/.aliases
+sudo ln -sf $WORKDIR/shell/bash/root-bashrc /root/.bashrc
+echo "Bash config simlinked."
 
-# Make default tty font bigger
-cat > /etc/vconsole.conf << EOF
-FONT=latarcyrheb-sun32
-FONT_MAP=8859-2
-EOF
+# Install xinitrc
+cp $WORKDIR/shell/xinitrc $HOME/.xinitrc && echo "~/.xinitrc installed"
 
-# Add/Remove programs
-pacman -S --noconfirm pacman-contrib
-pacman -R --noconfirm nano
+# neovim config
+echo 'Installing nvim configs...'
+[ ! -d $CONFIG/nvim ] && mkdir -vp $CONFIG/nvim
+ln -sf $WORKDIR/config/nvim/init.vim $CONFIG/nvim/init.vim && echo 'init.vim simlinked'
 
-# Add user
-echo "Enter ROOT password..."
-passwd
-useradd -mU -G wheel,uucp,video,audio,storage,games,input $2
-echo "Enter password for $2..."
-passwd $2
+echo "Installing vim-plug..."
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+mkdir -vp ~/.local/share/nvim/site/plugged
+nvim --headless +:PlugInstall +:qall
 
-echo "Done."
+mkdir -vp $HOME/Projects $HOME/Downloads $HOME/Repositories $HOME/Shared \
+    $HOME/Documents $HOME/Music $HOME/Pictures $HOME/Videos
+xdg-user-dirs-update
