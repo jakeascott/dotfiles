@@ -45,15 +45,17 @@ clear
 swap_size=$(free --mebi | awk '/Mem:/ {print $2}')
 swap_end=$(( $swap_size + 550 + 1))MiB
 
-echo "Installing arch on $device with"
-echo "HOSTNAME: $hostname"
-echo "USERNAME: $username"
-echo
-echo "Drive $device with be wiped and the following partitions with be created..."
-echo "BOOT: 550MB"
-echo "SWAP: ${swap_size}MB"
-echo "ROOT: Rest of Drive"
-echo
+_message="
+Installing arch on $device with
+HOSTNAME: $hostname
+USERNAME: $username
+
+Drive $device with be wiped and the following partitions with be created...
+BOOT: 550MB
+SWAP: ${swap_size}MB
+ROOT: Rest of Drive
+"
+echo "$_message"
 
 echo -n "Do you wish to continue? [Y/n] "
 read confirm
@@ -71,6 +73,13 @@ parted --script "${device}" mklabel gpt \
 part_boot="${device}1"
 part_swap="${device}2"
 part_root="${device}3"
+
+echo "Partitions created..."
+lsblk
+echo "BOOT: $part_boot | SWAP: $part_swap | ROOT: $part_root"
+echo -n "Continue with these partitions? [Y/n] "
+read confirm2
+[[ ${confirm2,,} == "n" ]] && exit 1
 
 # set time and refresh keys
 timedatectl set-ntp true
