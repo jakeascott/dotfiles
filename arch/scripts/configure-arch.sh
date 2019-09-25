@@ -13,19 +13,23 @@ if [[ $(pacman -Qs xf86-video | wc -l) -eq 0 ]]; then
     echo "$(pacman -Ss xf86-video | grep 'xf86' | sed 's/.*\///' | awk '{print $1}')"
 fi
 
-sudo pacman -S --noconfirm xorg-server xorg-xinit xorg-apps pulseaudio \
+sudo pacman -S --noconfirm pacman-contrib xorg-server xorg-xinit xorg-apps pulseaudio \
     pulseaudio-alsa pulsemixer ttf-dejavu otf-font-awesome otf-fira-code \
     otf-fira-sans otf-fira-mono xdg-user-dirs sysstat htop acpi lxappearance \
-    xclip xdotool libnotify kitty dunst compton imagemagick feh bc firefox
+    xclip xdotool libnotify kitty dunst compton imagemagick feh bc dash firefox
 
 WORKDIR=$(find $HOME -name dotfiles)
 [ ! -d $WORKDIR ] && echo "No dotfiles found. Aborting config install." && exit 1
 LOCAL="$HOME/.local"
+SOURCE="$HOME/.local/src"
 CONFIG="$HOME/.config"
 CACHE="$HOME/.cache"
 
+# Install yay
+bash $WORKDIR/arch/scripts/install-yay.sh
+
 # Copy configs into local directories
-mkdir -pv $LOCAL $CONFIG $CACHE
+mkdir -pv $LOCAL $CONFIG $CACHE $SOURCE
 cp -r $WORKDIR/config/* $CONFIG/
 cp -r $WORKDIR/local/*  $LOCAL/
 
@@ -56,6 +60,24 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 mkdir -vp ~/.local/share/nvim/site/plugged
 nvim --headless +:PlugInstall +:qall
 
+# XDG Directories
 mkdir -vp $HOME/Projects $HOME/Downloads $HOME/Repositories $HOME/Shared \
     $HOME/Documents $HOME/Music $HOME/Pictures $HOME/Videos
 xdg-user-dirs-update
+
+# Link dash
+sudo ln -sfT dash /user/bin/sh
+sudo mkdir -pv /etc/pacman.d/hooks/
+sudo cat > /etc/pacman.d/hooks/110-dash-symlink.hook << EOF
+[Trigger]
+Type = Package
+Operation = Install
+Operation = Upgrade
+Target = bash
+
+[Action]
+Description = Re-pointing /bin/sh symlink to dash...
+When = PostTransaction
+Exec = /usr/bin/ln -sfT dash /usr/bin/sh
+Depends = dash
+EOF
