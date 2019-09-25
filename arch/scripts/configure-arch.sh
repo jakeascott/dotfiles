@@ -1,7 +1,8 @@
 #!/bin/bash
 # Run this after clean arch install to get default setup
 # Run as normal user
-
+set -uo pipefail
+trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND; exit $s' ERR
 # Ensure arch is up-to-date
 sudo pacman -Syu
 
