@@ -1,10 +1,10 @@
 #===========================================
-#     _               _              
-#    | |__   __ _ ___| |__  _ __ ___ 
-#    | '_ \ / _` / __| '_ \| '__/ __|
-# _  | |_) | (_| \__ \ | | | | | (__ 
-#(_) |_.__/ \__,_|___/_| |_|_|  \___|
-# 
+#      _               _
+#     | |__   __ _ ___| |__  _ __ ___
+#     | '_ \ / _` / __| '_ \| '__/ __|
+#  _  | |_) | (_| \__ \ | | | | | (__
+# (_) |_.__/ \__,_|___/_| |_|_|  \___|
+#
 # ==========================================
 
 # activate vi mode
@@ -43,10 +43,10 @@ git_branch() {
 }
 
 # Set Prompt
-PS1="$CYAN\u $GREEN\w$YELLOW\$(git_branch)$RESET $ " 
+PS1="$CYAN\u $GREEN\w$YELLOW\$(git_branch)$RESET $ "
 PROMPT_DIRTRIM=3 # Sets depth of directory displayed in prompt
 
-# Apply LS & GREP colors 
+# Apply LS & GREP colors
 LS_COLORS='ow=0;30;102:di=0;30;102:ex=1;35:ln=4;36:' ; export LS_COLORS
 # GREP_COLOR="1;32"; export GREP_COLOR
 

@@ -1,9 +1,9 @@
 " ==========================================
-"           _
-"    __   _(_)_ __ ___  _ __ ___
-"    \ \ / / | '_ ` _ \| '__/ __|
-" _   \ V /| | | | | | | | | (__
-"(_)   \_/ |_|_| |_| |_|_|  \___|
+"            _
+"     __   _(_)_ __ ___  _ __ ___
+"     \ \ / / | '_ ` _ \| '__/ __|
+"  _   \ V /| | | | | | | | | (__
+" (_)   \_/ |_|_| |_| |_|_|  \___|
 "
 " ==========================================
 
@@ -81,6 +81,7 @@ nnoremap <leader>p "+p
 nnoremap <leader>\ :vsp<cr>
 nnoremap <leader>- :sp<cr>
 nnoremap <leader>/ :nohlsearch<cr> :echo "Search cleared."<cr>
+nnoremap <leader>* :%s/\<<c-r><c-w>\>//g<left><left>
 nnoremap <c-u> viwU
 nnoremap <tab> za
 "nnoremap ; :
@@ -96,12 +97,12 @@ inoremap <c-u> <esc>viwUi
 " Visual mode mappings ----------------------------------------------- {{{
 vnoremap H ^
 vnoremap L $
-vnoremap <leader>" y`<i"<esc>`>a"<esc>
-vnoremap <leader>' y`<i'<esc>`>a'<esc>
-vnoremap <leader>( y`<i(<esc>`>a)<esc>
-vnoremap <leader>{ y`<i{<esc>`>a}<esc>
-vnoremap <leader>[ y`<i[<esc>`>a]<esc>
-vnoremap <leader>< y`<i<<esc>`>a><esc>
+vnoremap <leader>" y`>a"<esc>`<i"<esc>
+vnoremap <leader>' y`>a'<esc>`<i'<esc>
+vnoremap <leader>( y`>a)<esc>`<i(<esc>
+vnoremap <leader>{ y`>a}<esc>`<i{<esc>
+vnoremap <leader>[ y`>a]<esc>`<i[<esc>
+vnoremap <leader>< y`>a><esc>`<i<<esc>
 nnoremap <leader>y "+y
 nnoremap <leader>p "+p
 " }}}
@@ -198,6 +199,14 @@ augroup filetype_python
     autocmd!
     autocmd FileType python nnoremap <buffer> <localleader>c I#<esc>
     autocmd FileType python iabbrev <buffer> iff if:<left>
+    "autocmd FileType python
+                "\ set tabstop=4
+                "\ set softtabstop=4
+                "\ set shiftwidth=4
+                "\ set textwidth=79
+                "\ set expandtab
+                "\ set autoindent
+                "\ set fileformat=unix
 augroup END
 " }}}
 
@@ -217,6 +226,10 @@ augroup filetype_html
     autocmd FileType html nnoremap <buffer> <localleader>h1 i<h1></h1><esc>F>a
     autocmd FileType html nnoremap <buffer> <localleader>li i<li></li><esc>F>a
     autocmd FileType html nnoremap <buffer> <localleader>ul i<ul></ul><esc>F>a<cr><esc>kf>a<cr>
+    "autocmd FileType html
+                "\ set tabstop=2
+                "\ set softtabstop=2
+                "\ set shiftwidth=2
 augroup END
 " }}}
 
