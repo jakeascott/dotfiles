@@ -103,8 +103,8 @@ vnoremap <leader>( y`>a)<esc>`<i(<esc>
 vnoremap <leader>{ y`>a}<esc>`<i{<esc>
 vnoremap <leader>[ y`>a]<esc>`<i[<esc>
 vnoremap <leader>< y`>a><esc>`<i<<esc>
-nnoremap <leader>y "+y
-nnoremap <leader>p "+p
+vnoremap <leader>y "+y
+vnoremap <leader>p "+p
 " }}}
 
 " Terminal mode mappings --------------------------------------------- {{{
@@ -236,7 +236,18 @@ augroup END
 " LaTex file settings ------------------------------------------------ {{{
 augroup filetype_tex
     autocmd!
-    autocmd FileType tex nnoremap <leader>bf i\textbf{}<ESC>i
+    autocmd FileType tex nnoremap <localleader>bf i\textbf{}<ESC>i
+augroup END
+" }}}
+
+" Markdown file settings ------------------------------------------------ {{{
+augroup filetype_tex
+    autocmd!
+    autocmd FileType markdown nnoremap <localleader>c :!pandoc -f markdown -t html -o <c-r>%<bs><bs><bs>.html <c-r>%<cr>
+    autocmd FileType markdown nnoremap <localleader>i i**<esc>i
+    autocmd FileType markdown vnoremap <localleader>i y`>a*<esc>`<i*<esc>
+    autocmd FileType markdown nnoremap <localleader>b i****<esc>hi
+    autocmd FileType markdown vnoremap <localleader>b y`>a**<esc>`<i**<esc>
 augroup END
 " }}}
 " }}}
