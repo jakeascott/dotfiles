@@ -1,7 +1,9 @@
 #!/bin/sh
 
 if ! [ -z $1 ] && [ -f $1 ] ; then
-    ln -sf $(realpath $1) $HOME/.local/share/wallpaper
+    image=$(realpath $1)
+    convert "$image" -resize $HOME/.local/share/wallpaper
+    #ln -sf $(realpath $1) $HOME/.local/share/wallpaper
 fi
 
 feh --no-fehbg --bg-scale $HOME/.local/share/wallpaper
