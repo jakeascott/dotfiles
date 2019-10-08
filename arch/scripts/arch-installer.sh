@@ -106,7 +106,7 @@ cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
 curl -s "https://www.archlinux.org/mirrorlist/?country=US&protocol=https&ip_version=4&ip_version=6&uuse_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^## U/d' | rankmirrors -n 5 - > /etc/pacman.d/mirrorlist
 
 # begin arch install
-pacstrap /mnt base base-devel intel-ucode networkmanager ufw neovim git
+pacstrap /mnt base linux base-devel intel-ucode networkmanager ufw neovim git
 genfstab -U /mnt >> /mnt/etc/fstab
 
 # set timezone and clock
@@ -184,9 +184,6 @@ fi
 arch-chroot /mnt systemctl enable NetworkManager.service
 arch-chroot /mnt systemctl enable ufw.service
 arch-chroot /mnt ufw enable
-
-# remove programs
-arch-chroot /mnt pacman -R --noconfirm nano
 
 # add admin user
 arch-chroot /mnt useradd -mU -G wheel,uucp,video,audio,storage,games,input "$username"
