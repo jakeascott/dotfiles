@@ -237,11 +237,13 @@ augroup END
 augroup filetype_tex
     autocmd!
     autocmd FileType tex nnoremap <localleader>bf i\textbf{}<ESC>i
+    autocmd FileType tex nnoremap <c-p> :w<cr>:!pdflatex %:p<cr>
+    autocmd FileType tex nnoremap <c-b> :w<cr>:!biber %:p:r<cr>
 augroup END
 " }}}
 
 " Markdown file settings ------------------------------------------------ {{{
-augroup filetype_tex
+augroup filetype_markdown
     autocmd!
     autocmd FileType markdown nnoremap <localleader>c :!pandoc -f markdown -t html -o <c-r>%<bs><bs><bs>.html <c-r>%<cr>
     autocmd FileType markdown nnoremap <localleader>i i**<esc>i
