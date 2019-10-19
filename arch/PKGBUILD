@@ -1,5 +1,5 @@
 # Maintainer: Jake Scott <scottj1123@gmail.com>
-pkgname=jakesco-base
+pkgname=jakes-laptop
 pkgver=0.0.1
 pkgrel=1
 pkgdesc="Packages for all my systems"
@@ -11,8 +11,8 @@ depends=(
     'networkmanager'
     'ufw'
     'git'
-    'gnome-keyring'
     'libsecret'
+    'gnome-keyring'
     'neovim'
     'xorg-server'
     'xorg-xinit'
