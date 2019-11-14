@@ -199,14 +199,14 @@ augroup filetype_python
     autocmd!
     autocmd FileType python nnoremap <buffer> <localleader>c I#<esc>
     autocmd FileType python iabbrev <buffer> iff if:<left>
-    "autocmd FileType python
-                "\ set tabstop=4
-                "\ set softtabstop=4
-                "\ set shiftwidth=4
-                "\ set textwidth=79
-                "\ set expandtab
-                "\ set autoindent
-                "\ set fileformat=unix
+    " For PEP 8 standards
+    autocmd FileType python set textwidth=79
+    autocmd FileType python set shiftwidth=4
+    autocmd FileType python set tabstop=4
+    autocmd FileType python set expandtab
+    autocmd FileType python set softtabstop=4
+    autocmd FileType python set shiftround
+    autocmd FileType python set autoindent
 augroup END
 " }}}
 
