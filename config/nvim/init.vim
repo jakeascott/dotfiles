@@ -46,6 +46,10 @@ set shiftwidth=4 " for when <tab> is pressed at beginning of line
 " Colorscheme
 set background=dark
 colorscheme gruvbox
+
+" Columns
+"set colorcolumn=80
+"highlight ColorColumn ctermbg=darkgray
 " }}}
 
 " General Shortcuts -------------------------------------------------- {{{
@@ -84,6 +88,7 @@ nnoremap <leader>/ :nohlsearch<cr> :echo "Search cleared."<cr>
 nnoremap <leader>* :%s/\<<c-r><c-w>\>//g<left><left>
 nnoremap <c-u> viwU
 nnoremap <tab> za
+"nnoremap <c-cr> test
 "nnoremap ; :
 "nnoremap : ;
 " }}}
@@ -114,6 +119,8 @@ tnoremap <leader>q <c-\><c-n>:q<cr>
 
 " Operator-pending mappings ------------------------------------------ {{{
 " pair with d, c, y, etc
+onoremap H ^
+onoremap L $
 onoremap p i(
 onoremap in( :<c-u>normal! f(vi(<cr>
 onoremap il( :<c-u>normal! F)vi(<cr>
@@ -207,6 +214,16 @@ augroup filetype_python
     autocmd FileType python set softtabstop=4
     autocmd FileType python set shiftround
     autocmd FileType python set autoindent
+    "autocmd FileType python
+                "\ set tabstop=4
+                "\ set softtabstop=4
+                "\ set shiftwidth=4
+                "\ set textwidth=79
+                "\ set expandtab
+                "\ set autoindent
+                "\ set fileformat=unix
+    "autocmd set colorcolumn=80
+    "autocmd highlight ColorColumn ctermbg=darkgray
 augroup END
 " }}}
 
@@ -255,8 +272,6 @@ augroup END
 " }}}
 
 " Notes -------------------------------------------------------------- {{{
-onoremap ih :<c-u>execute "normal! ?^==\\+$\r:nohlsearch\rkvg_"<cr>
-
 " ^n for autocomple selections
 " ^x^n autocomplete just this file
 " ^x^f autocomplete filenames
