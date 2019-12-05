@@ -15,10 +15,10 @@ if [[ $(pacman -Qs xf86-video | wc -l) -eq 0 ]]; then
     exit 1
 fi
 
-sudo pacman -S --noconfirm pacman-contrib xorg-server xorg-xinit xorg-apps pulseaudio \
-    pulseaudio-alsa pulsemixer ttf-dejavu otf-font-awesome otf-fira-code \
-    otf-fira-sans otf-fira-mono xdg-user-dirs sysstat htop acpi lxappearance \
-    xclip xdotool libnotify kitty dunst compton imagemagick feh bc firefox
+sudo pacman -S --noconfirm pacman-contrib xorg-server xorg-xinit xorg-apps
+    pulseaudio pulseaudio-alsa pulsemixer ttf-dejavu otf-font-awesome \
+    xdg-user-dirs sysstat htop acpi lxappearance xclip xdotool libnotify \
+    termite dunst picom imagemagick sxiv bc firefox
 
 WORKDIR=$(find $HOME -name dotfiles)
 [ ! -d $WORKDIR ] && echo "No dotfiles found. Aborting config install." && exit 1
