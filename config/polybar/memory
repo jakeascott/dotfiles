@@ -1,0 +1,15 @@
+#!/bin/sh
+USED=$(free | awk '/^Mem/ {print ($3 + $5)}')
+
+# Display in MB or GB
+if [ $USED -ge 1024000 ] ; then
+    printf "%.1fG\n" $(echo $USED/1024/1024 | bc -l)
+else 
+    printf "%.0fM\n" $(echo $USED/1024 | bc -l)
+fi
+
+# Check if swap is being used
+if [ $(free | awk '/^Swap/ {print $3}') -gt 0 ] ; then
+    echo
+    echo "#fabd2f"
+fi

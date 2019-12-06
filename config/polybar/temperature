@@ -1,0 +1,2 @@
+#!/bin/sh
+sensors coretemp-isa-0000 | awk '/^Package/ {print $4}' | sed 's/+//'
