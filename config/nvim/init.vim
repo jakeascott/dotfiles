@@ -181,7 +181,6 @@ augroup END
 augroup filetype_ini
     autocmd!
     autocmd FileType dosini nnoremap <buffer> <localleader>c I;<esc>
-    autocmd FileType dosini setlocal foldmethod=marker
 augroup END
 " }}}
 
@@ -197,7 +196,6 @@ augroup END
 augroup filetype_sh
     autocmd!
     autocmd FileType sh nnoremap <buffer> <localleader>c I#<esc>
-    autocmd FileType sh setlocal foldmethod=marker
 augroup END
 " }}}
 

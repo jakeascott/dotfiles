@@ -41,3 +41,5 @@ bspc config focused_border_color  "#689d6a"
 # Rules ----------------------------------------------- {{{
 bspc rule -a firefox desktop='^2' follow=on
 # }}}
+
+# vim:foldmethod=marker
