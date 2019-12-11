@@ -1,0 +1,41 @@
+[module/sep]
+type = custom/text
+content = |
+
+[module/user]
+type = custom/script
+exec = whoami
+label =  %output%
+interval = 3600
+
+format-padding = 1
+
+[module/mem]
+type = custom/script
+exec = /home/jake/.config/polybar/scripts/memory
+label =  %output%
+interval = 15
+
+format-padding = 1
+;format-background = ${colors.purple}
+
+[module/temp]
+type = custom/script
+exec = /home/jake/.config/polybar/scripts/temperature
+label =  %output%
+interval = 15
+
+format-padding = 1
+;format-background = ${colors.purple}
+
+[module/network]
+type = custom/script
+exec = /home/jake/.config/polybar/scripts/network
+label = %output%
+interval = 15
+
+click-left = notify-send "$(nmcli -g NAME c show --active)"
+
+format-padding = 1
+
+; vim:ft=dosini
