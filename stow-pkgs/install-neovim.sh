@@ -8,6 +8,6 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 mkdir -vp ~/.local/share/nvim/site/plugged
 
 cd $WORKDIR
-stow -t ~ neovim
+stow -vt ~ --no-folding neovim
 
 nvim --headless +:PlugInstall +:qall
