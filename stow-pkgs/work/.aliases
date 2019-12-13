@@ -1,0 +1,51 @@
+# useful aliases
+alias mkd='mkdir -pv'
+alias v='nvim'
+alias la='ls -Agoh'
+alias ll='ls -goh'
+alias py='python3'
+alias pip='pip3'
+alias q='exit'
+alias veon='source venv/bin/activate'
+alias fonts='fc-list'
+alias stree='tree -Ra'
+
+# file shortcuts
+alias bpr='nvim ~/.profile'
+alias brc='nvim ~/.bashrc'
+alias vrc='nvim ~/.config/nvim/init.vim'
+alias bal='nvim ~/.aliases'
+alias sbrc='source ~/.bashrc'
+alias r='ranger'
+
+# directory shortcuts
+alias school='cd /mnt/p/school'
+alias cs315='cd /mnt/p/school/cs315 && ls'
+alias cs469='cd /mnt/p/school/cs469 && ls'
+alias c='cd /mnt/c'
+alias p='cd /mnt/p'
+alias s='cd /mnt/s'
+alias down='cd /mnt/c/Users/scottj/Downloads && ls'
+alias dots='cd ~/dotfiles && ls'
+alias mmr='cd /mnt/s/Institutional\ Research/DATA/Monday\ Morning\ Reports && ls'
+
+# wsl aliases
+#alias chrome="/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe"
+
+# git aliases
+alias gita='git add .'
+alias gitc='git commit -m'
+alias gitp='git push'
+alias gits='git status'
+
+# apt aliases
+alias apti='sudo apt install'
+alias aptu='sudo apt update'
+alias aptg='sudo apt upgrade'
+alias aptr='sudo apt remove'
+alias aptp='sudo apt purge'
+alias apts='apt search'
+alias upgrade='sudo apt -y update && sudo apt -y upgrade'
+
+# fun aliases
+alias starwars='telnet towel.blinkenlights.nl'

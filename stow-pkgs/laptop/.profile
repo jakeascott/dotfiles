@@ -7,21 +7,20 @@
 
 # Set PATH so it includes private scripts
 [ -d "$HOME/.local/bin" ] && PATH="$HOME/.local/bin:$PATH"
-[ -d "$HOME/.local/bin/dmenu" ] && PATH="$HOME/.local/bin/dmenu:$PATH"
 
 # Set global defaults
 export EDITOR="nvim"
-#export TERMINAL="kitty"
-#export BROWSER="firefox"
+export TERMINAL="termite"
+export BROWSER="firefox"
 #export READER="zathura"
 #export FILE="ranger"
 
 # For consistant QT/GTK themes (requires qt5-styleplugins)
-#export QT_QPA_PLATFORMTHEME=gtk2
+export QT_QPA_PLATFORMTHEME=gtk2
 
 # For HiDPI
-#export GDK_SCALE=2
+export GDK_SCALE=2
 #export GDK_DPI_SCALE=0.5 # if having trouble with font size
 
-# auto start x session if i3 not running
-#[ "$(tty)" = "/dev/tty1" ] && ! pgrep -x i3 >/dev/null && exec startx &>/dev/null
+# auto start x session if bspwm not running
+#[ "$(tty)" = "/dev/tty1" ] && ! pgrep -x bspwm >/dev/null && exec startx &>/dev/null

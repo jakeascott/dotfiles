@@ -30,14 +30,13 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
 fi
 
 # start gnome-keyring
-#dbus-update-activation-environment --systemd DISPLAY
-eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
-export SSH_AUTH_SOCK
+#eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+#export SSH_AUTH_SOCK
 
 # more x settings
-#xrandr --dpi 192
+xrandr --dpi 144
 xset r rate 300 50
-#xsetroot -cursor_name left_ptr
+xsetroot -cursor_name left_ptr
 
-# Start i3
-#lock-screen -c && exec i3
+# Start bspwm
+lock-screen -c && exec bspwm

@@ -1,6 +1,5 @@
 # useful aliases
 alias mkd='mkdir -pv'
-alias vim='nvim'
 alias v='nvim'
 alias la='ls -Agoh'
 alias ll='ls -goh'
@@ -14,22 +13,12 @@ alias brc='nvim ~/.bashrc'
 alias vrc='nvim ~/.config/nvim/init.vim'
 alias bal='nvim ~/.aliases'
 alias sbrc='source ~/.bashrc'
-alias wmc='nvim ~/.config/i3/config'
-alias bar='nvim ~/.config/i3blocks/config'
-#alias wmc='nvim ~/.config/bspwm/bspwmrc'
-#alias hkc='nvim ~/.config/sxhkd/sxhkdrc'
-#alias bar='nvim ~/.config/polybar/config'
+alias wmc='nvim ~/.config/bspwm/bspwmrc'
+alias hkc='nvim ~/.config/sxhkd/sxhkdrc'
+alias bar='nvim ~/.config/polybar/config'
 
 # directory shortcuts
 alias bin='cd ~/.local/bin && ll'
 alias locl='cd ~/.local && ll'
 alias conf='cd ~/.config && ll'
-
-# git aliases
-alias gita='git add .'
-alias gitc='git commit -m'
-alias gitp='git push'
-alias gits='git status'
-
-# fun aliases
-alias starwars='telnet towel.blinkenlights.nl'
+alias dots='cd ~/dotfiles && ll'
