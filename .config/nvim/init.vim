@@ -1,1 +1,0 @@
-../../stow-pkgs/neovim/.config/nvim/init.vim
