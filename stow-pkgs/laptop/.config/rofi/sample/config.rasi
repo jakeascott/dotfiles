@@ -1,8 +1,5 @@
 configuration {
     show-icons:                     true;
-    font:                           "SF Compact Text Regular 16";
-    
-    
 }
 /*rgba (0, 0, 0, 90%);*/
 
@@ -14,7 +11,7 @@ configuration {
     selected-text-color:            #000000;
     primary:                        #A3BE8C;
     urgent:                         #BF616A;
-    
+
 }
 
 
@@ -53,7 +50,7 @@ element {
 
 mainbox {
     padding:                        10px 40px 10px 40px;
-    
+
 }
 
 element {
@@ -93,3 +90,4 @@ element-text {
     horizontal-align:               0.5;
 }
 
+@import "/usr/share/rofi/themes/gruvbox-dark-hard.rasi"

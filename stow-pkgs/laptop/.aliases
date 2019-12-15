@@ -21,4 +21,7 @@ alias bar='nvim ~/.config/polybar/config'
 alias bin='cd ~/.local/bin && ll'
 alias locl='cd ~/.local && ll'
 alias conf='cd ~/.config && ll'
-alias dots='cd ~/dotfiles && ll'
+alias dots='cd ~/Repositories/dotfiles && ll'
+
+#ssh
+alias piserver='ssh ubuntu@192.168.1.149'
