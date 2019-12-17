@@ -20,5 +20,6 @@ dunst
 picom
 imagemagick
 sxiv
+xwallpaper
 bc
 firefox

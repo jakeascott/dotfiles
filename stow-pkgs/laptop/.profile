@@ -23,4 +23,4 @@ export GDK_SCALE=2
 #export GDK_DPI_SCALE=0.5 # if having trouble with font size
 
 # auto start x session if bspwm not running
-#[ "$(tty)" = "/dev/tty1" ] && ! pgrep -x bspwm >/dev/null && exec startx &>/dev/null
+[ "$(tty)" = "/dev/tty1" ] && ! pgrep -x bspwm >/dev/null && exec startx &>/dev/null
