@@ -97,3 +97,25 @@ sudo systemctl start ddclient.service
 * `ufw status` for checking firewall
 * `glances` to check running status
 * Check `/var/log/auth.log` for system logs
+
+
+## Additional Notes
+
+### Wifi
+* Install `rfkill` and `wireless-tools`
+* `wpasupplicant` is already installed.
+
+### OpenVPN
+
+* Refer to repo: https://github.com/angristan/openvpn-install
+* This will do a lot of security stuff and create a `client.ovpn` file in $HOME
+
+#### Setting up Clients
+* Copy the `client.ovpn` to the client machine.
+* Install openvpn on client, copy .ovpn file to `/etc/openvpn/client`
+* Run `openvpn client.ovpn`
+* `curl ifconig.me` should bring up vpn's ip-address
+* Pluginin available for networkmanager `networkmanager-openvpn`
+
+### Nextcloud
+* Nextcould snap available on ubuntu server.

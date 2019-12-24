@@ -49,3 +49,5 @@ alias upgrade='sudo apt -y update && sudo apt -y upgrade'
 
 # fun aliases
 alias starwars='telnet towel.blinkenlights.nl'
+alias cpi='ssh -i ~/.ssh/work-server -p9001 ubuntu@remote.jakescott.xyz'
+
