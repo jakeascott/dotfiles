@@ -14,14 +14,14 @@
 
 ## Set up login with ssh keys
 * Generate a new key
-`ssh-keygen -t rsa -b 4096 -C <comment>`
+`ssh-keygen -t ed25519 -C <comment> -f <filename>`
 * copy public key to server `ssh-copy-id -i /path/to/key.pub user@server.com`
 
 ## Set up firewall
 
 Set ufw (uncomplicated firewall) to deny everything,
 but allow limited access to ssh (port 22)
-
+```
 sudo su
 ufw default deny incoming
 ufw default allow outgoing
@@ -29,6 +29,7 @@ ufw limit 22/tcp
 ufw enable
 ufw status
 exit
+```
 
 ## Disable password auth for SSH
 In `/etc/ssh/sshd_config`
