@@ -16,6 +16,7 @@ call plug#begin('~/.local/share/nvim/site/plugged')
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'kovetskiy/sxhkd-vim'
+Plug 'sevko/vim-nand2tetris-syntax'
 " Plug 'kassio/neoterm'
 " vim-test
 " deoplete.nvim | nvim-completion-manager | asyncomplete | webcomplete
