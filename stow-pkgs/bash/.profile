@@ -7,6 +7,7 @@
 
 # Set PATH so it includes private scripts
 [ -d "$HOME/.local/bin" ] && PATH="$HOME/.local/bin:$PATH"
+PATH="$HOME/.local/nand2tetris/tools:$PATH"
 
 # Set global defaults
 export EDITOR="nvim"
@@ -19,7 +20,7 @@ export BROWSER="firefox"
 #export QT_QPA_PLATFORMTHEME=gtk2
 
 # For HiDPI
-#export GDK_SCALE=2
+export GDK_SCALE=2
 #export GDK_DPI_SCALE=0.5 # if having trouble with font size
 
 # auto start x session if bspwm not running
