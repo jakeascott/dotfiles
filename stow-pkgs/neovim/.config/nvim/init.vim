@@ -213,16 +213,21 @@ augroup filetype_python
     autocmd FileType python set softtabstop=4
     autocmd FileType python set shiftround
     autocmd FileType python set autoindent
-    "autocmd FileType python
-                "\ set tabstop=4
-                "\ set softtabstop=4
-                "\ set shiftwidth=4
-                "\ set textwidth=79
-                "\ set expandtab
-                "\ set autoindent
-                "\ set fileformat=unix
-    "autocmd set colorcolumn=80
-    "autocmd highlight ColorColumn ctermbg=darkgray
+augroup END
+" }}}
+
+" Haskell file settings ----------------------------------------------- {{{
+augroup filetype_haskell
+    autocmd!
+    autocmd FileType haskell nnoremap <buffer> <localleader>c I--<esc>
+    " For haskell style guide
+    autocmd FileType python set textwidth=79
+    autocmd FileType python set shiftwidth=4
+    autocmd FileType python set tabstop=4
+    autocmd FileType python set expandtab
+    autocmd FileType python set softtabstop=4
+    autocmd FileType python set shiftround
+    autocmd FileType python set autoindent
 augroup END
 " }}}
 

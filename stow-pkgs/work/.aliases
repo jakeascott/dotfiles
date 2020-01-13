@@ -9,6 +9,7 @@ alias q='exit'
 alias veon='source venv/bin/activate'
 alias fonts='fc-list'
 alias stree='tree -Ra'
+alias gh='history | grep'
 
 # file shortcuts
 alias bpr='nvim ~/.profile'
@@ -20,8 +21,8 @@ alias r='ranger'
 
 # directory shortcuts
 alias school='cd /mnt/p/school'
-alias cs315='cd /mnt/p/school/cs315 && ls'
-alias cs469='cd /mnt/p/school/cs469 && ls'
+alias cs314='cd ~/homework/cs314 && ll'
+alias cs452='cd ~/homework/cs452 && ll'
 alias c='cd /mnt/c'
 alias p='cd /mnt/p'
 alias s='cd /mnt/s'

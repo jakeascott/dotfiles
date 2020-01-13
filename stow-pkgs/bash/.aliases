@@ -5,6 +5,7 @@ alias la='ls -Agoh'
 alias ll='ls -goh'
 alias fonts='fc-list'
 alias py='python'
+alias gh='history | grep'
 
 # file shortcuts
 alias bpr='nvim ~/.profile'
