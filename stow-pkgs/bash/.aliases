@@ -1,6 +1,8 @@
 # useful aliases
 alias mkd='mkdir -pv'
 alias v='nvim'
+alias vim='nvim'
+alias q='exit'
 alias la='ls -Agoh'
 alias ll='ls -goh'
 alias fonts='fc-list'
@@ -23,7 +25,7 @@ alias bin='cd ~/.local/bin && ll'
 alias locl='cd ~/.local && ll'
 alias conf='cd ~/.config && ll'
 alias dots='cd ~/.dotfiles && ll'
-alias cs314='cd ~/Nextcloud/school/cs314 && ll'
+alias cs314='cd ~/school/cs314 && ll'
+alias cs452='cd ~/school/cs452 && ll'
 
 #ssh
-alias cpi='ssh ubuntu@192.168.1.132'
