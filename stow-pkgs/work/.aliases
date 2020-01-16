@@ -11,6 +11,9 @@ alias fonts='fc-list'
 alias stree='tree -Ra'
 alias gh='history | grep'
 
+# Django
+alias dman='python manage.py'
+
 # file shortcuts
 alias bpr='nvim ~/.profile'
 alias brc='nvim ~/.bashrc'
