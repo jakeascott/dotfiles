@@ -26,7 +26,13 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
+# add haskell packages to path
+if [ -d "$HOME/.cabal/bin" ] ; then
+    PATH="$HOME/.cabal/bin:$PATH"
+fi
+
 PATH="/mnt/c/Program Files (x86)/Google/Chrome/Application/:$PATH"
+PATH="$HOME/.local/scripts:$PATH"
 
 BROWSER='chrome.exe'
 

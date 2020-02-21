@@ -17,6 +17,7 @@ Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'kovetskiy/sxhkd-vim'
 Plug 'sevko/vim-nand2tetris-syntax'
+Plug 'ARM9/arm-syntax-vim'
 " Plug 'kassio/neoterm'
 " vim-test
 " deoplete.nvim | nvim-completion-manager | asyncomplete | webcomplete
@@ -53,6 +54,10 @@ colorscheme gruvbox
 " Columns
 "set colorcolumn=80
 "highlight ColorColumn ctermbg=darkgray
+
+" ARM assembly
+au BufNewFile,BufRead *.s,*.S set filetype=arm " arm = arm6/7
+
 " }}}
 
 " General Shortcuts -------------------------------------------------- {{{
