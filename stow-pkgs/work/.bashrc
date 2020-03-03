@@ -58,3 +58,4 @@ alias diff='diff --color=auto'
 
 # Source aliases
 [ -f ~/.aliases ] && source ~/.aliases
+

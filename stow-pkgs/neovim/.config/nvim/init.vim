@@ -23,6 +23,8 @@ Plug 'ARM9/arm-syntax-vim'
 " deoplete.nvim | nvim-completion-manager | asyncomplete | webcomplete
 " LanguageClient-neovim
 " ALE
+" 'vim-scripts/indentpython.vim'
+" 'Valloric/YouCompleteMe'
 call plug#end()
 " }}}
 
@@ -52,12 +54,16 @@ colorscheme gruvbox
 " Columns
 "set colorcolumn=80
 "highlight ColorColumn ctermbg=darkgray
+
+" ARM assembly
+au BufNewFile,BufRead *.s,*.S set filetype=arm " arm = arm6/7
+
 " }}}
 
 " General Shortcuts -------------------------------------------------- {{{
 " Shortcut to edit vimrc
-nnoremap <leader>vrc :vsplit $MYVIMRC<cr>
-nnoremap <leader>svrc :source $MYVIMRC<cr>
+nnoremap <leader>ec :vsplit $MYVIMRC<cr>
+nnoremap <leader>rc :source $MYVIMRC<cr>
 
 " Naviage with guides
 nnoremap <leader><Space> <esc>/<++><cr>"_c4l
@@ -69,12 +75,12 @@ nnoremap <leader>n :set relativenumber!<cr>
 nnoremap <leader>s :setlocal spell! spelllang=en_us<cr>
 
 " Open terminal in new pane
-nnoremap <leader><cr> :sp<cr> :resize 10<cr> :term<cr> :set number!<cr> i
+"nnoremap <leader><cr> :sp<cr> :resize 10<cr> :term<cr> :set number!<cr> i
 " }}}
 
 " Global Abbreviations ----------------------------------------------- {{{
-iabbrev @@n Jake<space>Scott
-iabbrev @@ scottj@sou.edu
+"iabbrev @@n Jake<space>Scott
+"iabbrev @@ scottj@sou.edu
 " }}}
 
 " Normal mode mappings ----------------------------------------------- {{{
@@ -177,6 +183,11 @@ augroup filetype_vim
     autocmd FileType vim nnoremap <buffer> <localleader>c I"<esc>
     autocmd FileType vim setlocal foldmethod=marker
 augroup END
+
+"augroup myvimrc
+"    autocmd!
+"    autocmd BufWritePost init.vim so $MYVIMRC
+"augroup END
 " }}}
 
 " Ini file settings -------------------------------------------------- {{{
@@ -207,13 +218,14 @@ augroup filetype_python
     autocmd FileType python nnoremap <buffer> <localleader>c I#<esc>
     autocmd FileType python iabbrev <buffer> iff if:<left>
     " For PEP 8 standards
-    autocmd FileType python set textwidth=79
-    autocmd FileType python set shiftwidth=4
     autocmd FileType python set tabstop=4
-    autocmd FileType python set expandtab
     autocmd FileType python set softtabstop=4
-    autocmd FileType python set shiftround
+    autocmd FileType python set shiftwidth=4
+    autocmd FileType python set textwidth=79
+    autocmd FileType python set expandtab
     autocmd FileType python set autoindent
+    autocmd FileType python set shiftround
+    autocmd FileType python set fileformat=unix
 augroup END
 " }}}
 

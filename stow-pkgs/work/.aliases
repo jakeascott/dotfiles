@@ -3,7 +3,7 @@ alias mkd='mkdir -pv'
 alias v='nvim'
 alias la='ls -Agoh'
 alias ll='ls -goh'
-alias py='python3'
+alias py='python'
 alias pip='pip3'
 alias q='exit'
 alias veon='source venv/bin/activate'
@@ -12,7 +12,8 @@ alias stree='tree -Ra'
 alias gh='history | grep'
 
 # Django
-alias dman='python manage.py'
+alias runserver="python $(find ~/ifb/ifb_project -name manage.py) runserver"
+alias manage="python $(find ~/ifb/ifb_project -name manage.py)"
 
 # file shortcuts
 alias bpr='nvim ~/.profile'
