@@ -44,7 +44,7 @@ git_branch() {
 
 # Set Prompt
 PS1="$CYAN\u $GREEN\w$YELLOW\$(git_branch)$RESET $ "
-PROMPT_DIRTRIM=3 # Sets depth of directory displayed in prompt
+PROMPT_DIRTRIM=2 # Sets depth of directory displayed in prompt
 
 # Apply LS & GREP colors
 LS_COLORS='ow=0;30;102:di=0;30;102:ex=1;35:ln=4;36:' ; export LS_COLORS

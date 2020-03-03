@@ -8,6 +8,14 @@ alias ll='ls -goh'
 alias fonts='fc-list'
 alias py='python'
 alias gh='history | grep'
+alias code='code --force-device-scale-factor=2'
+
+# Django
+alias runserver='python $(find $(git rev-parse --show-toplevel) -name manage.py) runserver'
+alias manage='python $(find $(git rev-parse --show-toplevel) -name manage.py)'
+
+# venv
+alias activate='source $(find $(git rev-parse --show-toplevel) -name activate)'
 
 # file shortcuts
 alias bpr='nvim ~/.profile'
@@ -27,5 +35,6 @@ alias conf='cd ~/.config && ll'
 alias dots='cd ~/.dotfiles && ll'
 alias cs314='cd ~/school/cs314 && ll'
 alias cs452='cd ~/school/cs452 && ll'
+alias ifb='cd ~/Capstone/ifb && ll'
 
 #ssh
