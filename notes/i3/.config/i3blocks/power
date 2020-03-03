@@ -1,9 +1,0 @@
-#!/bin/bash
-
-case $BLOCK_BUTTON in
-    1) exit-options ;;
-esac
-
-echo " "
-echo " "
-echo "#83a598"

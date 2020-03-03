@@ -1,8 +1,0 @@
-Ensure xorg is installed.
-
-Install plasma meta packages.
-- plasma-meta | For plasma and select programs
-- sddm | for display manager
-- kde-applications-meta | for all kde apps (can probably reduce this later)
-
-Select Photon backend and cron provider (VLC and fcron)

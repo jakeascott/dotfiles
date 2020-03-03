@@ -1,2 +1,0 @@
-#!/bin/sh
-xbacklight | awk '{printf "%d\n", $1}'

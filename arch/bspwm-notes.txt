@@ -1,8 +1,0 @@
-# Main packages
-bspwm
-sxhkd
-
-If cursor is display as an X put `xsetroot -cursor_name left_ptr` into .xinitrc
-
-# Bar
-polybar from the AUR
