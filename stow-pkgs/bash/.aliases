@@ -9,6 +9,7 @@ alias fonts='fc-list'
 alias py='python'
 alias gh='history | grep'
 alias code='code --force-device-scale-factor=2'
+alias gp='gprolog --consult-file'
 
 # Django
 alias runserver='python $(find $(git rev-parse --show-toplevel) -name manage.py) runserver'
