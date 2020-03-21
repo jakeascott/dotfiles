@@ -1,9 +1,11 @@
-# dotfiles
+# Installing dotfile packages
 
-Jake's scripts, dotfiles & notes.
+These packages are organized to be used with GNU Stow.
 
-## Managing dotfiles with GNU Stow
-I now use stow to manage my dotfiles.
-Stow is available in most distributions repositories as `stow`.
-Configs are now organized into stow packages in the `stow-pkgs` directory.
-To install the desired config simply run `stow -t ~ <pkg-name>`.
+To Install config for a package, run:
+`stow -t ~ <package-name>`
+
+
+## Neovim
+Vim-plug's method of storing packages causes problems when stow simlinks the toplevel directories.
+Use the `install-neovim.sh` script to avoid problems.

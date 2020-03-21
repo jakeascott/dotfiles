@@ -39,7 +39,7 @@ CYAN="\[\e[01;96m\]"
 
 # Function for git branch in prompt
 git_branch() {
-    git branch 2> /dev/null | awk '/^*/ {print " ("$2")"}'
+    git branch 2> /dev/null | awk '/^\*/ {print " ("$2")"}'
 }
 
 # Set Prompt

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-WORKDIR=$(find $HOME -name stow-pkgs)
+WORKDIR=$(find $HOME -name .dotfiles)
 
 # Install vim-plug
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
