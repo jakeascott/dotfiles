@@ -1,4 +1,4 @@
-# useful aliases
+# Command shortcuts
 alias mkd='mkdir -pv'
 alias v='nvim'
 alias vim='nvim'
@@ -6,6 +6,10 @@ alias q='exit'
 alias la='ls -Agoh'
 alias ll='ls -goh'
 alias gh='history | grep'
+alias clip='xclip -selection "clipboard"'
+
+# Package manager
+alias pkg='sudo eopkg'
 
 # Django
 alias runserver='python $(find $(git rev-parse --show-toplevel) -name manage.py) runserver'
