@@ -30,12 +30,12 @@ PROMPT_COMMAND='history -a'
 
 # Prompt Colors (color: \[\e[XX;YYm\])
 RESET="\[\e[0m\]"
-RED="\[\e[01;91m\]"
-GREEN="\[\e[01;92m\]"
-YELLOW="\[\e[01;93m\]"
-BLUE="\[\e[01;94m\]"
-PURPLE="\[\e[01;95m\]"
-CYAN="\[\e[01;96m\]"
+RED="\[\e[01;31m\]"
+GREEN="\[\e[01;32m\]"
+YELLOW="\[\e[01;33m\]"
+BLUE="\[\e[01;34m\]"
+PURPLE="\[\e[01;35m\]"
+CYAN="\[\e[01;36m\]"
 
 # Function for git branch in prompt
 git_branch() {
@@ -47,7 +47,7 @@ PS1="$CYAN\u $GREEN\w$YELLOW\$(git_branch)$RESET $ "
 PROMPT_DIRTRIM=2 # Sets depth of directory displayed in prompt
 
 # Apply LS & GREP colors
-LS_COLORS='ow=0;30;102:di=0;30;102:ex=1;35:ln=4;36:' ; export LS_COLORS
+LS_COLORS='ow=0;30;102:di=1;34:ex=1;35:ln=4;36:' ; export LS_COLORS
 # GREP_COLOR="1;32"; export GREP_COLOR
 
 # Enable color for various commands

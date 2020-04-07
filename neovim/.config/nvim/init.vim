@@ -45,9 +45,6 @@ colorscheme gruvbox
 "set colorcolumn=80
 "highlight ColorColumn ctermbg=darkgray
 
-" ARM assembly
-au BufNewFile,BufRead *.s,*.S set filetype=arm " arm = arm6/7
-
 " }}}
 
 " General Shortcuts -------------------------------------------------- {{{
