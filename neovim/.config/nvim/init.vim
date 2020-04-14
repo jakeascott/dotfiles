@@ -68,6 +68,9 @@ nnoremap <leader>s :setlocal spell! spelllang=en_us<cr>
 " Global Abbreviations ----------------------------------------------- {{{
 "iabbrev @@n Jake<space>Scott
 "iabbrev @@ scottj@sou.edu
+
+" Abbreviation to insert current date
+iabbrev @@d <C-r>=strftime("%Y-%m-%d")<cr>
 " }}}
 
 " Normal mode mappings ----------------------------------------------- {{{

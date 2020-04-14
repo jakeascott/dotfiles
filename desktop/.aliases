@@ -7,6 +7,10 @@ alias la='ls -Agoh'
 alias ll='ls -goh'
 alias gh='history | grep'
 alias clip='xclip -selection "clipboard"'
+alias py='python3'
+
+alias todo='topydo'
+alias trm='transmission-remote'
 
 # Package manager
 alias pkg='sudo eopkg'
@@ -30,4 +34,8 @@ alias sbrc='source ~/.bashrc'
 alias bin='cd ~/.local/bin && ll'
 alias conf='cd ~/.config && ll'
 alias dots='cd ~/.dotfiles && ll'
+alias wiki='cd ~/Code/wiki && ll'
 alias ifb='cd ~/Code/ifb && ll'
+
+# school
+alias seclab='ssh -i /home/jake/.ssh/cs455 -N -D 9000 scottj@140.211.102.130'
