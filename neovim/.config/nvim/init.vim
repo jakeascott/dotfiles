@@ -15,6 +15,7 @@ let maplocalleader = "\<space>"
 call plug#begin('~/.local/share/nvim/site/plugged')
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
+Plug 'arcticicestudio/nord-vim'
 call plug#end()
 " }}}
 
@@ -38,8 +39,8 @@ set softtabstop=4 " default to 4 spaces for soft tab
 set shiftwidth=4 " for when <tab> is pressed at beginning of line
 
 " Colorscheme
-set background=dark
-colorscheme gruvbox
+"set background=dark
+colorscheme nord
 
 " Columns
 "set colorcolumn=80

@@ -7,7 +7,6 @@ alias la='ls -Agoh'
 alias ll='ls -goh'
 alias gh='history | grep'
 alias clip='xclip -selection "clipboard"'
-alias py='python3'
 
 alias todo='topydo'
 alias trm='transmission-remote'
