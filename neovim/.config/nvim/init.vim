@@ -39,8 +39,8 @@ set softtabstop=4 " default to 4 spaces for soft tab
 set shiftwidth=4 " for when <tab> is pressed at beginning of line
 
 " Colorscheme
-set background=dark
-colorscheme gruvbox
+"set background=dark
+colorscheme nord
 
 " Columns
 "set colorcolumn=80
