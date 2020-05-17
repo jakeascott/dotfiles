@@ -7,6 +7,11 @@
 #
 # ==========================================
 
+# Source gobal definitions
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+
 # activate vi mode
 set -o vi
 
