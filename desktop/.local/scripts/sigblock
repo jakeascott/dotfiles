@@ -1,0 +1,4 @@
+#!/bin/sh
+# Sends pkill signal to i3blocks
+[ -z "$1" ] && exit 1
+pkill -RTMIN+$1 i3blocks

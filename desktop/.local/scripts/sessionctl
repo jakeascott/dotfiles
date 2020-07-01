@@ -1,0 +1,11 @@
+#!/bin/sh
+
+options="\
+logout kill -TERM $(pidof -s dwm)
+refresh dwm kill -HUP $(pidof -s dwm)
+reboot reboot
+shutdown poweroff"
+
+choice="$(echo "$options" | dmenu)" || exit 1
+
+echo $choice

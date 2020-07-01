@@ -1,0 +1,6 @@
+#!/bin/sh
+# Create ISO from physical disk
+
+echo "ISO Size: $(isosize $1)"
+
+echo "dd if=$1 of=$2 bs=$(isosize -x $1 | awk -F, '{print $2}' | awk '{print $NF}') count=$(isosize -x $1 | awk -F, '{print $1}' | awk '{print $NF}') status=progress"

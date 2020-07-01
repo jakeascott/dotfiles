@@ -1,0 +1,65 @@
+# =========================================================
+#	          _     _       _
+#	 _____  _| |__ | | ____| |_ __ ___
+#	/ __\ \/ / '_ \| |/ / _` | '__/ __|
+#	\__ \>  <| | | |   < (_| | | | (__
+#	|___/_/\_\_| |_|_|\_\__,_|_|  \___|
+#
+#	Simple X Hotkey Deamon Config
+#	Sample config in /usr/share/doc/bspwm/examples/sxhkdrc
+#
+# =========================================================
+
+# WM Independent Hotkeys ------------------------------ {{{
+super + Return
+	$TERMINAL
+
+super + p
+	dmenu_run
+
+super + Escape ; k
+	pkill -USR1 -x sxhkd && notify-send "sxhkd reloaded"
+# }}}
+
+# Program Hotkeys ------------------------------------- {{{
+super + w
+	$BROWSER
+
+super + x
+	lock-screen
+
+super + r
+	$TERMINAL -e ranger
+# }}}
+
+# Scripts --------------------------------------------- {{{
+super + {_,shift + }grave
+	{list-icons,list-colors}
+
+super + z
+	exit-options
+# }}}
+
+# Fn Keys --------------------------------------------- {{{
+# Volume
+XF86AudioMute
+    pulsemixer --toggle-mute
+
+{_, shift + } + XF86AudioRaiseVolume
+    pulsemixer --change-volume {+1, +10}
+
+{_, shift + } + XF86AudioLowerVolume
+    pulsemixer --change-volume {-1, -10}
+
+# Brightness
+{_, shift + } + XF86MonBrightnessUp
+    xbacklight {+5, +10}
+
+{_, shift + } + XF86MonBrightnessDown
+    xbacklight {-5, -10}
+
+#bindsym XF86AudioMicMute
+#bindsym XF86RFKill
+# }}}
+
+# vim:fileencoding=utf-8:ft=sxhkd:foldmethod=marker

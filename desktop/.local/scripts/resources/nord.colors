@@ -1,0 +1,16 @@
+blue(0) #2e3440
+blue(1) #3b4252
+blue(2) #434c5e
+blue(3) #4c566a
+snow(4) #d8dee9
+snow(5) #e5e9f0
+snow(6) #eceff4
+frost(7) #8fbcbb
+frost(8) #88c0d0
+frost(9) #81a1c1
+frost(10) #5e81ac
+red(11) #bf616a
+orange(12) #d08770
+yellow(13) #ebcb8b
+green(14) #a3be8c
+purple(15) #b48ead

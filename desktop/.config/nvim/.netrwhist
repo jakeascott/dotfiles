@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =4
+let g:netrw_dirhist_4='/home/jake/.dotfiles/arch'
+let g:netrw_dirhist_3='/home/jake/.local/scripts'
+let g:netrw_dirhist_2='/home/jake/.dotfiles/scripts/.local/scripts/resources'
+let g:netrw_dirhist_1='/home/jake/.dotfiles/desktop/.config/sxhkd'

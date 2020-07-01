@@ -30,11 +30,13 @@ alias bal='nvim ~/.aliases'
 alias sbrc='source ~/.bashrc'
 
 # directory shortcuts
+alias scpt='cd ~/.local/scripts && ll'
 alias bin='cd ~/.local/bin && ll'
 alias conf='cd ~/.config && ll'
 alias dots='cd ~/.dotfiles && ll'
 alias wiki='cd ~/Code/wiki && ll'
 alias ifb='cd ~/Code/ifb && ll'
+alias edwm='cd ~/.local/src/dwm && ll'
 alias cs455='cd ~/School/cs455 && ll'
 alias cs360='cd ~/School/cs360 && ll'
 

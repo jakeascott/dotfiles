@@ -16,6 +16,7 @@ call plug#begin('~/.local/share/nvim/site/plugged')
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'arcticicestudio/nord-vim'
+Plug 'ap/vim-css-color'
 call plug#end()
 " }}}
 
