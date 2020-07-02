@@ -18,7 +18,7 @@ super + p
 	dmenu_run
 
 super + Escape
-    lockscreen
+    sessionctl
 
 super + w
 	$BROWSER
