@@ -17,19 +17,14 @@ super + Return
 super + p
 	dmenu_run
 
-super + Escape ; k
-	pkill -USR1 -x sxhkd && notify-send "sxhkd reloaded"
-# }}}
+super + Escape
+    lockscreen
 
-# Program Hotkeys ------------------------------------- {{{
 super + w
 	$BROWSER
 
-super + x
-	lock-screen
-
-super + r
-	$TERMINAL -e ranger
+super + r ; k
+   pkill -USR1 -x sxhkd && notify-send "sxhkd reloaded"
 # }}}
 
 # Scripts --------------------------------------------- {{{
@@ -43,13 +38,13 @@ super + z
 # Fn Keys --------------------------------------------- {{{
 # Volume
 XF86AudioMute
-    pulsemixer --toggle-mute
+    pulsemixer --toggle-mute && kill -36 $(pidof goblocks)
 
 {_, shift + } + XF86AudioRaiseVolume
-    pulsemixer --change-volume {+1, +10}
+    pulsemixer --change-volume {+1, +10} && kill -36 $(pidof goblocks)
 
 {_, shift + } + XF86AudioLowerVolume
-    pulsemixer --change-volume {-1, -10}
+    pulsemixer --change-volume {-1, -10} && kill -36 $(pidof goblocks)
 
 # Brightness
 {_, shift + } + XF86MonBrightnessUp
@@ -58,8 +53,17 @@ XF86AudioMute
 {_, shift + } + XF86MonBrightnessDown
     xbacklight {-5, -10}
 
-#bindsym XF86AudioMicMute
-#bindsym XF86RFKill
+#XF86AudioMicMute
+#XF86RFKill
+#XF86AudioPrev
+#XF86AudioNext
+#XF86AudioPlay
+#XF86Calculator
+#XF86Mail
+#XF86HomePage
+#XF86Tools (Music button)
+#XF86Search
+
 # }}}
 
 # vim:fileencoding=utf-8:ft=sxhkd:foldmethod=marker

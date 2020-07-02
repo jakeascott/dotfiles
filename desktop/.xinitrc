@@ -40,6 +40,7 @@ xset r rate 300 50
 # Autostart
 picom &
 numlockx &
+redshift &
 dunst &
 sxhkd &
 set-wallpaper &

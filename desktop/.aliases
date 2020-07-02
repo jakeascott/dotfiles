@@ -10,6 +10,7 @@ alias clip='xclip -selection "clipboard"'
 
 alias todo='topydo'
 alias trm='transmission-remote'
+alias slmake='sudo make install && make clean'
 
 # Package manager
 alias pkg='sudo eopkg'
@@ -37,6 +38,7 @@ alias dots='cd ~/.dotfiles && ll'
 alias wiki='cd ~/Code/wiki && ll'
 alias ifb='cd ~/Code/ifb && ll'
 alias edwm='cd ~/.local/src/dwm && ll'
+alias edmenu='cd ~/.local/src/dmenu && ll'
 alias cs455='cd ~/School/cs455 && ll'
 alias cs360='cd ~/School/cs360 && ll'
 

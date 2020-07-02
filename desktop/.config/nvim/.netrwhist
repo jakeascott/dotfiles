@@ -1,5 +1,9 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =4
+let g:netrw_dirhistcnt =8
+let g:netrw_dirhist_8='/home/jake/.local/src/patches'
+let g:netrw_dirhist_7='/home/jake/.dotfiles/desktop/.local/scripts/statusbar'
+let g:netrw_dirhist_6='/home/jake/.config/redshift'
+let g:netrw_dirhist_5='/home/jake/.config/sxhkd'
 let g:netrw_dirhist_4='/home/jake/.dotfiles/arch'
 let g:netrw_dirhist_3='/home/jake/.local/scripts'
 let g:netrw_dirhist_2='/home/jake/.dotfiles/scripts/.local/scripts/resources'

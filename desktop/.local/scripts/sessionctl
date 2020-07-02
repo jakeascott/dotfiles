@@ -1,11 +1,24 @@
 #!/bin/sh
 
 options="\
-logout kill -TERM $(pidof -s dwm)
-refresh dwm kill -HUP $(pidof -s dwm)
-reboot reboot
-shutdown poweroff"
+logout
+refresh dwm
+reboot
+shutdown"
 
-choice="$(echo "$options" | dmenu)" || exit 1
+choice="$(echo "$options" | dmenu | cut -f 1 -d ' ')" || exit 1
 
-echo $choice
+case $choice in
+    logout)
+        kill -TERM $(pidof s dwm)
+        ;;
+    refresh)
+        kill -HUP $(pidof s dwm)
+        ;;
+    reboot)
+        reboot
+        ;;
+    shutdown)
+        poweroff
+        ;;
+esac
