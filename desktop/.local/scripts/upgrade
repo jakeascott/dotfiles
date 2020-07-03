@@ -1,0 +1,5 @@
+#!/bin/sh
+# Upgrades packages
+
+yay -Syu
+kill -37 $(pidof goblocks)

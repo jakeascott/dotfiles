@@ -1,0 +1,6 @@
+#!/bin/sh
+
+nm-online >/dev/null
+
+echo " $(checkupdates | wc -l)"
+

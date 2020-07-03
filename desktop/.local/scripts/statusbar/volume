@@ -3,5 +3,6 @@
 if [ $(pulsemixer --get-mute) -eq 1 ] ; then
     echo "MUTE"
 else
-    pulsemixer --get-volume | cut -f 1 -d " "
+    out=$(pulsemixer --get-volume | cut -f 1 -d " ")
+    echo " ${out}"
 fi
