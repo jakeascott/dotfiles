@@ -16,6 +16,7 @@ call plug#begin('~/.local/share/nvim/site/plugged')
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'arcticicestudio/nord-vim'
+Plug 'dracula/vim',{'as':'dracula'}
 Plug 'ap/vim-css-color'
 call plug#end()
 " }}}
@@ -40,8 +41,11 @@ set softtabstop=4 " default to 4 spaces for soft tab
 set shiftwidth=4 " for when <tab> is pressed at beginning of line
 
 " Colorscheme
-"set background=dark
-colorscheme nord
+set termguicolors
+set background=dark
+colorscheme dracula
+"colorscheme nord
+"colorscheme gruvbox
 
 " Columns
 "set colorcolumn=80
