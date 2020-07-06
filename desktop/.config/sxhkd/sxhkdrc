@@ -17,22 +17,17 @@ super + Return
 super + p
 	dmenu_run
 
-super + Escape
-    sessionctl
+super + {_,shift + }Escape
+    {lockscreen,sessionopt}
 
 super + w
 	$BROWSER
 
 super + r ; k
    pkill -USR1 -x sxhkd && notify-send "sxhkd reloaded"
-# }}}
 
-# Scripts --------------------------------------------- {{{
 super + {_,shift + }grave
 	{list-icons,list-colors}
-
-super + z
-	exit-options
 # }}}
 
 # Fn Keys --------------------------------------------- {{{
@@ -41,10 +36,10 @@ XF86AudioMute
     pulsemixer --toggle-mute && kill -36 $(pidof goblocks)
 
 {_, shift + } + XF86AudioRaiseVolume
-    pulsemixer --change-volume {+1, +10} && kill -36 $(pidof goblocks)
+    pulsemixer --change-volume {+10, +1} && kill -36 $(pidof goblocks)
 
 {_, shift + } + XF86AudioLowerVolume
-    pulsemixer --change-volume {-1, -10} && kill -36 $(pidof goblocks)
+    pulsemixer --change-volume {-10, -1} && kill -36 $(pidof goblocks)
 
 # Brightness
 {_, shift + } + XF86MonBrightnessUp
@@ -53,11 +48,17 @@ XF86AudioMute
 {_, shift + } + XF86MonBrightnessDown
     xbacklight {-5, -10}
 
+XF86AudioPlay
+    playerctl --player=spotify play-pause
+
+XF86AudioPrev
+    playerctl --player=spotify previous
+
+XF86AudioNext
+    playerctl --player=spotify next
+
 #XF86AudioMicMute
 #XF86RFKill
-#XF86AudioPrev
-#XF86AudioNext
-#XF86AudioPlay
 #XF86Calculator
 #XF86Mail
 #XF86HomePage

@@ -43,8 +43,8 @@ numlockx &
 redshift &
 dunst &
 sxhkd &
-set-wallpaper &
 goblocks &
+setwall
 
 # Start dwm
 exec dwm

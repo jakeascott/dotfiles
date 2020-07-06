@@ -2,13 +2,13 @@
 # Wrapper for i3lock, see man i3lock for options
 # pass -c option to dispaly wallpaper only
 
-text_color=#eceff4ff
-back_color=#2e3440cc
-error_color=#bf616acc
-ring_color=#8fbcbbff
+text_color=#F8F8F2FF
+back_color=#282A36CC
+error_color=#FF5555CC
+ring_color=#FF79C6FF
 transparent=#00000000
-highlight=#d8dee9ff
-backspace=#2e3440ff
+highlight=#50FA7BFF
+backspace=#FF5555FF
 
 if ! [ -z $1 ] && [ $1 = "-c" ] ; then
     i3lock -k -i $HOME/.local/share/wallpaper \

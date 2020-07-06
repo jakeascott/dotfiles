@@ -16,8 +16,8 @@
 export EDITOR="nvim"
 export TERMINAL="alacritty"
 export BROWSER="firefox"
-#export READER="zathura"
-#export FILE="ranger"
+export READER="zathura"
+export FILE="ranger"
 
 # For consistant QT/GTK themes (requires qt5-styleplugins)
 #export QT_QPA_PLATFORMTHEME=gtk2
