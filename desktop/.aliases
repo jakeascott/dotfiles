@@ -7,20 +7,19 @@ alias la='ls -Agoh'
 alias ll='ls -goh'
 alias gh='history | grep'
 alias clip='xclip -selection "clipboard"'
+alias z='zathura'
+alias o='xdg-open'
 
-alias todo='topydo'
 alias trm='transmission-remote'
 alias slmake='sudo make install && make clean'
+alias egpuclk='sudo nvim /etc/default/amdgpu-custom-states.card0'
 
-# Package manager
-alias pkg='sudo eopkg'
+# Update system and signal goblocks
+alias upgrade='yay -Syu && kill -37 $(pidof goblocks)'
 
-# Django
-alias runserver='python $(find $(git rev-parse --show-toplevel) -name manage.py) runserver'
-alias manage='python $(find $(git rev-parse --show-toplevel) -name manage.py)'
-
-# venv
+# Python helpers
 alias activate='source $(find $(git rev-parse --show-toplevel) -name activate)'
+alias manage='python $(find $(git rev-parse --show-toplevel) -name manage.py)'
 
 # file shortcuts
 alias bpr='nvim ~/.profile'
@@ -31,17 +30,18 @@ alias bal='nvim ~/.aliases'
 alias sbrc='source ~/.bashrc'
 
 # directory shortcuts
-alias scpt='cd ~/.local/scripts && ll'
+alias sc='cd ~/.local/scripts && ll'
 alias bin='cd ~/.local/bin && ll'
-alias conf='cd ~/.config && ll'
+alias cnf='cd ~/.config && ll'
 alias dots='cd ~/.dotfiles && ll'
-alias wiki='cd ~/Code/wiki && ll'
-alias ifb='cd ~/Code/ifb && ll'
+alias wiki='cd ~/projects/wiki && ll'
+alias ifb='cd ~/projects/ifb && ll'
 alias edwm='cd ~/.local/src/dwm && ll'
 alias edmenu='cd ~/.local/src/dmenu && ll'
-alias cs455='cd ~/School/cs455 && ll'
-alias cs360='cd ~/School/cs360 && ll'
+alias sf='cd ~/documents/starfinder && ll'
+alias blog='cd ~/projects/blog && ll'
 
-# school
-alias seclab='ssh -i /home/jake/.ssh/cs455 -N -D 9000 scottj@140.211.102.130'
-alias my.cnf='v ~/School/cs360/my.cnf'
+# Fonts
+#fc-cache
+#fc-list : family
+#cal for calander

@@ -22,7 +22,7 @@ case $choice in
     reboot)
         reboot
         ;;
-    shutdown)
+    poweroff)
         poweroff
         ;;
 esac

@@ -1,5 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =5
+let g:netrw_dirhistcnt =7
+let g:netrw_dirhist_7='/home/jake/.local/src/amdgpu-fan/amdgpu_fan'
+let g:netrw_dirhist_6='/home/jake/.config/zathura'
 let g:netrw_dirhist_5='/home/jake/.dotfiles/desktop/.local/scripts/statusbar'
 let g:netrw_dirhist_4='/usr/share/themes/Adapta-FrostBlue4-Nokto-Eta/gtk-2.0'
 let g:netrw_dirhist_3='/usr/share/themes/Adapta-FrostBlue4-Nokto-Eta'
@@ -8,5 +10,3 @@ let g:netrw_dirhist_1='/home/jake/.config/dunst'
 let g:netrw_dirhist_0='/home/jake/.dotfiles/arch/.config/polybar/scripts'
 let g:netrw_dirhist_9='/home/jake/.config/sxhkd'
 let g:netrw_dirhist_8='/home/jake/.local/src/patches'
-let g:netrw_dirhist_7='/home/jake/.dotfiles/desktop/.local/scripts/statusbar'
-let g:netrw_dirhist_6='/home/jake/.config/redshift'
