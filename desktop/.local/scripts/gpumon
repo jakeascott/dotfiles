@@ -4,10 +4,14 @@
 POLL=1
 
 keyhelp(){
-    echo -e "\n(q) quit; (r) reset maxes\n"
+    echo -e "\n(q) quit; (r) reset maxes; (s) start/stop recording\n"
 }
 
 clear
+
+S=0
+OUTFILE=""
+
 
 CARD_NAME=$(sudo lshw -quiet -C display 2>/dev/null | grep "product" | sed 's/.*product: //g')
 SCLKMAX=0
@@ -18,6 +22,7 @@ FANMAX=0
 TEDGMAX=0
 TJNCMAX=0
 TMEMMAX=0
+CDIEMAX=0
 
 #SCLKAVG=$(awk -F, 'NR>1 {sum+=$1; count++;} END {printf "%4.1f\n", sum/count}' $logfile)
 
@@ -35,6 +40,8 @@ while true ; do
     TJNC=$(echo "$temps" | grep -e "^junc" | cut -f 1 -d "(" | cut -f 2 -d ":" | sed 's/[^0-9.]*//g')
     TMEM=$(echo "$temps" | grep -e "^mem" | cut -f 1 -d "(" | cut -f 2 -d ":" | sed 's/[^0-9.]*//g')
 
+    CDIE=$(echo "$temps" | grep -e "^Tdie" | cut -f 2 -d ":" | sed 's/[^0-9.]*//g')
+
 
     # Update max values for stats
     (( $(echo "$SCLK > $SCLKMAX" | bc -l) )) && SCLKMAX=$SCLK
@@ -45,6 +52,7 @@ while true ; do
     (( $(echo "$TEDG > $TEDGMAX" | bc -l) )) && TEDGMAX=$TEDG
     (( $(echo "$TJNC > $TJNCMAX" | bc -l) )) && TJNCMAX=$TJNC
     (( $(echo "$TMEM > $TMEMMAX" | bc -l) )) && TMEMMAX=$TMEM
+    (( $(echo "$CDIE > $CDIEMAX" | bc -l) )) && CDIEMAX=$CDIE
 
     buffer=$(
         clear
@@ -60,10 +68,18 @@ while true ; do
         echo "TEDG: $TEDG C (MAX: $TEDGMAX)"
         echo "TJNC: $TJNC C (MAX: $TJNCMAX)"
         echo "TMEM: $TMEM C (MAX: $TMEMMAX)"
+
+        echo -e "\nCPU Temperature:"
+        echo "CDIE: $CDIE C (MAX: $CDIEMAX)"
         keyhelp
+        [ $S -eq 1 ] && echo "Writing to $OUTFILE"
     )
 
     echo "$buffer"
+
+    if [ $S -eq 1 ] ; then
+        echo "$CDIE,$TEDG,$TJNC,$TMEM,$FAN" >> $OUTFILE
+    fi
 
     IFS= read -r -t $POLL -n 1 -s input && var="$input"
 
@@ -78,6 +94,16 @@ while true ; do
             TEDGMAX=0
             TJNCMAX=0
             TMEMMAX=0
+            ;;
+        s)  if [ $S -eq 1 ] ;
+            then
+                S=0
+            else
+                OUTFILE="$HOME/gpumon_$(date '+%Y%m%d%H%M%S')"
+                touch $OUTFILE
+                S=1
+                echo "CPU,GPUEDG,GPUJNC,GPUMEM,GPUFAN" > $OUTFILE
+            fi
             ;;
     esac
     unset var

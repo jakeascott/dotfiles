@@ -9,10 +9,12 @@ alias gh='history | grep'
 alias clip='xclip -selection "clipboard"'
 alias z='zathura'
 alias o='xdg-open'
+alias drag='dragon -x'
 
 alias trm='transmission-remote'
 alias slmake='sudo make install && make clean'
 alias egpuclk='sudo nvim /etc/default/amdgpu-custom-states.card0'
+alias scap="scrot -sf -e 'mv $f ~/pictures/screenshots/'"
 
 # Update system and signal goblocks
 alias upgrade='yay -Syu && kill -37 $(pidof goblocks)'
@@ -30,16 +32,22 @@ alias bal='nvim ~/.aliases'
 alias sbrc='source ~/.bashrc'
 
 # directory shortcuts
+alias dl='cd ~/downloads && ll'
 alias sc='cd ~/.local/scripts && ll'
 alias bin='cd ~/.local/bin && ll'
 alias cnf='cd ~/.config && ll'
 alias dots='cd ~/.dotfiles && ll'
 alias wiki='cd ~/projects/wiki && ll'
+alias gri='cd ~/projects/grabimg-pdf && ll'
+alias clb='cd ~/projects/caleb && ll'
+alias eud='cd ~/projects/eudyptula && ll'
+alias grd='cd ~/go/src/gordon && ll'
 alias ifb='cd ~/projects/ifb && ll'
 alias edwm='cd ~/.local/src/dwm && ll'
 alias edmenu='cd ~/.local/src/dmenu && ll'
 alias sf='cd ~/documents/starfinder && ll'
 alias blog='cd ~/projects/blog && ll'
+alias work='cd ~/work && ll'
 
 # Fonts
 #fc-cache

@@ -42,7 +42,7 @@ picom &
 numlockx &
 redshift &
 dunst &
-sxhkd &
+#sxhkd &
 goblocks &
 setwall
 

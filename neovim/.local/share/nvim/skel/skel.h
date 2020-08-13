@@ -4,8 +4,8 @@
 
    --------------------------------------------*/
 
-#ifndef SKEL_H
-#define SKEL_H
+#ifndef __SKEL_H
+#define __SKEL_H
 
 // Includes
 

@@ -2,5 +2,11 @@
 
 nm-online >/dev/null
 
-echo " $(checkupdates | wc -l)"
+count="$(checkupdates | wc -l)"
 
+if [ $count -eq 0 ] ;
+then
+    echo ""
+else
+    echo "^c#50FA7B^ $count^d^"
+fi
