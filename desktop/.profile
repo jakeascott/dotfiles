@@ -17,6 +17,7 @@
 
 # Variables for .NET
 [ -d "$HOME/.dotnet/tools" ] && PATH="$HOME/.dotnet/tools:$PATH"
+export DOTNET_ROOT=/opt/dotnet
 export DOTNET_CLI_TELEMETRY_OPOUT=1
 
 # Set global defaults

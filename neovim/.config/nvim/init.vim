@@ -256,10 +256,10 @@ augroup filetype_html
     autocmd FileType html nnoremap <buffer> <localleader>h1 i<h1></h1><esc>F>a
     autocmd FileType html nnoremap <buffer> <localleader>li i<li></li><esc>F>a
     autocmd FileType html nnoremap <buffer> <localleader>ul i<ul></ul><esc>F>a<cr><esc>kf>a<cr>
-    "autocmd FileType html
-                "\ set tabstop=2
-                "\ set softtabstop=2
-                "\ set shiftwidth=2
+    autocmd FileType html
+                \ set tabstop=2
+                \ set softtabstop=2
+                \ set shiftwidth=2
 augroup END
 " }}}
 
