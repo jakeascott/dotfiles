@@ -1,5 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =5
+let g:netrw_dirhistcnt =7
+let g:netrw_dirhist_7='/home/jake/projects/arch-installer/suppliment'
+let g:netrw_dirhist_6='/home/jake/.ssh'
 let g:netrw_dirhist_5='/usr/share/doc/neomutt/samples'
 let g:netrw_dirhist_4='/usr/share/doc/neomutt'
 let g:netrw_dirhist_3='/home/jake/.config/ranger'
@@ -8,5 +10,3 @@ let g:netrw_dirhist_1='/home/jake/documents/starfinder/notes'
 let g:netrw_dirhist_0='/home/jake/projects/resume/markdown'
 let g:netrw_dirhist_9='/home/jake/projects/resume'
 let g:netrw_dirhist_8='/home/jake/.dotfiles/desktop/.config/awesome'
-let g:netrw_dirhist_7='/home/jake/.local/src/amdgpu-fan/amdgpu_fan'
-let g:netrw_dirhist_6='/home/jake/.config/zathura'

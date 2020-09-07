@@ -17,7 +17,7 @@ alias egpuclk='sudo nvim /etc/default/amdgpu-custom-states.card0'
 alias scap="scrot -sf -e 'mv $f ~/pictures/screenshots/'"
 
 # Update system and signal goblocks
-alias upgrade='yay -Syu && kill -37 $(pidof goblocks)'
+alias upgrade='yay -Syu'
 
 # Python helpers
 alias activate='source $(find $(git rev-parse --show-toplevel) -name activate)'
@@ -43,6 +43,7 @@ alias clb='cd ~/projects/caleb && ll'
 alias tet='cd ~/projects/tetris && ll'
 alias tetj='cd ~/projects/tetris-js && ll'
 alias eud='cd ~/projects/eudyptula && ll'
+alias lyah='cd ~/projects/learn-you-a-haskell && ll'
 alias grd='cd ~/go/src/gordon && ll'
 alias ifb='cd ~/projects/ifb && ll'
 alias edwm='cd ~/.local/src/dwm && ll'
