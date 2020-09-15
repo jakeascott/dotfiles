@@ -5,14 +5,10 @@ alias vim='nvim'
 alias q='exit'
 alias la='ls -Agoh'
 alias ll='ls -goh'
-alias fonts='fc-list'
 alias py='python'
 alias gh='history | grep'
-alias code='code --force-device-scale-factor=2'
-alias gp='gprolog --consult-file'
 
 # Django
-alias runserver='python $(find $(git rev-parse --show-toplevel) -name manage.py) runserver'
 alias manage='python $(find $(git rev-parse --show-toplevel) -name manage.py)'
 
 # venv
@@ -25,17 +21,6 @@ alias brc='nvim ~/.bashrc'
 alias vrc='nvim ~/.config/nvim/init.vim'
 alias bal='nvim ~/.aliases'
 alias sbrc='source ~/.bashrc'
-alias wmc='nvim ~/.config/bspwm/bspwmrc'
-alias hkc='nvim ~/.config/sxhkd/sxhkdrc'
-alias bar='nvim ~/.config/polybar/config'
 
 # directory shortcuts
-alias bin='cd ~/.local/bin && ll'
-alias locl='cd ~/.local && ll'
-alias conf='cd ~/.config && ll'
 alias dots='cd ~/.dotfiles && ll'
-alias cs314='cd ~/school/cs314 && ll'
-alias cs452='cd ~/school/cs452 && ll'
-alias ifb='cd ~/Capstone/ifb && ll'
-
-#ssh
