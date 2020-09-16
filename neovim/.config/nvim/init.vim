@@ -18,6 +18,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'arcticicestudio/nord-vim'
 Plug 'dracula/vim',{'as':'dracula'}
 Plug 'ap/vim-css-color'
+Plug 'joshdick/onedark.vim'
 call plug#end()
 " }}}
 
@@ -43,7 +44,8 @@ set shiftwidth=4 " for when <tab> is pressed at beginning of line
 " Colorscheme
 set termguicolors
 set background=dark
-colorscheme dracula
+colorscheme onedark
+"colorscheme dracula
 "colorscheme nord
 "colorscheme gruvbox
 

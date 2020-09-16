@@ -1,12 +1,14 @@
 # useful aliases
 alias mkd='mkdir -pv'
 alias v='nvim'
+alias e='emacs'
 alias vim='nvim'
 alias q='exit'
 alias la='ls -Agoh'
 alias ll='ls -goh'
 alias py='python'
 alias gh='history | grep'
+alias o='xdg-open'
 
 # Django
 alias manage='python $(find $(git rev-parse --show-toplevel) -name manage.py)'
@@ -19,8 +21,10 @@ alias bpr='nvim ~/.profile'
 alias sbpr='source ~/.profile'
 alias brc='nvim ~/.bashrc'
 alias vrc='nvim ~/.config/nvim/init.vim'
+alias erc='emacs ~/.emacs.d/init.el'
 alias bal='nvim ~/.aliases'
 alias sbrc='source ~/.bashrc'
 
 # directory shortcuts
 alias dots='cd ~/.dotfiles && ll'
+alias ifb='cd ~/Projects/ifb && ll'
