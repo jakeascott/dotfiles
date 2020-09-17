@@ -7,7 +7,6 @@ alias q='exit'
 alias la='ls -Agoh'
 alias ll='ls -goh'
 alias py='python'
-alias gh='history | grep'
 alias o='xdg-open'
 
 # Django

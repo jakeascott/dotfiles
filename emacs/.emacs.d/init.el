@@ -2,8 +2,8 @@
 
 ;; Package manager repos
 (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
-(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/"))
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/"))
 (setq package-enable-at-startup nil)
 (package-initialize)
 
@@ -20,37 +20,63 @@
   :init
   (evil-mode 1))
 
-;; Enable doom-one theme
-(use-package doom-themes
-  :config
-  (setq doom-themes-enable-bold t
-	doom-themes-enable-italic t)
-  (load-theme 'doom-one t)
+;; Configure helm
+(use-package helm
+  :ensure t)
+(require 'helm-config)
 
-  (doom-themes-visual-bell-config)
-  (doom-themes-org-config))
+(setq helm-split-window-inside-p t
+      helm-move-to-line-cycle-in-source t)
+(helm-mode 1)
+(global-set-key (kbd "C-x b") 'helm-buffers-list)
+(define-key evil-ex-map "b" 'helm-buffers-list)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "M-c") 'helm-calcul-expression)
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)
+(global-set-key (kbd "C-s") 'helm-occur)
+(global-set-key (kbd "C-x r b") 'helm-bookmarks)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
 
-;; Python
+;; flycheck
+(use-package flycheck
+    :ensure t
+    :init (global-flycheck-mode))
+
+;; Configure elpy
+;; installed python packages:
+;; ipython, black, jedi, flake8,
+(use-package blacken
+    :ensure t)
+
 (use-package elpy
-  :ensure t
-  :init
-  (elpy-enable))
+    :ensure t
+    :init (elpy-enable)
+    :config
+    (setq python-shell-interpreter "ipython"
+	  python-shell-interpreter-args "-i --simple-prompt"))
 
-;; Start emacs window maximized
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
-
-;; Clean up some defaults
+;; Theme
 (menu-bar-mode 0)
 (tool-bar-mode 0)
 (global-display-line-numbers-mode)
+(setq ring-bell-function 'ignore) ;; disable bell
 (setq inhibit-startup-screen t)
+
+;; set colorscheme
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(load-theme 'atom-one-dark t)
+;; Start emacs window maximized
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+(setq auto-save-default nil)
+(setq make-backup-files nil)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(elpy use-package evil doom-themes)))
+ '(package-selected-packages '(helm evil use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

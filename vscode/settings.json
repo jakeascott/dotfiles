@@ -1,6 +1,0 @@
-{
-    "workbench.colorTheme": "Dracula Soft",
-    "workbench.startupEditor": "newUntitledFile",
-    "go.formatTool": "goimports",
-    "editor.minimap.enabled": false
-}
