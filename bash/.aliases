@@ -27,3 +27,5 @@ alias sbrc='source ~/.bashrc'
 # directory shortcuts
 alias dots='cd ~/.dotfiles && ll'
 alias ifb='cd ~/Projects/ifb && ll'
+alias cphp='cd ~/Projects/cphp && ll'
+alias cs460='cd ~/Projects/cs460 && ll'

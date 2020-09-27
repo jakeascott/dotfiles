@@ -12,3 +12,5 @@
 export EDITOR="nvim"
 export TERMINAL="gnome-terminal"
 export BROWSER="firefox"
+
+export QT_QPA_PLATFORMTHEME=qt5ct
