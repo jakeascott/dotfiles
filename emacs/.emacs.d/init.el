@@ -16,14 +16,15 @@
 (menu-bar-mode 0)      ; Disable menubar
 (show-paren-mode 1)     ; Highlight matching parenthesis
 
-(column-number-mode)                ; Display column numbers
+(column-number-mode t)                ; Display column numbers
 (global-display-line-numbers-mode t)  ; Display line numbers
 
 ;; Disable line numbers for some modes
 (dolist (mode '(org-mode-hook
                 term-mode-hook
                 shell-mode-hook
-                eshell-mode-hook))
+                eshell-mode-hook
+		helpful-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;; Set font (height is 1/10 pt)
@@ -152,8 +153,26 @@
 (jake/leader-keys
   "ts" '(hydra-text-scale/body :which-key "scale text"))
 
+(use-package projectile
+  :diminish projectile-mode
+  :config (projectile-mode)
+  :custom ((projectile-completion-system 'ivy))
+  :bind-keymap
+  ("C-c p" . projectile-command-map))
+
+(use-package counsel-projectile
+  :config (counsel-projectile-mode))
+
+(use-package magit)
+
+(use-package evil-magit
+  :after magit)
+
+(use-package flycheck
+  :init (global-flycheck-mode))
+
 ;; ======================================================================
-;; Webdev package settings
+;; Programming lang
 
 
 ;; ======================================================================

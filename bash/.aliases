@@ -25,6 +25,7 @@ alias bal='nvim ~/.aliases'
 alias sbrc='source ~/.bashrc'
 
 # directory shortcuts
+alias dl='cd ~/Downloads && ll'
 alias dots='cd ~/.dotfiles && ll'
 alias ifb='cd ~/Projects/ifb && ll'
 alias cphp='cd ~/Projects/cphp && ll'

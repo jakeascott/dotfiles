@@ -82,8 +82,6 @@ iabbrev @@d <C-r>=strftime("%Y-%m-%d")<cr>
 " }}}
 
 " Normal mode mappings ----------------------------------------------- {{{
-nnoremap H ^
-nnoremap L $
 nnoremap <leader>d ^d$
 nnoremap <leader>v viw
 nnoremap <leader>y "+y
@@ -106,8 +104,6 @@ inoremap <c-u> <esc>viwUi
 " }}}
 
 " Visual mode mappings ----------------------------------------------- {{{
-vnoremap H ^
-vnoremap L $
 vnoremap <leader>" y`>a"<esc>`<i"<esc>
 vnoremap <leader>' y`>a'<esc>`<i'<esc>
 vnoremap <leader>( y`>a)<esc>`<i(<esc>
@@ -125,8 +121,6 @@ tnoremap <leader>q <c-\><c-n>:q<cr>
 
 " Operator-pending mappings ------------------------------------------ {{{
 " pair with d, c, y, etc
-onoremap H ^
-onoremap L $
 onoremap p i(
 onoremap in( :<c-u>normal! f(vi(<cr>
 onoremap il( :<c-u>normal! F)vi(<cr>
@@ -232,13 +226,13 @@ augroup filetype_haskell
     autocmd!
     autocmd FileType haskell nnoremap <buffer> <localleader>c I--<esc>
     " For haskell style guide
-    autocmd FileType python set textwidth=79
-    autocmd FileType python set shiftwidth=4
-    autocmd FileType python set tabstop=4
-    autocmd FileType python set expandtab
-    autocmd FileType python set softtabstop=4
-    autocmd FileType python set shiftround
-    autocmd FileType python set autoindent
+    autocmd FileType haskell set textwidth=79
+    autocmd FileType haskell set shiftwidth=4
+    autocmd FileType haskell set tabstop=4
+    autocmd FileType haskell set expandtab
+    autocmd FileType haskell set softtabstop=4
+    autocmd FileType haskell set shiftround
+    autocmd FileType haskell set autoindent
 augroup END
 " }}}
 
