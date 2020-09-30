@@ -142,7 +142,8 @@
   (jake/leader-keys
    "t" '(:ignore t :which-key "toggles")
    "tt" '(counsel-load-theme :which-key "choose theme")
-   "." '(counsel-find-file :which-key "find file")))
+   "." '(counsel-find-file :which-key "find file")
+   "c" '(company-mode :which-key "company-mode")))
 
 (use-package hydra)
 (defhydra hydra-text-scale (:timeout 5)
@@ -171,8 +172,16 @@
 (use-package flycheck
   :init (global-flycheck-mode))
 
+(use-package company)
+
 ;; ======================================================================
-;; Programming lang
+;; C
+
+;; ======================================================================
+;; HTML, CSS, JS, PHP
+
+;; ======================================================================
+;; Python
 
 
 ;; ======================================================================
