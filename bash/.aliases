@@ -8,6 +8,8 @@ alias la='ls -Agoh'
 alias ll='ls -goh'
 alias py='python'
 alias o='xdg-open'
+alias upgrade='sudo dnf upgrade -y'
+alias doom='~/.emacs.d/bin/doom'
 
 # Django
 alias manage='python $(find $(git rev-parse --show-toplevel) -name manage.py)'
@@ -30,3 +32,4 @@ alias dots='cd ~/.dotfiles && ll'
 alias ifb='cd ~/Projects/ifb && ll'
 alias cphp='cd ~/Projects/cphp && ll'
 alias cs460='cd ~/Projects/cs460 && ll'
+alias web='cd ~/Projects/my-website && ll'
