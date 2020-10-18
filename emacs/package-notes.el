@@ -1,59 +1,10 @@
-;; =====================================================================
-;;                                   _       _ _         _
-;;    ___ _ __ ___   __ _  ___ ___  (_)_ __ (_) |_   ___| |
-;;   / _ \ '_ ` _ \ / _` |/ __/ __| | | '_ \| | __| / _ \ |
-;;  |  __/ | | | | | (_| | (__\__ \ | | | | | | |_ |  __/ |
-;;   \___|_| |_| |_|\__,_|\___|___/ |_|_| |_|_|\__(_)___|_|
-;;
-;; =====================================================================
-
-;; Basic settings
-(setq inhibit-startup-message t)
-(setq ring-bell-function 'ignore)   ; disable visual and audio bell
-(scroll-bar-mode 0)   ; Disable scrollbar
-(tooltip-mode 0)       ; Disable tooltips
-(tool-bar-mode 0)      ; Disable toolbar
-(menu-bar-mode 0)      ; Disable menubar
-(show-paren-mode 1)     ; Highlight matching parenthesis
-
-(column-number-mode t)                ; Display column numbers
-(global-display-line-numbers-mode t)  ; Display line numbers
-
-;; Disable line numbers for some modes
-(dolist (mode '(org-mode-hook
-                term-mode-hook
-                shell-mode-hook
-                eshell-mode-hook
-		helpful-mode-hook))
-  (add-hook mode (lambda () (display-line-numbers-mode 0))))
-
-;; Set font (height is 1/10 pt)
-(defvar jake/default-font-size 12)
-(set-face-attribute 'default nil :font "Inconsolata" :height (* jake/default-font-size 10))
-
-;; Make escape quit prompts
-(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-
-;; set colorscheme
-;(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-;(load-theme 'atom-one-dark t)
-
-;; save autosave and backup files in /tmp/
-(setq backup-directory-alist
-      `((".*" . ,temporary-file-directory)))
-(setq auto-save-file-name-transforms
-      `((".*" ,temporary-file-directory t)))
-
-;; Automatically follow symlinks
-(setq vc-follow-symlinks t)
-
-;; ======================================================================
 ;; General Package settings
 (require 'package)
 
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
                          ("elpa" . "https://elpa.gnu.org/packages/")
                          ("org" . "https://orgmode.org/elpa/")))
+
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
@@ -64,17 +15,6 @@
 
 (require 'use-package)
 (setq use-package-always-ensure t)
-
-;; First time you load this config on a new machine run
-;; M-x all-the-icons-install-fonts to get the fonts
-(use-package all-the-icons)
-
-(use-package doom-modeline
-    :init (doom-modeline-mode 1))
-
-(use-package doom-themes
-    :init (load-theme 'doom-one t))
-
 (use-package ivy
   :diminish
   :bind (("C-s" . swiper)
@@ -173,22 +113,3 @@
   :init (global-flycheck-mode))
 
 (use-package company)
-
-;; ======================================================================
-;; C
-
-;; ======================================================================
-;; HTML, CSS, JS, PHP
-(use-package web-mode
-  :defer t
-  :mode
-  ("\\.html\\'" "\\.css\\'" "\\.php\\'"))
-
-;; ======================================================================
-;; Python
-
-
-;; ======================================================================
-;; Move custome-set-variables/faces to a different file
-(setq custom-file "~/.emacs.d/custom.el")
-(load custom-file :noerror)

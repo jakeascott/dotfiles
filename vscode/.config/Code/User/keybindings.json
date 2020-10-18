@@ -1,18 +1,18 @@
 [
     {
-        "key": "alt+h",
+        "key": "ctrl+h",
         "command": "workbench.action.navigateLeft"
     },
     {
-        "key": "alt+l",
+        "key": "ctrl+l",
         "command": "workbench.action.navigateRight"
     },
     {
-        "key": "alt+k",
+        "key": "ctrl+k",
         "command": "workbench.action.navigateUp"
     },
     {
-        "key": "alt+j",
+        "key": "ctrl+j",
         "command": "workbench.action.navigateDown"
     }
 ]

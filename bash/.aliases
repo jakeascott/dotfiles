@@ -8,6 +8,7 @@ alias la='ls -Agoh'
 alias ll='ls -goh'
 alias py='python'
 alias o='xdg-open'
+alias n='nautilus'
 alias upgrade='sudo dnf upgrade -y'
 alias doom='~/.emacs.d/bin/doom'
 

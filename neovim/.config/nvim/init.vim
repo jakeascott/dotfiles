@@ -130,22 +130,22 @@ onoremap fun :<c-u>normal! 0f(hviw<cr>
 " }}}
 
 " Quick window navigation -------------------------------------------- {{{
-nnoremap <a-h> <c-w>h
-nnoremap <a-j> <c-w>j
-nnoremap <a-k> <c-w>k
-nnoremap <a-l> <c-w>l
-inoremap <a-h> <esc><c-w>h
-inoremap <a-j> <esc><c-w>j
-inoremap <a-k> <esc><c-w>k
-inoremap <a-l> <esc><c-w>l
-vnoremap <a-h> <esc><c-w>h
-vnoremap <a-j> <esc><c-w>j
-vnoremap <a-k> <esc><c-w>k
-vnoremap <a-l> <esc><c-w>l
-tnoremap <a-h> <c-\><c-n><c-w>h
-tnoremap <a-j> <c-\><c-n><c-w>j
-tnoremap <a-k> <c-\><c-n><c-w>k
-tnoremap <a-l> <c-\><c-n><c-w>l
+nnoremap <c-h> <c-w>h
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-l> <c-w>l
+inoremap <c-h> <esc><c-w>h
+inoremap <c-j> <esc><c-w>j
+inoremap <c-k> <esc><c-w>k
+inoremap <c-l> <esc><c-w>l
+vnoremap <c-h> <esc><c-w>h
+vnoremap <c-j> <esc><c-w>j
+vnoremap <c-k> <esc><c-w>k
+vnoremap <c-l> <esc><c-w>l
+tnoremap <c-h> <c-\><c-n><c-w>h
+tnoremap <c-j> <c-\><c-n><c-w>j
+tnoremap <c-k> <c-\><c-n><c-w>k
+tnoremap <c-l> <c-\><c-n><c-w>l
 " }}}
 
 " File templates -------------------------------------------- {{{
