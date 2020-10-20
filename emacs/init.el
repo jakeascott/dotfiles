@@ -9,11 +9,14 @@
 
 ;; Basic settings
 (setq inhibit-startup-message t)
+(setq initial-scratch-message "")
+(fset 'yes-or-no-p 'y-or-n-p)
+;;(global-hl-line-mode)
 (setq ring-bell-function 'ignore)    ; disable visual and audio bell
-(scroll-bar-mode -1)                 ; Disable scrollbar
-;;(tooltip-mode -1)                  ; Disable tooltips
-(tool-bar-mode -1)                   ; Disable toolbar
-(menu-bar-mode -1)                   ; Disable menubar
+(scroll-bar-mode 0)                 ; Disable scrollbar
+(tooltip-mode 0)                  ; Disable tooltips
+(tool-bar-mode 0)                   ; Disable toolbar
+(menu-bar-mode 0)                   ; Disable menubar
 (show-paren-mode 1)                  ; Highlight matching parenthesis
 
 (column-number-mode t) ; Display column numbers
@@ -47,13 +50,16 @@
 ;; Automatically follow symlinks
 (setq vc-follow-symlinks t)
 
+;; remove trailing whitespace on save
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 ;; ======================================================================
 ;; Packages
 
 (require 'package)
 
-(setq package-archives '(("melpa" . "https://melpa.org/packages/")
-                         ("elpa" . "https://elpa.gnu.org/packages/")
+(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+			 ("melpa" . "https://melpa.org/packages/")
                          ("org" . "https://orgmode.org/elpa/")))
 
 (package-initialize)
@@ -62,6 +68,7 @@
 
 ;; Ensure use-package is installed
 (unless (package-installed-p 'use-package)
+  (package-refresh-contents)
   (package-install 'use-package))
 
 (require 'use-package)
@@ -70,7 +77,7 @@
 (use-package which-key
   :diminish which-key-mode
   :config
-  (which-key-mode 1)
+  (which-key-mode)
   (setq which-key-idle-delay 1))
 
 (use-package general
@@ -85,10 +92,10 @@
 
   (jake/leader-key
    ""   nil
-   "c"  (general-simulate-key "C-c" :which-key "foo")
-   "h"  (general-simulate-key "C-h")
-   "u"  (general-simulate-key "C-u")
-   "x"  (general-simulate-key "C-x")
+   "c"  (general-simulate-key "C-c" :which-key "user")
+   "h"  (general-simulate-key "C-h" :which-key "help")
+   "u"  (general-simulate-key "C-u" :which-key "C-u")
+   "x"  (general-simulate-key "C-x" :which-key "C-x")
 
    ;; Package manager
    "lp" 'list-packages
@@ -97,6 +104,10 @@
    "f"  '(:ignore t :which-key "files")
    "ff" 'find-file
 
+   ;; toggles
+   "t"  '(:ignore t :which-key "toggles")
+   "tt" '(counsel-load-theme :which-key "choose theme")
+
    ;; Quit ops
    "q"  '(:ignore t :which-key "quit emacs")
    "qq" 'kill-emacs
@@ -104,7 +115,7 @@
 
    ;; Buffer ops
    "b"  '(:ignore t :which-key "buffer")
-   "bb" 'mode-line-other-buffer
+   "bb" 'switch-to-buffer
    "bd" 'kill-this-buffer
    "bq" 'kill-buffer-and-window
    "b." 'next-buffer
@@ -116,11 +127,19 @@
    "ws" 'split-window-horizontally
    "wv" 'split-window-vertically
    "ww" 'other-window
-   "wd" 'delete-window
-   
+   "wc" 'delete-window
+   "wo" 'delete-other-windows
    )
-
   )
+
+;;(use-package hydra)
+;;(defhydra hydra-text-scale (:timeout 4)
+;;  "scale text"
+;;  ("j" text-scale-increase "in")
+;;("k" text-scale-decrease "out")
+;; ("f" nil "finished" :exit t))
+;;(jake/leader-key
+;;  "ts" '(hydra-text-scale/body :which-key "scale text"))
 
 (use-package evil
   :init
@@ -129,30 +148,90 @@
   (setq evil-want-C-u-scroll t)
   :config
   (evil-mode 1)
-  (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state))
- 
-
+  (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+  (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+  (evil-set-initial-state 'messages-buffer-mode 'normal)
+  (evil-set-initial-state 'dashboard-mode 'normal))
 
 (use-package evil-collection
   :after evil
   :config
   (evil-collection-init))
 
-  
-  
+(use-package ivy
+  :diminish
+  :general
+  ("C-c C-r" 'ivy-resume)
+  ("C-x B" 'ivy-switch-buffer-other-window)
+  :bind (
+	 :map ivy-minibuffer-map
+	 ("TAB" . ivy-alt-done)
+	 ("C-l" . ivy-alt-done)
+	 ("C-j" . ivy-next-line)
+	 ("C-k" . ivy-previous-line)
+	 :map ivy-switch-buffer-map
+	 ("C-l" . ivy-done)
+	 ("C-k" . ivy-previous-line)
+	 ("C-d" . ivy-switch-buffer-kill)
+	 :map ivy-reverse-i-search-map
+	 ("C-k" . ivy-previous-line)
+	 ("C-d" . ivy-reverse-i-search-kill))
+  :custom
+  (ivy-count-format "(%d/%d) ")
+  (ivy-use-virtual-buffers t)
+  :config
+  (ivy-mode 1))
+
+(use-package ivy-rich
+  :after ivy
+  :init (ivy-rich-mode 1))
+
+(use-package counsel
+  :after ivy
+  :config (counsel-mode 1))
+
+(use-package swiper
+  :after ivy
+  :general
+  ("C-s" 'swiper))
+
+(use-package helpful
+  :custom
+  (counsel-describe-function-function #'helpful-callable)
+  (counsel-describe-variable-function #'helpful-variable)
+  :bind
+  ([remap describe-function] . counsel-describe-function)
+  ([remap describe-command] . helpful-command)
+  ([remap describe-variable] . counsel-describe-variable)
+  ([remap describe-key] . helpful-key))
+
+(use-package flycheck
+  :defer 2
+  :diminish
+  :init (global-flycheck-mode)
+  :custom
+  (flycheck-display-errors-delay .3))
+
+(use-package doom-themes
+  :config (load-theme 'doom-one t))
+
+(use-package doom-modeline
+  :defer 0.1
+  :config (doom-modeline-mode))
+
+(use-package all-the-icons
+  :if (display-graphic-p)
+  :config (unless (find-font (font-spec :name "all-the-icons"))
+	    (all-the-icons-install-fonts t)))
+
+(use-package company
+  :config
+  (global-company-mode t))
+
 
 ;; ======================================================================
 ;; Auto Generated Config
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages '(general evil-collection evil use-package)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file :noerror)
