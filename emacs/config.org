@@ -8,7 +8,7 @@
     (require 'package)
 
     (add-to-list 'package-archives
-		 '("melpa" . "https://melpa.org/packages/"))
+                 '("melpa" . "https://melpa.org/packages/"))
 
     (package-initialize)
     (unless package-archive-contents
@@ -22,14 +22,19 @@
     (require 'use-package)
     (setq use-package-hook-name-suffix nil)
 
+    (use-package diminish
+      :ensure
+      :after use-package)
+
   #+end_src
+
 
 * Base Configuration
 ** Font
 
 #+begin_src emacs-lisp
 
-  (defvar jake/font-size 10)
+  (defvar jake/font-size 11)
 
   (set-face-attribute 'default nil :font "Source Code Pro" :height (* jake/font-size 10))
 
@@ -66,12 +71,13 @@
 #+begin_src emacs-lisp
 
   (column-number-mode t)
+  (global-display-line-numbers-mode t)
 
   (dolist (mode '(org-mode-hook
                   term-mode-hook
                   shell-mode-hook
                   eshell-mode-hook))
-    (add-hook mode (lambda () (display-line-numbers-mode 0))))
+    (add-hook mode (lambda () (display-line-numbers-mode -1))))
 
 #+end_src
 
@@ -85,37 +91,45 @@
 
 ** Move Backup and Autosave Files
 
-   #+begin_src emacs-lisp
+#+begin_src emacs-lisp
 
-     (setq backup-directory-alist
-	   `((".*" . ,temporary-file-directory)))
-     (setq auto-save-file-name-transforms
-	   `((".*" ,temporary-file-directory t)))
+  (setq backup-directory-alist
+        `((".*" . ,temporary-file-directory)))
+  (setq auto-save-file-name-transforms
+        `((".*" ,temporary-file-directory t)))
 
-   #+end_src
+#+end_src
 
 ** Move Auto Config File
 
-   #+begin_src emacs-lisp
+#+begin_src emacs-lisp
 
-     (setq custom-file "~/.emacs.d/custom.el")
-     (load custom-file :noerror)
+  (setq custom-file "~/.emacs.d/custom.el")
+  (load custom-file :noerror)
 
-   #+end_src
+#+end_src
+
 
 * Evil Mode
 
   #+begin_src emacs-lisp
 
     (use-package evil
-      :ensure t
+      :ensure
       :config (evil-mode 1))
 
   #+end_src
 
-* Org Mode
 
+* Org Mode
 ** Basic Configs
+
+#+begin_src emacs-lisp
+
+  (add-hook 'org-mode-hook 'org-indent-mode)
+  (add-hook 'org-mode-hook 'visual-line-mode)
+
+#+end_src
 
 ** Tempo
 
@@ -142,5 +156,80 @@
         (org-babel-tangle))))
 
   (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'jake/org-babel-tangle-config)))
+
+#+end_src
+
+
+* Which Key
+
+#+begin_src emacs-lisp
+
+  (use-package which-key
+    :ensure
+    :diminish which-key-mode
+    :config
+    (which-key-mode)
+    (setq which-key-idle-delay 1))
+
+#+end_src
+
+
+* Incremental Completion and Selection
+
+I'm just sticking with ido at the moment.
+
+#+begin_src emacs-lisp
+
+  (use-package ido
+    :config
+    (ido-mode t))
+
+#+end_src
+
+
+* Project Management Utilites
+** Projectile
+** Magit
+
+* Development
+** LSP Mode
+
+#+begin_src emacs-lisp
+
+#+end_src
+
+*** Python
+
+#+begin_src emacs-lisp
+
+#+end_src
+
+** Company
+
+#+begin_src emacs-lisp
+
+  (use-package company
+    :ensure
+    :diminish company-mode
+    :custom
+    (company-minimum-prefix-length 1)
+    (company-idle-delay 0)
+    :config
+    (global-company-mode t))
+
+  (use-package company-box
+    :diminish company-box-mode
+    :hook (company-mode . company-box-mode))
+
+#+end_src
+
+
+* Custom Keybinds
+
+#+begin_src emacs-lisp
+
+  (use-package general
+    :ensure
+    :after which-key)
 
 #+end_src
