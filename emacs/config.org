@@ -116,7 +116,16 @@
 
     (use-package evil
       :ensure
+      :init
+      (setq evil-want-integration t
+            evil-want-keybinding nil)
       :config (evil-mode 1))
+
+    (use-package evil-collection
+      :ensure
+      :after evil
+      :config
+      (evil-collection-init))
 
   #+end_src
 
@@ -131,7 +140,7 @@
 
 #+end_src
 
-** Tempo
+** Source Block Snippets
 
 #+begin_src emacs-lisp
 
@@ -141,7 +150,7 @@
 
 #+end_src
 
-** Babel
+** Babel Tangle on Save
 
 #+begin_src emacs-lisp
 
@@ -174,15 +183,46 @@
 #+end_src
 
 
-* Incremental Completion and Selection
-
-I'm just sticking with ido at the moment.
+* Ivy, Counsel, and Swiper
 
 #+begin_src emacs-lisp
 
-  (use-package ido
+  (use-package ivy
+    :ensure
+    :diminish ivy-mode
+    :demand
+    :bind (:map ivy-minibuffer-map
+           ("TAB" . ivy-alt-done)
+           ("C-l" . ivy-alt-done)
+           ("C-j" . ivy-next-line)
+           ("C-k" . ivy-previous-line)
+           :map ivy-switch-buffer-map
+           ("C-k" . ivy-previous-line)
+           ("C-l" . ivy-done)
+           ("C-d" . ivy-switch-buffer-kill)
+           :map ivy-reverse-i-search-map
+           ("C-k" . ivy-previous-line)
+           ("C-d" . ivy-reverse-i-search-kill))
     :config
-    (ido-mode t))
+    (ivy-mode 1))
+
+  (use-package ivy-rich
+    :init
+    (ivy-rich-mode 1))
+
+  (use-package counsel
+    :ensure
+    :diminish counsel-mode
+    :after ivy
+    :demand
+    :config
+    (counsel-mode 1))
+
+  (use-package swiper
+    :ensure
+    :after ivy
+    :demand
+    :bind (("C-s" . swiper)))
 
 #+end_src
 
@@ -190,6 +230,7 @@ I'm just sticking with ido at the moment.
 * Project Management Utilites
 ** Projectile
 ** Magit
+
 
 * Development
 ** LSP Mode
@@ -203,6 +244,9 @@ I'm just sticking with ido at the moment.
 #+begin_src emacs-lisp
 
 #+end_src
+
+*** Web Development
+
 
 ** Company
 
@@ -224,7 +268,7 @@ I'm just sticking with ido at the moment.
 #+end_src
 
 
-* Custom Keybinds
+* Leader Keybinds with General
 
 #+begin_src emacs-lisp
 
