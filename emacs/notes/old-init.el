@@ -1,42 +1,49 @@
-(defvar jake/font-size 10)
-(defvar jake/variable-font-size 10)
+;; =====================================================================
+;;                                   _       _ _         _
+;;    ___ _ __ ___   __ _  ___ ___  (_)_ __ (_) |_   ___| |
+;;   / _ \ '_ ` _ \ / _` |/ __/ __| | | '_ \| | __| / _ \ |
+;;  |  __/ | | | | | (_| | (__\__ \ | | | | | | |_ |  __/ |
+;;   \___|_| |_| |_|\__,_|\___|___/ |_|_| |_|_|\__(_)___|_|
+;;
+;; =====================================================================
 
+;; Basic settings
 (setq inhibit-startup-message t)
 ;;(setq initial-scratch-message "")
 (fset 'yes-or-no-p 'y-or-n-p)
 ;;(global-hl-line-mode)
 (setq ring-bell-function 'ignore)    ; disable visual and audio bell
-(scroll-bar-mode 0)                  ; Disable scrollbar
-(tooltip-mode 0)                     ; Disable tooltips
-(tool-bar-mode 0)                    ; Disable toolbar
-(menu-bar-mode 0)                    ; Disable menubar
+(scroll-bar-mode 0)                 ; Disable scrollbar
+(tooltip-mode 0)                  ; Disable tooltips
+(tool-bar-mode 0)                   ; Disable toolbar
+(menu-bar-mode 0)                   ; Disable menubar
 (show-paren-mode 1)                  ; Highlight matching parenthesis
 
-(column-number-mode t)               ; Display column numbers
+(column-number-mode t) ; Display column numbers
 
 (global-display-line-numbers-mode t) ; Display line numbers
-
 ;; Disable line numbers for some modes
 (dolist (mode '(org-mode-hook
                 term-mode-hook
                 shell-mode-hook
                 eshell-mode-hook
-                helpful-mode-hook))
+	        	helpful-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
-;; Automatically follow symlinks
-(setq vc-follow-symlinks t)
-
-;; remove trailing whitespace on save
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-
 ;; Set font (height is 1/10 pt)
+(defvar jake/default-font-size 12)
+(set-face-attribute 'default nil :font "Inconsolata" :height (* jake/default-font-size 10))
 
-(set-face-attribute 'default nil :font "Inconsolata" :height (* jake/font-size 10))
+(set-face-attribute 'fixed-pitch nil :font "Inconsolata" :height (* jake/default-font-size 10))
 
-(set-face-attribute 'fixed-pitch nil :font "Inconsolata" :height (* jake/font-size 10))
+(set-face-attribute 'variable-pitch nil :font "Cantarell" :height 120 :weight 'regular)
 
-(set-face-attribute 'variable-pitch nil :font "Cantarell" :height (* jake/variable-font-size 10) :weight 'regular)
+;; Make escape quit prompts
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+
+;; set colorscheme
+;(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+;(load-theme 'atom-one-dark t)
 
 ;; save autosave and backup files in /tmp/
 (setq backup-directory-alist
@@ -44,11 +51,14 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
-(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+;; Automatically follow symlinks
+(setq vc-follow-symlinks t)
 
-;; set colorscheme
-;(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-;(load-theme 'atom-one-dark t)
+;; remove trailing whitespace on save
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+;; ======================================================================
+;; Packages
 
 (require 'package)
 
@@ -201,6 +211,13 @@
   ([remap describe-variable] . counsel-describe-variable)
   ([remap describe-key] . helpful-key))
 
+(use-package flycheck
+  :defer 2
+  :diminish
+  :init (global-flycheck-mode)
+  :custom
+  (flycheck-display-errors-delay .3))
+
 (use-package doom-themes
   :config (load-theme 'doom-one t))
 
@@ -212,6 +229,10 @@
   :if (display-graphic-p)
   :config (unless (find-font (font-spec :name "all-the-icons"))
 	    (all-the-icons-install-fonts t)))
+
+(use-package company
+  :config
+  (global-company-mode t))
 
 (defun jake/org-font-setup ()
   ;; Replace list hyphen with dot
@@ -273,21 +294,8 @@
 (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
 (add-to-list 'org-structure-template-alist '("py" . "src python"))
 
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((emacs-lisp . t)
-   (python . t)))
-
-(push '("conf-unix" . conf-unix) org-src-lang-modes)
-
-;; Automatically tangle config.org file on save
-(defun jake/org-babel-tangle-config ()
-  (when (string-equal (buffer-file-name)
-                      (expand-file-name "~/.dotfiles/emacs/config.org"))
-    (let ((org-confirm-babel-evaluate nil))
-      (org-babel-tangle))))
-
-(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'jake/org-babel-tangle-config)))
+;; ======================================================================
+;; Auto Generated Config
 
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file :noerror)
