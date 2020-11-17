@@ -13,6 +13,8 @@ let maplocalleader = "\<space>"
 " Plugins ------------------------------------------------------------ {{{
 " ----- Vim Plugged ----- "
 call plug#begin('~/.local/share/nvim/site/plugged')
+Plug 'tjdevries/colorbuddy.nvim'
+Plug 'ishan9299/modus-theme-vim'
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'arcticicestudio/nord-vim'
@@ -44,10 +46,11 @@ set shiftwidth=4 " for when <tab> is pressed at beginning of line
 " Colorscheme
 set termguicolors
 set background=dark
-colorscheme onedark
+"colorscheme onedark
 "colorscheme dracula
 "colorscheme nord
-"colorscheme gruvbox
+colorscheme gruvbox
+"colorscheme modus-vivendi
 
 " Columns
 "set colorcolumn=80
