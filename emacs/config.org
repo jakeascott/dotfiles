@@ -1,53 +1,7 @@
 #+title: Jake's Emacs Config
 #+property: header-args:emacs-lisp :tangle ~/.emacs.d/init.el :mkdirp yes
 
-* Package Manager
-
-  #+begin_src emacs-lisp
-
-    (require 'package)
-
-    (add-to-list 'package-archives
-                 '("melpa" . "https://melpa.org/packages/"))
-
-    (package-initialize)
-    (unless package-archive-contents
-      (package-refresh-contents))
-
-    ;; ensure use-package is installed
-    (unless (package-installed-p 'use-package)
-      (package-refresh-contents)
-      (package-install 'use-package))
-
-    (require 'use-package)
-    (setq use-package-hook-name-suffix nil)
-
-    (use-package diminish
-      :ensure
-      :after use-package)
-
-  #+end_src
-
-
 * Base Configuration
-** Font
-
-#+begin_src emacs-lisp
-
-  (defvar jake/font-size 11)
-
-  (set-face-attribute 'default nil :font "Source Code Pro" :height (* jake/font-size 10))
-
-#+end_src
-
-** Theme
-
-#+begin_src emacs-lisp
-
-  (load-theme 'adwaita t)
-
-#+end_src
-
 ** UI Elements
 
 #+begin_src emacs-lisp
@@ -66,6 +20,16 @@
 
 #+end_src
 
+** Font
+
+#+begin_src emacs-lisp
+
+  (defvar jake/font-size 11)
+
+  (set-face-attribute 'default nil :font "Source Code Pro" :height (* jake/font-size 10))
+
+#+end_src
+
 ** Line Numbers
 
 #+begin_src emacs-lisp
@@ -76,7 +40,8 @@
   (dolist (mode '(org-mode-hook
                   term-mode-hook
                   shell-mode-hook
-                  eshell-mode-hook))
+                  eshell-mode-hook
+                  Man-mode-hook))
     (add-hook mode (lambda () (display-line-numbers-mode -1))))
 
 #+end_src
@@ -106,6 +71,50 @@
 
   (setq custom-file "~/.emacs.d/custom.el")
   (load custom-file :noerror)
+
+#+end_src
+
+
+* Package Manager
+
+  #+begin_src emacs-lisp
+
+    (require 'package)
+
+    (add-to-list 'package-archives
+                 '("melpa" . "https://melpa.org/packages/"))
+
+    (package-initialize)
+    (unless package-archive-contents
+      (package-refresh-contents))
+
+    ;; ensure use-package is installed
+    (unless (package-installed-p 'use-package)
+      (package-refresh-contents)
+      (package-install 'use-package))
+
+    (require 'use-package)
+    (setq use-package-hook-name-suffix nil)
+
+    (use-package diminish
+      :ensure
+      :after use-package)
+
+  #+end_src
+
+
+* Theme
+
+#+begin_src emacs-lisp
+
+
+  (use-package modus-vivendi-theme
+    :ensure)
+
+  (use-package modus-operandi-theme
+    :ensure)
+
+  (load-theme 'modus-vivendi t)
 
 #+end_src
 
@@ -147,6 +156,8 @@
   (require 'org-tempo)
 
   (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+  (add-to-list 'org-structure-template-alist '("py" . "src python"))
+  (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
 
 #+end_src
 
@@ -207,21 +218,20 @@
     (ivy-mode 1))
 
   (use-package ivy-rich
+    :ensure
+    :after ivy
     :init
     (ivy-rich-mode 1))
 
   (use-package counsel
-    :ensure
     :diminish counsel-mode
     :after ivy
-    :demand
     :config
     (counsel-mode 1))
 
   (use-package swiper
     :ensure
     :after ivy
-    :demand
     :bind (("C-s" . swiper)))
 
 #+end_src
@@ -274,6 +284,20 @@
 
   (use-package general
     :ensure
-    :after which-key)
+    :after which-key
+    :config
+    (general-create-definer jake/leader
+      :prefix "SPC")
+    (jake/leader
+      :keymaps 'normal
+      "f"  'find-file
+      "b"  'switch-to-buffer
+      "w"  '(:ignore t :which-key "window")
+      "wo" 'delete-other-windows
+      "wc" 'delete-window
+      "ws" 'split-window-below
+      "wv" 'split-window-right
+      "ww" 'other-window
+      "wf" 'find-file-other-window))
 
 #+end_src
