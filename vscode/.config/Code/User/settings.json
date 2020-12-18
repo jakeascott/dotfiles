@@ -2,12 +2,28 @@
     "editor.minimap.enabled": false,
     "window.titleBarStyle": "custom",
     "workbench.colorTheme": "One Dark Pro",
-    "workbench.iconTheme": "vscode-icons",
     "python.linting.enabled": true,
     "python.linting.flake8Enabled": true,
     "python.linting.pylintEnabled": false,
     "python.formatting.provider": "black",
+    "python.formatting.blackPath": "/usr/bin/black",
     "editor.formatOnSave": true,
     "explorer.confirmDelete": false,
-    "workbench.startupEditor": "newUntitledFile"
+    "workbench.startupEditor": "newUntitledFile",
+    "cSpell.userWords": [
+        "dbconfig",
+        "scottj"
+    ],
+    "editor.wordWrap": "on",
+    "python.linting.flake8Path": "/usr/bin/flake8",
+    "workbench.editorAssociations": [
+        {
+            "viewType": "jupyter.notebook.ipynb",
+            "filenamePattern": "*.ipynb"
+        }
+    ],
+    "python.linting.flake8Args": [
+        "--max-line-length",
+        "120"
+    ]
 }
