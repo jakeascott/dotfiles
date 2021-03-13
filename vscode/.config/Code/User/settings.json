@@ -25,5 +25,7 @@
     "python.linting.flake8Args": [
         "--max-line-length",
         "120"
-    ]
+    ],
+    "explorer.confirmDragAndDrop": false,
+    "python.showStartPage": false
 }

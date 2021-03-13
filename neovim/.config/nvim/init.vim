@@ -22,6 +22,7 @@ Plug 'dracula/vim',{'as':'dracula'}
 Plug 'joshdick/onedark.vim'
 Plug 'tjdevries/colorbuddy.nvim'
 Plug 'ishan9299/modus-theme-vim'
+Plug 'ziglang/zig.vim'
 call plug#end()
 " }}}
 
