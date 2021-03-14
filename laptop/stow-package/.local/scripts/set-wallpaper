@@ -2,7 +2,7 @@
 
 if ! [ -z $1 ] && [ -f $1 ] ; then
     image=$(realpath $1)
-    convert "${image}" -resize 1920x1080 $HOME/.local/share/wallpaper
+    convert "$image" -resize $HOME/.local/share/wallpaper
     #ln -sf $(realpath $1) $HOME/.local/share/wallpaper
 fi
 

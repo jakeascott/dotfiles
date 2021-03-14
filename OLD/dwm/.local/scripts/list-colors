@@ -1,3 +1,0 @@
-#!/bin/sh
-cat $HOME/.local/scripts/resources/dracula.colors | dmenu -F -c -bw 1 -l 10 | awk '{printf "%s",$2}' | xclip -i -sel c -f | xclip -i -sel p
-[ ! -z $(xclip -o -sel p) ] && notify-send "$(xclip -o -sel p) copied to clipboard"
