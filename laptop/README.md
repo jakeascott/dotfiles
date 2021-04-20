@@ -38,15 +38,28 @@ The Intel wireless card in my laptop needs proprietary drivers. Add the non-free
 
 Connect to wifi with `nmcli dev wifi conn <wifi-name> password <wifi-password>`
 
-## Activate TRIM
+## Activate TRIM and install microcode
 
 `sudo systemctl enable fstrim.timer`
 
+install `intel-microcode`
+
 ## Install some basics
 
-Install `git`, `curl`, `neovim`, `stow`, `tmux`, `build-essential`, `fish`
+Install `git`, `curl`, `neovim`, `stow`, `tmux`, `build-essential`, `fish`, `lm-sensors`
 
 > `chsh -s /usr/bin/fish`
 
+## Xorg
+
+install `xorg`
+
+clone `github.com:jakesco/dwm.git`, `github.com:jakesco/st.git`, `github.com:jakesco/dmenu.git` to `~/.local/src`
+
+These require `libx11-dev`, `libxft-dev`, and `libxinerama-dev`. `make` and `sudo make clean install` for each.
+
 ## Resources
 - [dpkg cheatsheet](https://www.cyberciti.biz/howto/question/linux/dpkg-cheat-sheet.php)
+- [wifi](https://wiki.debian.org/iwlwifi)
+- [install guide](https://www.dwarmstrong.org/minimal-debian/)
+- [after install](https://gitlab.com/dwarmstrong/debian-after-install/-/blob/master/debian-after-install.sh)

@@ -27,5 +27,7 @@
         "120"
     ],
     "explorer.confirmDragAndDrop": false,
-    "python.showStartPage": false
+    "python.showStartPage": false,
+    "vscode-neovim.neovimExecutablePaths.linux": "/home/jake/.local/bin/nvim0.5",
+    "python.defaultInterpreterPath": "/usr/bin/python"
 }

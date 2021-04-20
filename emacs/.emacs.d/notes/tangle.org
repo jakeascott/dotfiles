@@ -1,0 +1,328 @@
+#+title: Jake's Emacs Config
+#+property: header-args:emacs-lisp :tangle ~/.emacs.d/init.el :mkdirp yes
+
+* Base Configuration
+** UI Elements
+
+#+begin_src emacs-lisp
+
+  (setq inhibit-startup-message t
+        ring-bell-function 'ignore
+        vc-follow-symlinks t)
+
+  (fset 'yes-or-no-p 'y-or-n-p)
+
+  (scroll-bar-mode -1)
+  (tooltip-mode -1)
+  (tool-bar-mode -1)
+  (menu-bar-mode -1)
+  (show-paren-mode 1)
+
+#+end_src
+
+** Font
+
+#+begin_src emacs-lisp
+
+  (defvar jake/font-size 11)
+
+  (set-face-attribute 'default nil :font "Source Code Pro" :height (* jake/font-size 10))
+
+#+end_src
+
+** Line Numbers
+
+#+begin_src emacs-lisp
+
+  (column-number-mode t)
+  (global-display-line-numbers-mode t)
+
+  (dolist (mode '(org-mode-hook
+                  term-mode-hook
+                  shell-mode-hook
+                  eshell-mode-hook
+                  Man-mode-hook))
+    (add-hook mode (lambda () (display-line-numbers-mode -1))))
+
+#+end_src
+
+** Delete Trailing Whitespace
+
+#+begin_src emacs-lisp
+
+  (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+#+end_src
+
+** Move Backup and Autosave Files
+
+#+begin_src emacs-lisp
+
+  (setq backup-directory-alist
+        `((".*" . ,temporary-file-directory)))
+  (setq auto-save-file-name-transforms
+        `((".*" ,temporary-file-directory t)))
+
+#+end_src
+
+** Move Auto Config File
+
+#+begin_src emacs-lisp
+
+  (setq custom-file "~/.emacs.d/custom.el")
+  (load custom-file :noerror)
+
+#+end_src
+
+
+* Package Manager
+
+  #+begin_src emacs-lisp
+
+    (require 'package)
+
+    (add-to-list 'package-archives
+                 '("melpa" . "https://melpa.org/packages/"))
+
+    (package-initialize)
+    (unless package-archive-contents
+      (package-refresh-contents))
+
+    ;; ensure use-package is installed
+    (unless (package-installed-p 'use-package)
+      (package-refresh-contents)
+      (package-install 'use-package))
+
+    (require 'use-package)
+    (setq use-package-hook-name-suffix nil)
+
+    (use-package diminish
+      :ensure
+      :after use-package)
+
+  #+end_src
+
+
+* Theme
+
+#+begin_src emacs-lisp
+
+
+  (use-package modus-vivendi-theme
+    :ensure)
+
+  (use-package modus-operandi-theme
+    :ensure)
+
+  (load-theme 'modus-vivendi t)
+
+#+end_src
+
+
+* Evil Mode
+
+  #+begin_src emacs-lisp
+
+    (use-package evil
+      :ensure
+      :init
+      (setq evil-want-integration t
+            evil-want-keybinding nil)
+      :config (evil-mode 1))
+
+    (use-package evil-collection
+      :ensure
+      :after evil
+      :config
+      (evil-collection-init))
+
+  #+end_src
+
+
+* Org Mode
+** Basic Configs
+
+#+begin_src emacs-lisp
+
+  (add-hook 'org-mode-hook 'org-indent-mode)
+  (add-hook 'org-mode-hook 'visual-line-mode)
+
+#+end_src
+
+** Source Block Snippets
+
+#+begin_src emacs-lisp
+
+  (require 'org-tempo)
+
+  (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+  (add-to-list 'org-structure-template-alist '("py" . "src python"))
+  (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+
+#+end_src
+
+** Babel Tangle on Save
+
+#+begin_src emacs-lisp
+
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-lisp . t)))
+
+  (defun jake/org-babel-tangle-config ()
+    (when (string-equal (buffer-file-name)
+                        (expand-file-name "~/.dotfiles/emacs/config.org"))
+      (let ((org-confirm-babel-evaluate nil))
+        (org-babel-tangle))))
+
+  (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'jake/org-babel-tangle-config)))
+
+#+end_src
+
+
+* Which Key
+
+#+begin_src emacs-lisp
+
+  (use-package which-key
+    :ensure
+    :diminish which-key-mode
+    :config
+    (which-key-mode)
+    (setq which-key-idle-delay 1))
+
+#+end_src
+
+
+* Ivy, Counsel, and Swiper
+
+#+begin_src emacs-lisp
+
+  (use-package ivy
+    :ensure
+    :diminish ivy-mode
+    :demand
+    :bind (:map ivy-minibuffer-map
+           ("TAB" . ivy-alt-done)
+           ("C-l" . ivy-alt-done)
+           ("C-j" . ivy-next-line)
+           ("C-k" . ivy-previous-line)
+           :map ivy-switch-buffer-map
+           ("C-k" . ivy-previous-line)
+           ("C-l" . ivy-done)
+           ("C-d" . ivy-switch-buffer-kill)
+           :map ivy-reverse-i-search-map
+           ("C-k" . ivy-previous-line)
+           ("C-d" . ivy-reverse-i-search-kill))
+    :config
+    (ivy-mode 1))
+
+  (use-package counsel
+    :diminish counsel-mode
+    :after ivy
+    :config
+    (counsel-mode 1))
+
+  (use-package swiper
+    :ensure
+    :after ivy
+    :bind (("C-s" . swiper)))
+
+  (use-package ivy-rich
+    :ensure
+    :after ivy
+    :init
+    (ivy-rich-mode 1))
+
+#+end_src
+
+
+* Project Management Utilites
+** Projectile
+** Magit
+
+
+* Other Modes
+
+#+begin_src emacs-lisp
+
+  (use-package markdown-mode
+    :ensure t)
+
+  (use-package yaml-mode
+    :ensure t)
+
+#+end_src
+
+
+* Development
+** LSP Mode
+
+#+begin_src emacs-lisp
+
+#+end_src
+
+*** Python
+
+#+begin_src emacs-lisp
+
+#+end_src
+
+*** Web Development
+
+
+** Company
+
+#+begin_src emacs-lisp
+
+  (use-package company
+    :ensure
+    :diminish company-mode
+    :custom
+    (company-minimum-prefix-length 1)
+    (company-idle-delay 0)
+    :config
+    (global-company-mode t))
+
+  (use-package company-box
+    :diminish company-box-mode
+    :hook (company-mode . company-box-mode))
+
+#+end_src
+
+
+** SLIME
+
+#+begin_src emacs-lisp
+
+(use-package slime
+  :ensure t
+  :config
+  (setq inferior-lisp-program "/usr/bin/sbcl"))
+
+#+end_src
+
+
+* Leader Keybinds with General
+
+#+begin_src emacs-lisp
+
+  (use-package general
+    :ensure
+    :after which-key
+    :config
+    (general-create-definer jake/leader
+      :prefix "SPC")
+    (jake/leader
+      :keymaps 'normal
+      "f"  'find-file
+      "b"  'switch-to-buffer
+      "w"  '(:ignore t :which-key "window")
+      "wo" 'delete-other-windows
+      "wc" 'delete-window
+      "ws" 'split-window-below
+      "wv" 'split-window-right
+      "ww" 'other-window
+      "wf" 'find-file-other-window))
+
+#+end_src
