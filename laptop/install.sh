@@ -1,6 +1,6 @@
 #!/bin/sh
 
-stow -vnt "${HOME}" --no-folding stow-package
+stow -vt "${HOME}" stow-package
 
 # Install vim-plug
 curl -fLo $HOME/.local/share/nvim/site/autoload/plug.vim --create-dirs \
