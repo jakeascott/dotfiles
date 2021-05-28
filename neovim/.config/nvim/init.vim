@@ -18,11 +18,7 @@ Plug 'ap/vim-css-color'
 Plug 'voldikss/vim-floaterm'
 Plug 'morhetz/gruvbox'
 Plug 'arcticicestudio/nord-vim'
-Plug 'dracula/vim',{'as':'dracula'}
 Plug 'joshdick/onedark.vim'
-Plug 'tjdevries/colorbuddy.nvim'
-Plug 'ishan9299/modus-theme-vim'
-Plug 'ziglang/zig.vim'
 call plug#end()
 " }}}
 
@@ -48,11 +44,7 @@ set shiftwidth=4 " for when <tab> is pressed at beginning of line
 " Colorscheme
 set termguicolors
 set background=dark
-colorscheme onedark
-"colorscheme dracula
-"colorscheme nord
-"colorscheme gruvbox
-"lua require('colorbuddy').colorscheme('modus-vivendi')
+colorscheme gruvbox
 
 " Columns
 "set colorcolumn=80
