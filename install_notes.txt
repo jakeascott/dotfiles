@@ -1,0 +1,46 @@
+- Minimal Debian install, with non-free firmware, connected to wired ethernet.
+- After reboot
+	- installed `network-manager`
+	- set `FONTSIZE` to `16x32` in `/etc/defaults/console-setup`
+- Next reboot
+	- Run `nmtui` to connect to wifi.
+	- Install `w3m` to access online docs.
+	- Install some dev tools `acpi`, `tlp`, `git`, `stow`, `build-essential`, `intel-microcode`
+	- Install window manager and other esentials `sway`, `wayland`, `xwayland`, `firefox-esr`
+- sway
+	- start sway by running `sway` in tty
+	- see https://github.com/swaywm/sway/wiki for info on sway config
+	- utils `brightnessctl`
+	- mkdir .config/{foot,sway}
+	- cp /usr/share/foot/foot.ini ~/.config/foot
+	- cp /etc/sway/config ~/.config/sway
+- Neovim 0.5+
+	- Debian 11 has 0.4.4, get 0.5 from github, or backports when/if available. (Using the appimage for now)
+	- See https://github.com/neovim/neovim/wiki/Installing-Neovim for Debian
+	- need to install `fuse3` for appimage
+	- cp nvim.appimage /usr/local/bin/nvim and chmod 755
+	- TODO: Look into zsync for neovim autoupdate https://appimage-builder.readthedocs.io/en/latest/advanced/updates.html
+
+- Get keys on github and sign into firefox
+	- ssh-keygen -t ed25519 -C envoy
+
+- Other packages
+	- wl-clipboard, wofi, swaylock, swayidle, htop, unzip, tree
+- Greetd
+	- Must compile from source. See https://git.sr.ht/~kennylevinsen/greetd
+	- Need packages, `cargo` and `librust-pam-dev`
+	- Autologin
+ 	 [default_session]
+	 command = "agreety"
+	 [initial_session]
+ 	 command = "sway"
+ 	 user = "myuser"
+	- then systemctl enable greetd
+- Install patched font
+    - copy ttf/otf files to /usr/local/share/fonts
+    - set permissions to 644
+    - run fc-cache to reload font cache
+
+    - dpkg-reconfigure fontconfig-config
+      dpkg-reconfigure fontconfig
+      to set font rendering

@@ -101,6 +101,8 @@ return require('packer').startup(function()
         requires = "nvim-lua/plenary.nvim"
     }
 
+    use 'ap/vim-css-color'
+
     use {
         'neovim/nvim-lspconfig',
         config = function()
