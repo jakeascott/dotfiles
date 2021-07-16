@@ -10,6 +10,18 @@
 let mapleader = "\<space>"
 let maplocalleader = "\<space>"
 
+" Plugins ------------------------------------------------------------ {{{
+" ----- Vim Plugged ----- "
+call plug#begin('~/.local/share/nvim/site/plugged')
+Plug 'vim-airline/vim-airline'
+Plug 'ap/vim-css-color'
+Plug 'voldikss/vim-floaterm'
+Plug 'morhetz/gruvbox'
+Plug 'arcticicestudio/nord-vim'
+Plug 'joshdick/onedark.vim'
+call plug#end()
+" }}}
+
 " General Settings --------------------------------------------------- {{{
 set mouse=a " Activate mouse
 set number relativenumber " line numbers
@@ -32,22 +44,12 @@ set shiftwidth=4 " for when <tab> is pressed at beginning of line
 " Colorscheme
 set termguicolors
 set background=dark
-" }}}
+colorscheme gruvbox
 
-" Bootstrap Packer --------------------------------------------- {{{
-lua << EOF
-local execute = vim.api.nvim_command
-local fn = vim.fn
+" Columns
+"set colorcolumn=80
+"highlight ColorColumn ctermbg=darkgray
 
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-
-if fn.empty(fn.glob(install_path)) > 0 then
-  fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
-  execute 'packadd packer.nvim'
-end
-EOF
-
-lua require('plugins')
 " }}}
 
 " General Shortcuts -------------------------------------------------- {{{
