@@ -44,3 +44,5 @@
     - dpkg-reconfigure fontconfig-config
       dpkg-reconfigure fontconfig
       to set font rendering
+- dev
+    - python3-venv, python3-pip

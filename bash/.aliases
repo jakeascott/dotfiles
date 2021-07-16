@@ -1,0 +1,27 @@
+# useful aliases
+alias mkd='mkdir -pv'
+alias v='nvim'
+alias vim='nvim'
+alias e='nvim'
+alias q='exit'
+alias la='ls -Agoh'
+alias ll='ls -goh'
+alias o='xdg-open'
+alias upgrade='sudo apt update && sudo apt upgrade -y'
+alias python='python3'
+
+# python venv
+alias activate='source $(find $(git rev-parse --show-toplevel) -name activate)'
+
+# file shortcuts
+alias bpr='nvim ~/.profile'
+alias sbpr='source ~/.profile'
+alias brc='nvim ~/.bashrc'
+alias sbrc='source ~/.bashrc'
+alias vrc='nvim ~/.config/nvim/init.vim'
+alias bal='nvim ~/.aliases'
+
+# directory shortcuts
+alias dl='cd ~/Downloads && ll'
+alias dots='cd ~/.dotfiles && ll'
+alias pr='cd ~/Projects && ll'
