@@ -32,6 +32,7 @@ set shiftwidth=4 " for when <tab> is pressed at beginning of line
 " Colorscheme
 set termguicolors
 set background=dark
+colorscheme modus-vivendi
 " }}}
 
 " Bootstrap Packer --------------------------------------------- {{{
