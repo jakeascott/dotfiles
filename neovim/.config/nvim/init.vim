@@ -13,15 +13,23 @@ let maplocalleader = "\<space>"
 " General Settings --------------------------------------------------- {{{
 set mouse=a " Activate mouse
 set number relativenumber " line numbers
+set completeopt=menuone,noinsert,noselect
 set linebreak " wrap lines on 'word' boundaries
 set scrolloff=3 " don't let cursor touch edge of viewport
 set splitbelow splitright " vertical splits use right half of screen
 set iskeyword+=- " treat dash separated words as one word object
 set inccommand=nosplit " interactive find and replace preview
+set incsearch
+set ignorecase smartcase
+set diffopt+=vertical
+set shortmess+=c
+set signcolumn=yes
 set breakindent " Indent wrapped lines up to the same level
 set path+=** " Search down into subfolders
 
 let g:netrw_banner=0 " Disable banner in netrw
+
+filetype plugin indent on
 
 " Tab settings
 set expandtab " Expand tabs into spaces
@@ -32,7 +40,6 @@ set shiftwidth=4 " for when <tab> is pressed at beginning of line
 " Colorscheme
 set termguicolors
 set background=dark
-colorscheme modus-vivendi
 " }}}
 
 " Bootstrap Packer --------------------------------------------- {{{

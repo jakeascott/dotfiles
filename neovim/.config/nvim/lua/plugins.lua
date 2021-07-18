@@ -37,22 +37,74 @@ return require('packer').startup(function()
         end,
     }
 
+    use "tpope/vim-commentary"
+
+    use 'tpope/vim-surround'
+
+    use {
+        'tpope/vim-fugitive',
+        config = function()
+            vim.api.nvim_set_keymap('n', '<leader>gg', ':Git<CR>', {noremap = true})
+        end,
+    }
+
+    -- Requries ripgrep, bat
+    use {
+        'nvim-telescope/telescope.nvim',
+        requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}},
+        config = function()
+            vim.api.nvim_set_keymap('n', '<leader>ff', ':Telescope find_files<CR>', {noremap = true})
+            vim.api.nvim_set_keymap('n', '<leader>fg', ':Telescope live_grep<CR>', {noremap = true})
+            vim.api.nvim_set_keymap('n', '<leader>fb', ':Telescope buffers<CR>', {noremap = true})
+            vim.api.nvim_set_keymap('n', '<leader>fh', ':Telescope help_tags<CR>', {noremap = true})
+        end,
+    }
+
+    use {
+        'kassio/neoterm',
+        config = function()
+            vim.api.nvim_set_var('neoterm_default_mod', 'vertical')
+            vim.api.nvim_set_var('neoterm_size', 60)
+            vim.api.nvim_set_var('neoterm_autoinsert', 1)
+            vim.api.nvim_set_keymap('n', '<c-q>', ':Ttoggle<CR>', {noremap = true})
+            vim.api.nvim_set_keymap('i', '<c-q>', '<Esc>:Ttoggle<CR>', {noremap = true})
+            vim.api.nvim_set_keymap('t', '<c-q>', '<c-\\><c-n>:Ttoggle<CR>', {noremap = true})
+        end,
+    }
+
+    use {
+        'sbdchd/neoformat',
+        config = function()
+            vim.api.nvim_set_keymap('n', '<leader>F', ':Neoformat', {noremap = true})
+        end,
+    }
+
+
+    use {
+        'szw/vim-maximizer',
+        config = function()
+            vim.api.nvim_set_keymap('n', '<leader>m', ':MaximizerToggle!<CR>', {noremap = true})
+        end,
+    }
+
+    use {
+        'ishan9299/modus-theme-vim',
+        config = function()
+            vim.api.nvim_exec('colorscheme modus-vivendi', false)
+        end,
+    }
+
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
     }
-
-    use 'ishan9299/modus-theme-vim'
-
-    use 'tpope/vim-commentary'
-
-    use 'kassio/neoterm'
 
     use 'ap/vim-css-color'
 
     use {
         "vhyrro/neorg",
         ft = "norg",
+        requires = "nvim-lua/plenary.nvim",
         config = function()
             require('neorg').setup {
                 -- Tell Neorg what modules to load
@@ -69,8 +121,8 @@ return require('packer').startup(function()
             },
         }
         end,
-        requires = "nvim-lua/plenary.nvim"
     }
+
 
 end)
 
